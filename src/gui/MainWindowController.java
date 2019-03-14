@@ -1,5 +1,6 @@
 package gui;
 
+import api.spotify.Song;
 import api.spotify.Spotify;
 import api.spotify.UserProfileData;
 import download.DownloadManager;
@@ -234,14 +235,14 @@ public class MainWindowController {
         });
 
         if (myspotify.isLoggedIn()){
-            ArrayList<String> songs = myspotify.getSongsList();
+            ArrayList<Song> songs = myspotify.getSongsList();
             downloadSpotifyListRec(0,songs);
         }else {
             logger.log("Not logged in",Logger.ERROR);
         }
     }
 
-    private void downloadSpotifyListRec(int num,ArrayList<String> songlist){
+    private void downloadSpotifyListRec(int num,ArrayList<Song> songlist){
         new Thread(new Task<Boolean>() {
             @Override
             protected Boolean call() {
@@ -274,7 +275,7 @@ public class MainWindowController {
 
                 });
 
-                mydownload.startDownloadJob(songlist.get(num));
+                mydownload.startDownloadJob(songlist.get(num).songname+" "+songlist.get(num).artistname);
                 return null;
             }
         }).start();

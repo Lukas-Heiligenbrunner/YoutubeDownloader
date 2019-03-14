@@ -31,19 +31,28 @@ public class Spotify extends API {
     public Spotify() {
     }
 
-    public ArrayList<String> getSongsList(){
-        ArrayList<String> songs = new ArrayList<>();
+    public ArrayList<Song> getSongsList(){
+        ArrayList<Song> songs = new ArrayList<>();
 
-        int songnumber = 0;
-        JSONArray playlists = (JSONArray)((JSONObject)getPlaylists()).get("items");
-        for (Object list:playlists) {
-            if(((String)((JSONObject)list).get("name")).equals("meineliada")){
-                songnumber=Math.toIntExact((long)((JSONObject)((JSONObject)list).get("tracks")).get("total"));
-                System.out.println(songnumber);
+        ArrayList<Playlist> playlists = getPlaylists();
+        for (Playlist play:playlists) {
+            if (play.name.equals("meineliada")){
+                try {
+                    songs = getSongNames(play);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
-
         }
 
+        System.out.println(songs.size());
+        for (Song song:songs) {
+            System.out.println(song.songname+"  "+song.artistname);
+        }
+
+        /*
         int offset=0;
         for (int i = songnumber;i>0;i--){
             JSONArray myplaylist  = (JSONArray) ((JSONObject)getSongNames(meineliadaid,offset)).get("items");
@@ -56,31 +65,54 @@ public class Spotify extends API {
             i=i-100;
             offset+=100;
         }
+        */
+
         return songs;
     }
 
-    public Object getPlaylists(){
+    public ArrayList<Playlist> getPlaylists(){
         checkKeyValidity();
 
-        Object result=null;
+        ArrayList<Playlist> playlists = new ArrayList<>();
+
+        JSONObject result=null;
         try {
             Map<String,String> head = new HashMap<>();
             head.put("Authorization","Bearer "+data.getKey());
 
-            result = requestData("https://api.spotify.com/v1/me/playlists",head);
+            result = (JSONObject) requestData("https://api.spotify.com/v1/me/playlists",head);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return result;
+
+        JSONArray playlistarr = (JSONArray)result.get("items");
+
+        for (Object obj:playlistarr) {
+            JSONObject myobj = (JSONObject)obj;
+
+            Playlist myplaylist = new Playlist();
+            myplaylist.name = (String)myobj.get("name");
+            myplaylist.id = (String) myobj.get("id");
+            myplaylist.tracknumber = Math.toIntExact((long)((JSONObject)myobj.get("tracks")).get("total"));
+
+            playlists.add(myplaylist);
+        }
+
+
+        return playlists;
     }
 
-    public Object getSongNames(String playlistid,int offset){
+    public ArrayList<Song> getSongNames(Playlist list) throws IOException, ParseException {
         checkKeyValidity();
 
-        Object result=null;
-        try {
+        ArrayList<Song> songs = new ArrayList<>();
+        int songnumber = list.tracknumber;
+        int offset = 0;
+
+        for (int i = songnumber;i>0;i=i-100){
+
             Map<String,String> get = new HashMap<>();
             Map<String,String> head = new HashMap<>();
             head.put("Authorization","Bearer "+SpotifyData.getData().getKey());
@@ -88,13 +120,23 @@ public class Spotify extends API {
 
             get.put("offset",String.valueOf(offset));
 
-            result = requestData("https://api.spotify.com/v1/playlists/"+playlistid+"/tracks",get,head,false);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
+            JSONObject result = (JSONObject) requestData("https://api.spotify.com/v1/playlists/"+list.id+"/tracks",get,head,false);
+            JSONArray songarr = (JSONArray) result.get("items");
+
+            for (Object obj:songarr) {
+                JSONObject songobj = (JSONObject)obj;
+
+                Song mysong = new Song();
+                mysong.songname = (String)((JSONObject)songobj.get("track")).get("name");
+                JSONArray artists = (JSONArray)((JSONObject)songobj.get("track")).get("artists");
+                for (Object o:artists) {
+                    mysong.artistname+=((JSONObject)o).get("name")+" ";
+                }
+                songs.add(mysong);
+            }
+            offset+=100;
         }
-        return result;
+        return songs;
     }
 
     public void loginNewAccount(){
