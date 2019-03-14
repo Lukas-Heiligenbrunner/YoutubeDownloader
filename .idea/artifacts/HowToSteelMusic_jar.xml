@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="HowToSteelMusic:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/HowToSteelMusic_jar</output-path>
+    <root id="archive" name="HowToSteelMusic.jar">
+      <element id="module-output" name="HowToSteelMusic" />
+    </root>
+  </artifact>
+</component>
