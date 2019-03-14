@@ -4,7 +4,6 @@ package download;
  * A Java class to combine the three classes of The Youtube API, the Youtube to Link API, And the mp3 download Class
  */
 
-import api.API;
 import api.Youtube;
 import api.YoutubeToLink;
 import general.Logger;

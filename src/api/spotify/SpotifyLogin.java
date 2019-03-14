@@ -21,8 +21,8 @@ import java.util.Map;
 
 public class SpotifyLogin extends API {
 
-    private String ClientId = "";
-    private String ClientSecret = "";
+    private String ClientId;
+    private String ClientSecret;
 
     private ArrayList<ActionListener> onsuccesslist = new ArrayList<>();
 
@@ -65,9 +65,7 @@ public class SpotifyLogin extends API {
                         JSONObject request = null;
                         try {
                             request = (JSONObject ) requestData("https://accounts.spotify.com/api/token",mymap,true);
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        } catch (ParseException e1) {
+                        } catch (IOException | ParseException e1) {
                             e1.printStackTrace();
                         }
                         SpotifyData myspotifydata = SpotifyData.getData();

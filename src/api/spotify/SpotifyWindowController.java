@@ -1,11 +1,6 @@
 package api.spotify;
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Worker;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
@@ -30,18 +25,15 @@ public class SpotifyWindowController {
                 e.printStackTrace();
             }
 
-            myView.getEngine().getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
-                @Override
-                public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
-                    //System.out.println("changed...");
-                    String result = myView.getEngine().getLocation();
-                    if (result.contains("https://example.com/callback")){
-                        //System.out.println("successful");
-                        //System.out.println(result);
-                        result=result.substring(result.indexOf("code=")+5,result.lastIndexOf("&state="));
-                        fireOnSuccessEvent(result);
-                        ((Stage) myView.getScene().getWindow()).close();
-                    }
+            myView.getEngine().getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
+                //System.out.println("changed...");
+                String result = myView.getEngine().getLocation();
+                if (result.contains("https://example.com/callback")){
+                    //System.out.println("successful");
+                    //System.out.println(result);
+                    result=result.substring(result.indexOf("code=")+5,result.lastIndexOf("&state="));
+                    fireOnSuccessEvent(result);
+                    ((Stage) myView.getScene().getWindow()).close();
                 }
             });
         });

@@ -1,12 +1,6 @@
 package api.spotify;
 
 import api.API;
-import general.Logger;
-import javafx.concurrent.Task;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -21,12 +15,9 @@ public class Spotify extends API {
     private static final String ClientId="5b7f34f605214a52b6ce4d7b5a9e135c";
     private static final String ClientSecret="6d451d7334ea4c60b1329a6396bcc07c";
 
-    private static final String meineliadaid="60nhT85rlEoKhccSs8kx2e";
-
     private ArrayList<ActionListener> onLoginSuccessList = new ArrayList<>();
 
     private SpotifyData data = SpotifyData.getData();
-    Logger logger = new Logger();
 
     public Spotify() {
     }
@@ -39,9 +30,7 @@ public class Spotify extends API {
             if (play.name.equals("meineliada")){
                 try {
                     songs = getSongNames(play);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ParseException e) {
+                } catch (IOException | ParseException e) {
                     e.printStackTrace();
                 }
             }
@@ -51,21 +40,6 @@ public class Spotify extends API {
         for (Song song:songs) {
             System.out.println(song.songname+"  "+song.artistname);
         }
-
-        /*
-        int offset=0;
-        for (int i = songnumber;i>0;i--){
-            JSONArray myplaylist  = (JSONArray) ((JSONObject)getSongNames(meineliadaid,offset)).get("items");
-            System.out.println(myplaylist.size());
-            for (Object o:myplaylist) {
-                String name = (String)  ((JSONObject)((JSONObject)o).get("track")).get("name");
-                //System.out.println(name);
-                songs.add(name);
-            }
-            i=i-100;
-            offset+=100;
-        }
-        */
 
         return songs;
     }
@@ -81,9 +55,7 @@ public class Spotify extends API {
             head.put("Authorization","Bearer "+data.getKey());
 
             result = (JSONObject) requestData("https://api.spotify.com/v1/me/playlists",head);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
 
@@ -168,15 +140,13 @@ public class Spotify extends API {
             user.id = (String) userdata.get("id");
             user.name = (String) userdata.get("display_name");
             user.product = (String) userdata.get("product");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
         return user;
     }
 
-    public void refreshToken(){
+    private void refreshToken(){
         Map<String,String> mymap = new HashMap<>();
         mymap.put("grant_type","refresh_token");
         mymap.put("refresh_token",data.getRefreshToken());
@@ -189,9 +159,7 @@ public class Spotify extends API {
             data.setKey((String)refreshed.get("access_token"));
             data.setExpireSeconds(Calendar.getInstance().getTimeInMillis()+(long)refreshed.get("expires_in")*1000);
             data.safeData();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
     }
@@ -213,11 +181,7 @@ public class Spotify extends API {
     }
 
     public boolean isLoggedIn(){
-        if (data.getRefreshToken().equals("")){
-            return false;
-        }else {
-            return true;
-        }
+        return !data.getRefreshToken().equals(""); //return false if reqfresh token is zero
     }
 
     public void logout(){

@@ -9,7 +9,6 @@ import general.ProxySettings;
 import safe.Settings;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -72,7 +71,7 @@ public class MainWindowController {
                     //in spotify tab --> load infos
                     new Thread(new Task<Boolean>() {
                         @Override
-                        protected Boolean call() throws Exception {
+                        protected Boolean call() {
                             Spotify myspotify = new Spotify();
                             if (myspotify.isLoggedIn()){
                                 UserProfileData user = myspotify.getUserProfile();
@@ -212,7 +211,7 @@ public class MainWindowController {
 
     }
 
-    public void selectDownloadPathBtn(ActionEvent actionEvent) {
+    public void selectDownloadPathBtn() {
         DirectoryChooser mychooser = new DirectoryChooser();
         mychooser.setTitle("select downloadpath");
         mychooser.setInitialDirectory(new File(settings.getDownloadPath())); //setting default windows to Download path
@@ -226,7 +225,7 @@ public class MainWindowController {
         }
     }
 
-    public void startSpotifyDownloadBtn(ActionEvent actionEvent) {
+    public void startSpotifyDownloadBtn() {
         Spotify myspotify = new Spotify();
 
         Platform.runLater(() -> {
@@ -281,7 +280,7 @@ public class MainWindowController {
         }).start();
     }
 
-    public void newSpotifyBtnListener(ActionEvent actionEvent) {
+    public void newSpotifyBtnListener() {
         Spotify myspotify = new Spotify();
         if (myspotify.isLoggedIn()){
             //logout

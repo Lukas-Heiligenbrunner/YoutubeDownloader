@@ -9,10 +9,6 @@ import java.util.*;
 
 public class API {
 
-    protected Object requestData(String url) throws IOException, ParseException{
-        return requestData(url,new HashMap<>(),new HashMap<>(),false);
-    }
-
     protected Object requestData(String url, Map<String,String> arguments ,Boolean POST) throws IOException, ParseException {
         return requestData(url,arguments,new HashMap<>(),POST);
     }
