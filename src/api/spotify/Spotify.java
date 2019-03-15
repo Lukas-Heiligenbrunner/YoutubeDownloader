@@ -1,6 +1,7 @@
 package api.spotify;
 
 import api.API;
+import general.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -19,6 +20,8 @@ public class Spotify extends API {
 
     private SpotifyData data = SpotifyData.getData();
 
+    private Logger logger = new Logger();
+
     public Spotify() {
     }
 
@@ -36,10 +39,10 @@ public class Spotify extends API {
             }
         }
 
-        System.out.println(songs.size());
-        for (Song song:songs) {
-            System.out.println(song.songname+"  "+song.artistname);
-        }
+//        System.out.println(songs.size());
+//        for (Song song:songs) {
+//            System.out.println(song.songname+"  "+song.artistname);
+//        }
 
         return songs;
     }
@@ -167,13 +170,11 @@ public class Spotify extends API {
     private void checkKeyValidity(){
         if(data.getExpireSeconds() > Calendar.getInstance().getTimeInMillis()){
             //valid
-            System.out.println("key is valid until: "+(data.getExpireSeconds()-Calendar.getInstance().getTimeInMillis()));
+            logger.log("key is valid until: "+(data.getExpireSeconds()-Calendar.getInstance().getTimeInMillis()),Logger.INFO);
         }else {
             //invalid
-            System.out.println("key is invalid");
-            if (data.getRefreshToken().equals("")){
-                System.out.println("not logged in yet");
-            }else {
+            logger.log("key is invalid, refreshing",Logger.INFO);
+            if (!data.getRefreshToken().equals("")){
                 refreshToken();
             }
 
@@ -181,7 +182,7 @@ public class Spotify extends API {
     }
 
     public boolean isLoggedIn(){
-        return !data.getRefreshToken().equals(""); //return false if reqfresh token is zero
+        return !data.getRefreshToken().equals(""); //return false if reqfresh token is ""
     }
 
     public void logout(){

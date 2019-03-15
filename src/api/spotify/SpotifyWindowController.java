@@ -26,11 +26,8 @@ public class SpotifyWindowController {
             }
 
             myView.getEngine().getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
-                //System.out.println("changed...");
                 String result = myView.getEngine().getLocation();
                 if (result.contains("https://example.com/callback")){
-                    //System.out.println("successful");
-                    //System.out.println(result);
                     result=result.substring(result.indexOf("code=")+5,result.lastIndexOf("&state="));
                     fireOnSuccessEvent(result);
                     ((Stage) myView.getScene().getWindow()).close();

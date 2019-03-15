@@ -1,5 +1,6 @@
 package download;
 
+import general.Logger;
 import javafx.concurrent.Task;
 
 import java.awt.event.ActionEvent;
@@ -14,6 +15,8 @@ public class DownloadMusic{
     public DownloadMusic() {
 
     }
+
+    Logger logger = new Logger();
 
     private ArrayList<ActionListener> actionlist = new ArrayList<>();
     private ArrayList<ActionListener> finishedlistener = new ArrayList<>();
@@ -41,15 +44,18 @@ public class DownloadMusic{
                 conttype = conn.getContentType();
 
                 if (!conttype.equals("audio/mpeg")){
-                    System.out.println("download error");
-                    System.out.println("retrying");
 
-                    for (int i = 1;i<=10 && !conttype.equals("audio/mpeg");i++){ //needed because download link sometimes invalid
-                        System.out.println(i+"st retry!");
+                    int i=1;
+                    for (i = 1;i<=10 && !conttype.equals("audio/mpeg");i++){ //needed because download link sometimes invalid
+                        logger.log("invalid Downloadlink --> "+i+"st retry",Logger.WARNING);
                         conn = new URL(link).openConnection();
                         conn.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0"); // setting user agent --> needed on oracle java 8
                         totallength = conn.getContentLength();
                         conttype = conn.getContentType();
+                    }
+                    if (i == 10){
+                        // download completelly errored
+                        logger.log("Download Error: Downloadlink is invalid",Logger.ERROR);
                     }
 
                 }

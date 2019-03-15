@@ -43,7 +43,6 @@ public class API {
             StringJoiner sj = new StringJoiner("&");
             for(Map.Entry<String,String> entry : arguments.entrySet()) sj.add(entry.getKey()+ "=" + URLEncoder.encode(entry.getValue(), "UTF-8"));
             OutputStreamWriter wr = new OutputStreamWriter(http.getOutputStream());
-            System.out.println(sj.toString());
             wr.write(sj.toString());
             wr.flush();
             wr.close();

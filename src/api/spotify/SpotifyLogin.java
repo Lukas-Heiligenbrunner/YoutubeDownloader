@@ -47,13 +47,10 @@ public class SpotifyLogin extends API {
             SpotifyWindowController controller = fxmlLoader.getController();
             controller.addOnSuccessListener(e -> {
                 String code = e.getActionCommand();
-                //System.out.println("success "+code);
-                //TODO request api code with gotten code
 
                 new Thread(new Task<Boolean>() {
                     @Override
                     protected Boolean call() {
-                        System.out.println("in thread...");
                         Map<String,String> mymap = new HashMap<>();
                         mymap.put("grant_type","authorization_code");
                         mymap.put("code",code);
