@@ -5,9 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import safe.SpotifyData;
 
 public class Main extends Application {
+
+    public static final String version = "1.0";
 
     @Override
     public void start(Stage primaryStage) throws Exception{

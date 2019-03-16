@@ -14,7 +14,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 
-import java.io.File;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -50,6 +54,7 @@ public class MainWindowController {
     public Label Spotifystatuslabel;
     public Label accountInfoLabel;
     public Button loginbtn;
+    public Label versioninfolabel;
 
 
     private Logger logger = new Logger();
@@ -64,6 +69,7 @@ public class MainWindowController {
             passfield.setText(settings.getProxyPass());
             proxportfield.setText(settings.getProxyPort());
             proxhostfield.setText(settings.getProxyHost());
+            versioninfolabel.setText(Main.version);
 
             settingPathLabel.setText(settings.getDownloadPath());
             rootTabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -298,6 +304,84 @@ public class MainWindowController {
                 });
             });
             myspotify.loginNewAccount();
+        }
+    }
+
+    public void updatebtnlistener() {
+
+        //checking version
+        String version = "";
+        try {
+            URL versionurl = new URL("http://lukisvpnserver.ddns.net/HowToSteelMusic/version.info");
+            BufferedReader myreader = new BufferedReader(new InputStreamReader(versionurl.openStream()));
+            version = myreader.readLine();
+            myreader.close();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("current version: "+Main.version+" -- version on server: "+version);
+
+        if (!Main.version.equals(version)){
+            //update
+            try {
+                final File currentJar = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+                final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
+
+
+                if(currentJar.delete())
+                {
+                    System.out.println("File deleted successfully");
+                    URL url = new URL("http://lukisvpnserver.ddns.net/HowToSteelMusic/HowToSteelMusic.jar");
+                    URLConnection conn = url.openConnection();
+                    int totallength = conn.getContentLength();
+                    InputStream is = conn.getInputStream();
+
+                    OutputStream outstream = new FileOutputStream(currentJar);
+                    byte[] buffer = new byte[4096];
+                    int len;
+                    int percentold = 42;
+                    int percent = 0;
+                    int loadedbytes = 0;
+
+                    while ((len = is.read(buffer)) > 0) {
+                        outstream.write(buffer, 0, len);
+                        loadedbytes+=len;
+                        percent = (loadedbytes*100)/totallength;
+                        if (percent != percentold)
+                        {
+                            System.out.println(percent);
+                            percentold = percent;
+                        }
+                    }
+                    outstream.close();
+
+                    /* Build command: java -jar application.jar */
+                    final ArrayList<String> command = new ArrayList<String>();
+                    command.add(javaBin);
+                    command.add("-jar");
+                    command.add(currentJar.getPath());
+
+                    final ProcessBuilder builder = new ProcessBuilder(command);
+                    builder.start();
+                    System.exit(0);
+
+
+                }
+                else
+                {
+                    System.out.println("Failed to delete the file");
+                }
+                System.out.println(currentJar.getPath());
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

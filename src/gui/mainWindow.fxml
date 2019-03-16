@@ -160,6 +160,8 @@
                                                 <ChoiceBox fx:id="languageChoice" prefWidth="150.0" GridPane.columnIndex="1" />
                                              </children>
                                           </GridPane>
+                                          <Button layoutX="186.0" layoutY="135.0" mnemonicParsing="false" onAction="#updatebtnlistener" text="Update" />
+                                          <Label fx:id="versioninfolabel" layoutX="131.0" layoutY="102.0" text="Version:" />
                                        </children>
                                     </AnchorPane>
                                  </content>
