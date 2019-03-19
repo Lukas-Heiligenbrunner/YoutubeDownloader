@@ -69,7 +69,7 @@ public class MainWindowController {
             passfield.setText(settings.getProxyPass());
             proxportfield.setText(settings.getProxyPort());
             proxhostfield.setText(settings.getProxyHost());
-            versioninfolabel.setText(Main.version);
+            versioninfolabel.setText("Version: "+Main.version);
 
             settingPathLabel.setText(settings.getDownloadPath());
             rootTabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {

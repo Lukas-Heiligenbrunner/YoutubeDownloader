@@ -47,7 +47,7 @@ public class DownloadMusic{
 
                     int i=1;
                     for (i = 1;i<=10 && !conttype.equals("audio/mpeg");i++){ //needed because download link sometimes invalid
-                        logger.log("invalid Downloadlink --> "+i+"st retry",Logger.WARNING);
+                        logger.log("invalid Downloadlink --> "+i+"st retry",Logger.WARNING,2);
                         conn = new URL(link).openConnection();
                         conn.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0"); // setting user agent --> needed on oracle java 8
                         totallength = conn.getContentLength();
@@ -64,6 +64,7 @@ public class DownloadMusic{
 
                 //TODO check if output path is writeable
                 // and user input of path
+                // check speed
                 OutputStream outstream = new FileOutputStream(new File(filename));
                 byte[] buffer = new byte[4096];
                 int len;

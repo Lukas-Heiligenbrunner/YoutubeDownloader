@@ -16,6 +16,8 @@ public class Logger {
     private static final String CYAN = "\u001B[36m";
     private static final String WHITE = "\u001B[37m";
 
+    private static final int level = 1;
+
 
 
     public Logger() {
@@ -27,32 +29,37 @@ public class Logger {
     }
 
     public void log(String message, int type){
-        if(System.getProperty("os.name").contains("Windows")) //colored terminal in Windows not supported...
-        {
-            switch (type){
-                case 1:
-                    System.out.println("[INFO] "+message);
-                    break;
-                case 0:
-                    System.out.println("[WARNING] "+message);
-                    break;
-                case -1:
-                    System.out.println("[ERROR] "+message);
-                    break;
-            }
-        }else {
-            switch (type){
-                case 1:
-                    System.out.println(CYAN+"[INFO] "+message+RESET);
-                    break;
-                case 0:
-                    System.out.println(YELLOW+"[WARNING] "+message+RESET);
-                    break;
-                case -1:
-                    System.out.println(RED+"[ERROR] "+message+RESET);
-                    break;
+        log(message,type,1);
+    }
+
+    public void log(String message, int type,int level){
+        if(level <= this.level){
+            if(System.getProperty("os.name").contains("Windows")) //colored terminal in Windows not supported...
+            {
+                switch (type){
+                    case 1:
+                        System.out.println("[INFO] "+message);
+                        break;
+                    case 0:
+                        System.out.println("[WARNING] "+message);
+                        break;
+                    case -1:
+                        System.out.println("[ERROR] "+message);
+                        break;
+                }
+            }else {
+                switch (type){
+                    case 1:
+                        System.out.println(CYAN+"[INFO] "+message+RESET);
+                        break;
+                    case 0:
+                        System.out.println(YELLOW+"[WARNING] "+message+RESET);
+                        break;
+                    case -1:
+                        System.out.println(RED+"[ERROR] "+message+RESET);
+                        break;
+                }
             }
         }
-
     }
 }
