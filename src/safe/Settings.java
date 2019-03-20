@@ -94,10 +94,10 @@ public class Settings implements  Serializable{
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("settings.txt"));
             out.writeObject(this);
             out.close();
-            new Logger().log("safed settings",Logger.INFO);
+            new Logger().log("safed settings",Logger.INFO,2);
         } catch (IOException e) {
             e.printStackTrace();
-            new Logger().log("root path might not be writeable!",Logger.ERROR);
+            new Logger().log("root path might not be writeable!",Logger.ERROR,2);
         }
     }
 

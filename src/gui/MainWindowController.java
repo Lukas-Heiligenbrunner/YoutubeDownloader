@@ -111,7 +111,7 @@ public class MainWindowController {
     }
 
     public void cancelbutton() {
-        logger.log("interrupting...", Logger.WARNING);
+        logger.log("stopping download...", Logger.WARNING,1);
         singleDownloadManager.interruptDownload();
     }
 
@@ -223,11 +223,11 @@ public class MainWindowController {
         mychooser.setInitialDirectory(new File(settings.getDownloadPath())); //setting default windows to Download path
         File mydir = mychooser.showDialog(rootTabPane.getScene().getWindow()); //show dialog
         if (mydir != null){
-            logger.log("setting Download path to: "+mydir.getPath(),Logger.INFO);
+            logger.log("setting Download path to: "+mydir.getPath(),Logger.INFO,2);
             Platform.runLater(() -> settingPathLabel.setText(mydir.getPath()));
             settings.setDownloadPath(mydir.getPath());
         }else{
-            logger.log("nothing selected",Logger.WARNING);
+            logger.log("nothing selected",Logger.WARNING,2);
         }
     }
 
@@ -243,7 +243,7 @@ public class MainWindowController {
             ArrayList<Song> songs = myspotify.getSongsList();
             downloadSpotifyListRec(0,songs);
         }else {
-            logger.log("Not logged in",Logger.ERROR);
+            logger.log("Not logged in",Logger.ERROR,1);
         }
     }
 

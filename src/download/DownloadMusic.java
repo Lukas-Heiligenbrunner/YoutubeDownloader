@@ -55,7 +55,7 @@ public class DownloadMusic{
                     }
                     if (i == 10){
                         // download completelly errored
-                        logger.log("Download Error: Downloadlink is invalid",Logger.ERROR);
+                        logger.log("Download Error: Downloadlink is invalid",Logger.ERROR,1);
                     }
 
                 }

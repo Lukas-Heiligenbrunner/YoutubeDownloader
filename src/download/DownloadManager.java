@@ -38,12 +38,12 @@ public class DownloadManager {
         new Thread(new Task<Boolean>() {
             @Override
             protected Boolean call() {
-                logger.log("searching on youtube", Logger.INFO);
+                logger.log("searching for "+songname, Logger.INFO,1);
 
                 try{
                     String id = myyoutube.firstResultID(songname);
 
-                    logger.log("getting direct link",Logger.INFO);
+                    logger.log("getting direct link",Logger.INFO,2);
 
                     yttl.getDirectLink(id);
                     String directlink = yttl.getLink();
@@ -53,25 +53,25 @@ public class DownloadManager {
                     dld.onPercentChangeListener(e ->fireProgressChangeEvent());
 
                     dld.onFinishedListener(e -> {
-                        logger.log("finished downloading",Logger.INFO);
+                        logger.log("finished downloading",Logger.INFO,2);
                         fireFinishedEvent();
                     });
 
                     dld.onDownloadStartListener(e -> {
-                        logger.log("starting downloading",Logger.INFO);
+                        logger.log("starting downloading",Logger.INFO,2);
                         fireOnStartEvent();
                     });
 
-                    dld.onRetrievingDataListener(e -> logger.log("starting retrieving data (Downloader)",Logger.INFO));
+                    dld.onRetrievingDataListener(e -> logger.log("starting retrieving data (Downloader)",Logger.INFO,2));
 
                     dld.Download(directlink, Settings.getSettings().getDownloadPath()+"/"+yttl.getName()+".mp3"); //starting the donwload
                 }catch (IOException e){
-                    logger.log("cant download --> no internet connection",Logger.ERROR);
+                    logger.log("cant download --> no internet connection",Logger.ERROR,1);
                     fireErrorEvent("No Internet Connection");
                     e.printStackTrace();
                 } catch (ParseException e) {
                     //download isnt available
-                    logger.log("requested video isnt available for download",Logger.ERROR);
+                    logger.log("requested video isnt available for download",Logger.ERROR,1);
                     fireErrorEvent("Video Not supported");
                 }
 
