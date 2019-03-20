@@ -55,6 +55,7 @@ public class MainWindowController {
     public Label accountInfoLabel;
     public Button loginbtn;
     public Label versioninfolabel;
+    public ListView playlistsListView;
 
 
     private Logger logger = new Logger();
