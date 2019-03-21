@@ -9,13 +9,13 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    public static final String version = "1.0";
+    public static final String version = "1.1";
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
         primaryStage.setTitle("How To Steel Music");
-        primaryStage.setScene(new Scene(root, 800, 500));
+        primaryStage.setScene(new Scene(root, 900, 600));
         primaryStage.show();
         new Logger().log("starging gui",Logger.INFO,1);
     }

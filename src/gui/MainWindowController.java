@@ -6,6 +6,8 @@ import api.spotify.UserProfileData;
 import download.DownloadManager;
 import general.Logger;
 import general.ProxySettings;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import safe.Settings;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -14,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -21,6 +24,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.EventListener;
 
 public class MainWindowController {
 
@@ -179,6 +183,20 @@ public class MainWindowController {
         Platform.runLater(() -> {
             progressbar.setProgress(-1.0);
             statusbottomlabel.setText("retrieving necessary data!");
+        });
+
+        singleDownloadManager.addEventDings(new EventListener() {
+            @Override
+            protected void finalize() throws Throwable {
+                super.finalize();
+            }
+        });
+
+        singleDownloadManager.addEventHandler(new EventHandler() {
+            @Override
+            public void handle(Event event) {
+
+            }
         });
 
         singleDownloadManager.onDownloadProgressChangeListener(e -> Platform.runLater(() -> {

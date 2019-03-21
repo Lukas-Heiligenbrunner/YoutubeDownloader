@@ -7,6 +7,8 @@ package download;
 import api.Youtube;
 import api.YoutubeToLink;
 import general.Logger;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import safe.Settings;
 import javafx.concurrent.Task;
 import org.json.simple.parser.ParseException;
@@ -15,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.EventListener;
 
 public class DownloadManager {
 
@@ -149,6 +152,14 @@ public class DownloadManager {
 
     public int getTotalBytes(){
         return dld.getTotallength();
+    }
+
+    public void addEventDings(EventListener listener){
+
+    }
+
+    public void addEventHandler(EventHandler listener){
+
     }
 
 }
