@@ -30,6 +30,7 @@ public class YoutubeToLink extends API{
         JSONObject request = (JSONObject) this.requestData("http://www.convertmp3.io/fetch/",mymap,false);
 
         link = ((String)request.get("link"));
+        System.out.println(link);
         name = ((String)request.get("title"));
         lengthsecs = ((String)request.get("length"));
     }

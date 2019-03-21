@@ -1,5 +1,6 @@
 package gui;
 
+import api.YoutubeToLinkmp3Music;
 import api.spotify.Song;
 import api.spotify.Spotify;
 import api.spotify.UserProfileData;
@@ -10,6 +11,7 @@ import download.DownloadManager;
 import general.Logger;
 import general.ProxySettings;
 
+import org.json.simple.parser.ParseException;
 import safe.Settings;
 
 import javafx.application.Platform;
@@ -117,8 +119,25 @@ public class MainWindowController {
     }
 
     public void cancelbutton() {
+        new Thread(new Task<Boolean>() {
+            @Override
+            protected Boolean call() throws Exception {
+
+                try {
+                    new YoutubeToLinkmp3Music().getDirectLink("L4sjxRhAJHA");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                return null;
+            }
+        }).start();
+
+
         logger.log("stopping download...", Logger.WARNING,1);
-        singleDownloadManager.interruptDownload();
+        //singleDownloadManager.interruptDownload();
     }
 
     public void clickbtnDownloadList() {
@@ -166,6 +185,7 @@ public class MainWindowController {
                     public void onDownloadFinished() {
                         Platform.runLater(() -> {
                             liststatuslabel.setText("finished downloding -- ready to download new");
+                            listProgressbar.setProgress(0.0);
                             if (downloadlinks.size() > num+1)
                             {
                                 DownloadMultipleRec(num+1,downloadlinks);
@@ -219,7 +239,10 @@ public class MainWindowController {
 
             @Override
             public void onDownloadFinished() {
-                Platform.runLater(() -> statusbottomlabel.setText("finished downloding -- ready to download new"));
+                Platform.runLater(() -> {
+                    statusbottomlabel.setText("finished downloding -- ready to download new");
+                    progressbar.setProgress(0.0);
+                });
             }
 
             @Override
@@ -314,6 +337,7 @@ public class MainWindowController {
                     public void onDownloadFinished() {
                         Platform.runLater(() -> {
                             Spotifystatuslabel.setText("finished downloding -- ready to download new");
+                            SpotifyProgressbar.setProgress(0.0);
                             if (songlist.size() > num+1)
                             {
                                 downloadSpotifyListRec(num+1,songlist);

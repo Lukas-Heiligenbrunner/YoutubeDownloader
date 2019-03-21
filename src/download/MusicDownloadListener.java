@@ -7,4 +7,5 @@ public interface MusicDownloadListener {
     void onFinishedListener();
     void onDownloadStartListener();
     void onRetrievingDataListener();
+    void onErrored(String message);
 }

@@ -6,6 +6,7 @@ package download;
 
 import api.Youtube;
 import api.YoutubeToLink;
+import api.YoutubeToLinkmp3Music;
 import general.Logger;
 import safe.Settings;
 import javafx.concurrent.Task;
@@ -21,6 +22,7 @@ public class DownloadManager {
     private ArrayList<DownloadListener> listeners = new ArrayList<>();
 
     private Youtube myyoutube = new Youtube();
+    //private YoutubeToLinkmp3Music yttl = new YoutubeToLinkmp3Music();
     private YoutubeToLink yttl = new YoutubeToLink();
     private DownloadMusic dld = new DownloadMusic();
 
@@ -64,6 +66,11 @@ public class DownloadManager {
                         @Override
                         public void onRetrievingDataListener() {
                             logger.log("starting retrieving data (Downloader)",Logger.INFO,2);
+                        }
+
+                        @Override
+                        public void onErrored(String message) {
+                            System.out.println(message);
                         }
                     });
 
