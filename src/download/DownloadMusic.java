@@ -71,7 +71,7 @@ public class DownloadMusic{
                     percent = (loadedbytes*100)/totallength;
                     if (percent != percentold)
                     {
-                        firePercentchangeListener();
+                        firePercentchangeListener(percent);
                         percentold = percent;
                     }
                 }
@@ -83,9 +83,9 @@ public class DownloadMusic{
         }).start();
     }
 
-    private void firePercentchangeListener(){
+    private void firePercentchangeListener(int percent){
         for (MusicDownloadListener lis:listeners) {
-            lis.onPercentChangeListener();
+            lis.onPercentChangeListener(percent);
         }
     }
 

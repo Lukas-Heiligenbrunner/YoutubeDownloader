@@ -45,8 +45,8 @@ public class DownloadManager {
 
                     dld.addActionListener(new MusicDownloadListener() {
                         @Override
-                        public void onPercentChangeListener() {
-                            fireProgresschangeEvent();
+                        public void onPercentChangeListener(int percent) {
+                            fireProgresschangeEvent(percent);
                         }
 
                         @Override
@@ -112,9 +112,9 @@ public class DownloadManager {
         listeners.add(e);
     }
 
-    private void fireProgresschangeEvent(){
+    private void fireProgresschangeEvent(int percent){
         for (DownloadListener listener:listeners) {
-            listener.onDownloadProgressChange();
+            listener.onDownloadProgressChange(percent);
         }
     }
 

@@ -3,11 +3,15 @@ package gui;
 import api.spotify.Song;
 import api.spotify.Spotify;
 import api.spotify.UserProfileData;
+
 import download.DownloadListener;
 import download.DownloadManager;
+
 import general.Logger;
 import general.ProxySettings;
+
 import safe.Settings;
+
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.*;
@@ -147,14 +151,14 @@ public class MainWindowController {
 
                 mydownload.addEventListener(new DownloadListener() {
                     @Override
-                    public void onDownloadProgressChange() {
+                    public void onDownloadProgressChange(int percent) {
                         Platform.runLater(() -> {
                             liststatuslabel.setText("downloading");
-                            listProgressbar.setProgress(mydownload.getDownloadProgress());
+                            listProgressbar.setProgress(percent/100.0);
                             DecimalFormat format = new DecimalFormat();
                             format.setMaximumFractionDigits(2);
 
-                            listsearchInfoLabel.setText("Filename: " + mydownload.getFilename() + "\nprogress:  " + (int) (mydownload.getDownloadProgress() * 100) + "%\nLoaded: " + format.format((float) mydownload.getLoadedBytes() / (1024 * 1024)) + "MB/" + format.format((float) mydownload.getTotalBytes() / (1024 * 1024)) + "MB");
+                            listsearchInfoLabel.setText("Filename: " + mydownload.getFilename() + "\nprogress:  " + percent + "%\nLoaded: " + format.format((float) mydownload.getLoadedBytes() / (1024 * 1024)) + "MB/" + format.format((float) mydownload.getTotalBytes() / (1024 * 1024)) + "MB");
                         });
                     }
 
@@ -202,14 +206,14 @@ public class MainWindowController {
 
         singleDownloadManager.addEventListener(new DownloadListener() {
             @Override
-            public void onDownloadProgressChange() {
+            public void onDownloadProgressChange(int percent) {
                 Platform.runLater(() -> {
                     statusbottomlabel.setText("downloading");
-                    progressbar.setProgress(singleDownloadManager.getDownloadProgress());
+                    progressbar.setProgress(percent/100.0);
                     DecimalFormat format = new DecimalFormat();
                     format.setMaximumFractionDigits(2);
 
-                    filenamelabel.setText("Filename: "+singleDownloadManager.getFilename()+"\nprogress: "+(int)(singleDownloadManager.getDownloadProgress()*100)+"%\nLoaded: "+format.format((float)singleDownloadManager.getLoadedBytes()/(1024*1024))+"MB/"+format.format((float)singleDownloadManager.getTotalBytes()/(1024*1024))+"MB");
+                    filenamelabel.setText("Filename: "+singleDownloadManager.getFilename()+"\nprogress: "+percent+"%\nLoaded: "+format.format((float)singleDownloadManager.getLoadedBytes()/(1024*1024))+"MB/"+format.format((float)singleDownloadManager.getTotalBytes()/(1024*1024))+"MB");
                 });
             }
 
@@ -295,14 +299,14 @@ public class MainWindowController {
 
                 mydownload.addEventListener(new DownloadListener() {
                     @Override
-                    public void onDownloadProgressChange() {
+                    public void onDownloadProgressChange(int percent) {
                         Platform.runLater(() -> {
                             Spotifystatuslabel.setText("downloading");
-                            SpotifyProgressbar.setProgress(mydownload.getDownloadProgress());
+                            SpotifyProgressbar.setProgress(percent/100.0);
                             DecimalFormat format = new DecimalFormat();
                             format.setMaximumFractionDigits(2);
 
-                            spotifyInfoLabel.setText("Filename: " + mydownload.getFilename() + "\nProgress:  " + (int) (mydownload.getDownloadProgress() * 100) + "%\nLoaded: " + format.format((float) mydownload.getLoadedBytes() / (1024 * 1024)) + "MB/" + format.format((float) mydownload.getTotalBytes() / (1024 * 1024)) + "MB");
+                            spotifyInfoLabel.setText("Filename: " + mydownload.getFilename() + "\nProgress:  " + percent + "%\nLoaded: " + format.format((float) mydownload.getLoadedBytes() / (1024 * 1024)) + "MB/" + format.format((float) mydownload.getTotalBytes() / (1024 * 1024)) + "MB");
                         });
                     }
 

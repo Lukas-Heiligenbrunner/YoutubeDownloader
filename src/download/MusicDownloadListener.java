@@ -3,8 +3,8 @@ package download;
 
 public interface MusicDownloadListener {
 
-    public void onPercentChangeListener();
-    public void onFinishedListener();
-    public void onDownloadStartListener();
-    public void onRetrievingDataListener();
+    void onPercentChangeListener(int percent);
+    void onFinishedListener();
+    void onDownloadStartListener();
+    void onRetrievingDataListener();
 }
