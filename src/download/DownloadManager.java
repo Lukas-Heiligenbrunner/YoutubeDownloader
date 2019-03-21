@@ -11,8 +11,6 @@ import safe.Settings;
 import javafx.concurrent.Task;
 import org.json.simple.parser.ParseException;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -20,13 +18,7 @@ public class DownloadManager {
 
     private Logger logger = new Logger();
 
-    private ArrayList<ActionListener> onfinished = new ArrayList<>();
-    private ArrayList<ActionListener> onstart = new ArrayList<>();
-    private ArrayList<ActionListener> onprogresschange = new ArrayList<>();
-    private ArrayList<ActionListener> onapidatafinished = new ArrayList<>();
-    private ArrayList<ActionListener> onErrored = new ArrayList<>();
-
-    ArrayList<DownloadListener> listeners = new ArrayList<>();
+    private ArrayList<DownloadListener> listeners = new ArrayList<>();
 
     private Youtube myyoutube = new Youtube();
     private YoutubeToLink yttl = new YoutubeToLink();
@@ -51,22 +43,29 @@ public class DownloadManager {
                     String directlink = yttl.getLink();
                     fireApiFinishedEvent();
 
+                    dld.addActionListener(new MusicDownloadListener() {
+                        @Override
+                        public void onPercentChangeListener() {
+                            fireProgresschangeEvent();
+                        }
 
-                    dld.onPercentChangeListener(e ->{
-                        fireProgresschangeEvent();
+                        @Override
+                        public void onFinishedListener() {
+                            logger.log("finished downloading",Logger.INFO,2);
+                            fireFinishedEvents();
+                        }
+
+                        @Override
+                        public void onDownloadStartListener() {
+                            logger.log("starting downloading",Logger.INFO,2);
+                            fireStartEvent();
+                        }
+
+                        @Override
+                        public void onRetrievingDataListener() {
+                            logger.log("starting retrieving data (Downloader)",Logger.INFO,2);
+                        }
                     });
-
-                    dld.onFinishedListener(e -> {
-                        logger.log("finished downloading",Logger.INFO,2);
-                        fireFinishedEvents();
-                    });
-
-                    dld.onDownloadStartListener(e -> {
-                        logger.log("starting downloading",Logger.INFO,2);
-                        fireStartEvent();
-                    });
-
-                    dld.onRetrievingDataListener(e -> logger.log("starting retrieving data (Downloader)",Logger.INFO,2));
 
                     dld.Download(directlink, Settings.getSettings().getDownloadPath()+"/"+yttl.getName()+".mp3"); //starting the donwload
                 }catch (IOException e){

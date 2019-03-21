@@ -3,8 +3,6 @@ package download;
 import general.Logger;
 import javafx.concurrent.Task;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
@@ -16,12 +14,9 @@ public class DownloadMusic{
 
     }
 
-    Logger logger = new Logger();
+    private Logger logger = new Logger();
 
-    private ArrayList<ActionListener> actionlist = new ArrayList<>();
-    private ArrayList<ActionListener> finishedlistener = new ArrayList<>();
-    private ArrayList<ActionListener> startDownloadlistener = new ArrayList<>();
-    private ArrayList<ActionListener> retrievingDatalistener = new ArrayList<>();
+    private ArrayList<MusicDownloadListener> listeners = new ArrayList<>();
 
     private int percent = 0;
     private int loadedbytes = 0;
@@ -76,7 +71,7 @@ public class DownloadMusic{
                     percent = (loadedbytes*100)/totallength;
                     if (percent != percentold)
                     {
-                        firelisteners();
+                        firePercentchangeListener();
                         percentold = percent;
                     }
                 }
@@ -88,46 +83,32 @@ public class DownloadMusic{
         }).start();
     }
 
-    private void firelisteners(){
-        for (ActionListener lis:actionlist) {
-            lis.actionPerformed(new ActionEvent(this, 0,"myaction"));
+    private void firePercentchangeListener(){
+        for (MusicDownloadListener lis:listeners) {
+            lis.onPercentChangeListener();
         }
     }
 
     private void fireFinishedEvent(){
-        for (ActionListener lis:finishedlistener) {
-            lis.actionPerformed(new ActionEvent(this, 0,"finished listener"));
+        for (MusicDownloadListener lis:listeners) {
+            lis.onFinishedListener();
         }
     }
 
     private void fireStartDownloadEvent(){
-        for (ActionListener lis:startDownloadlistener) {
-            lis.actionPerformed(new ActionEvent(this, 0,"start download listener"));
+        for (MusicDownloadListener lis:listeners) {
+            lis.onDownloadStartListener();
         }
     }
 
     private void fireRetrievingDataEvent(){
-        for (ActionListener lis:retrievingDatalistener) {
-            lis.actionPerformed(new ActionEvent(this, 0,"retrieving data listener"));
+        for (MusicDownloadListener lis:listeners) {
+            lis.onRetrievingDataListener();
         }
     }
 
-
-
-    public void onPercentChangeListener(ActionListener listener){
-        actionlist.add(listener);
-    }
-
-    public void onFinishedListener(ActionListener listener){
-        finishedlistener.add(listener);
-    }
-
-    public void onDownloadStartListener(ActionListener listener){
-        startDownloadlistener.add(listener);
-    }
-
-    public void onRetrievingDataListener(ActionListener listener){
-        retrievingDatalistener.add(listener);
+    public void addActionListener(MusicDownloadListener lis){
+        listeners.add(lis);
     }
 
 
