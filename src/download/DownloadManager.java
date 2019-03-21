@@ -7,8 +7,6 @@ package download;
 import api.Youtube;
 import api.YoutubeToLink;
 import general.Logger;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import safe.Settings;
 import javafx.concurrent.Task;
 import org.json.simple.parser.ParseException;
@@ -17,7 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.EventListener;
 
 public class DownloadManager {
 
@@ -28,6 +25,8 @@ public class DownloadManager {
     private ArrayList<ActionListener> onprogresschange = new ArrayList<>();
     private ArrayList<ActionListener> onapidatafinished = new ArrayList<>();
     private ArrayList<ActionListener> onErrored = new ArrayList<>();
+
+    ArrayList<DownloadListener> listeners = new ArrayList<>();
 
     private Youtube myyoutube = new Youtube();
     private YoutubeToLink yttl = new YoutubeToLink();
@@ -50,19 +49,21 @@ public class DownloadManager {
 
                     yttl.getDirectLink(id);
                     String directlink = yttl.getLink();
-                    fireGettingAPIDataEvent();
+                    fireApiFinishedEvent();
 
 
-                    dld.onPercentChangeListener(e ->fireProgressChangeEvent());
+                    dld.onPercentChangeListener(e ->{
+                        fireProgresschangeEvent();
+                    });
 
                     dld.onFinishedListener(e -> {
                         logger.log("finished downloading",Logger.INFO,2);
-                        fireFinishedEvent();
+                        fireFinishedEvents();
                     });
 
                     dld.onDownloadStartListener(e -> {
                         logger.log("starting downloading",Logger.INFO,2);
-                        fireOnStartEvent();
+                        fireStartEvent();
                     });
 
                     dld.onRetrievingDataListener(e -> logger.log("starting retrieving data (Downloader)",Logger.INFO,2));
@@ -70,67 +71,18 @@ public class DownloadManager {
                     dld.Download(directlink, Settings.getSettings().getDownloadPath()+"/"+yttl.getName()+".mp3"); //starting the donwload
                 }catch (IOException e){
                     logger.log("cant download --> no internet connection",Logger.ERROR,1);
-                    fireErrorEvent("No Internet Connection");
+                    fireErroredEvent("No Internet Connection");
                     e.printStackTrace();
                 } catch (ParseException e) {
                     //download isnt available
                     logger.log("requested video isnt available for download",Logger.ERROR,1);
-                    fireErrorEvent("Video Not supported");
+                    fireErroredEvent("Video Not supported");
                 }
 
                 return null;
             }
         }).start();
     }
-
-    private void fireFinishedEvent(){
-        for (ActionListener a:onfinished) {
-            a.actionPerformed(new ActionEvent(this,42,"finished event"));
-        }
-    }
-    public void onFinishedListener(ActionListener a){
-        onfinished.add(a);
-    }
-
-
-    private void fireOnStartEvent(){
-        for (ActionListener a:onstart) {
-            a.actionPerformed(new ActionEvent(this,42,"start event"));
-        }
-    }
-    public void onDownloadStartListener(ActionListener a){
-        onstart.add(a);
-    }
-
-
-    private void fireGettingAPIDataEvent(){
-        for (ActionListener a:onapidatafinished) {
-            a.actionPerformed(new ActionEvent(this,42,"finished getting data from apis"));
-        }
-    }
-    public void onGettingAPIDataFinishedListener(ActionListener a){
-        onapidatafinished.add(a);
-    }
-
-
-    private void fireProgressChangeEvent(){
-        for (ActionListener a:onprogresschange) {
-            a.actionPerformed(new ActionEvent(this,42,"Download progress changed"));
-        }
-    }
-    public void onDownloadProgressChangeListener(ActionListener a){
-        onprogresschange.add(a);
-    }
-
-    private void fireErrorEvent(String message){
-        for (ActionListener a:onErrored) {
-            a.actionPerformed(new ActionEvent(this,42,message));
-        }
-    }
-    public void onErrorListener(ActionListener a){
-        onErrored.add(a);
-    }
-
 
     public double getDownloadProgress(){
         return dld.getPercent()/100.0;
@@ -154,12 +106,41 @@ public class DownloadManager {
         return dld.getTotallength();
     }
 
-    public void addEventDings(EventListener listener){
 
+
+
+    public void addEventListener(DownloadListener e){
+        listeners.add(e);
     }
 
-    public void addEventHandler(EventHandler listener){
+    private void fireProgresschangeEvent(){
+        for (DownloadListener listener:listeners) {
+            listener.onDownloadProgressChange();
+        }
+    }
 
+    private void fireStartEvent(){
+        for (DownloadListener listener:listeners) {
+            listener.onDownloadStarted();
+        }
+    }
+
+    private void fireFinishedEvents(){
+        for (DownloadListener listener:listeners) {
+            listener.onDownloadFinished();
+        }
+    }
+
+    private void fireErroredEvent(String message){
+        for (DownloadListener listener:listeners) {
+            listener.onDownloadErrored(message);
+        }
+    }
+
+    private void fireApiFinishedEvent(){
+        for (DownloadListener listener:listeners) {
+            listener.onGettingApiDataFinished();
+        }
     }
 
 }

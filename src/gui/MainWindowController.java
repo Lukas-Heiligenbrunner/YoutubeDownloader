@@ -3,11 +3,10 @@ package gui;
 import api.spotify.Song;
 import api.spotify.Spotify;
 import api.spotify.UserProfileData;
+import download.DownloadListener;
 import download.DownloadManager;
 import general.Logger;
 import general.ProxySettings;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import safe.Settings;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -16,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -24,7 +22,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.EventListener;
 
 public class MainWindowController {
 
@@ -147,27 +144,45 @@ public class MainWindowController {
                 });
 
                 DownloadManager mydownload = new DownloadManager();
-                mydownload.onDownloadProgressChangeListener(e -> Platform.runLater(() -> {
-                    liststatuslabel.setText("downloading");
-                    listProgressbar.setProgress(mydownload.getDownloadProgress());
-                    DecimalFormat format = new DecimalFormat();
-                    format.setMaximumFractionDigits(2);
 
-                    listsearchInfoLabel.setText("Filename: " + mydownload.getFilename() + "\nprogress:  " + (int) (mydownload.getDownloadProgress() * 100) + "%\nLoaded: " + format.format((float) mydownload.getLoadedBytes() / (1024 * 1024)) + "MB/" + format.format((float) mydownload.getTotalBytes() / (1024 * 1024)) + "MB");
-                }));
+                mydownload.addEventListener(new DownloadListener() {
+                    @Override
+                    public void onDownloadProgressChange() {
+                        Platform.runLater(() -> {
+                            liststatuslabel.setText("downloading");
+                            listProgressbar.setProgress(mydownload.getDownloadProgress());
+                            DecimalFormat format = new DecimalFormat();
+                            format.setMaximumFractionDigits(2);
 
-                mydownload.onDownloadStartListener(e -> Platform.runLater(() -> liststatuslabel.setText("starting the download")));
-
-                mydownload.onFinishedListener(e -> Platform.runLater(() -> {
-                    liststatuslabel.setText("finished downloding -- ready to download new");
-                    if (downloadlinks.size() > num+1)
-                    {
-                        DownloadMultipleRec(num+1,downloadlinks);
+                            listsearchInfoLabel.setText("Filename: " + mydownload.getFilename() + "\nprogress:  " + (int) (mydownload.getDownloadProgress() * 100) + "%\nLoaded: " + format.format((float) mydownload.getLoadedBytes() / (1024 * 1024)) + "MB/" + format.format((float) mydownload.getTotalBytes() / (1024 * 1024)) + "MB");
+                        });
                     }
-                }));
 
-                mydownload.onGettingAPIDataFinishedListener(e -> {
+                    @Override
+                    public void onDownloadFinished() {
+                        Platform.runLater(() -> {
+                            liststatuslabel.setText("finished downloding -- ready to download new");
+                            if (downloadlinks.size() > num+1)
+                            {
+                                DownloadMultipleRec(num+1,downloadlinks);
+                            }
+                        });
+                    }
 
+                    @Override
+                    public void onDownloadStarted() {
+                        Platform.runLater(() -> liststatuslabel.setText("starting the download"));
+                    }
+
+                    @Override
+                    public void onDownloadErrored(String message) {
+                        //TODO!!!
+                    }
+
+                    @Override
+                    public void onGettingApiDataFinished() {
+                        //TODO!!!
+                    }
                 });
 
                 mydownload.startDownloadJob(downloadlinks.get(num));
@@ -185,41 +200,42 @@ public class MainWindowController {
             statusbottomlabel.setText("retrieving necessary data!");
         });
 
-        singleDownloadManager.addEventDings(new EventListener() {
+        singleDownloadManager.addEventListener(new DownloadListener() {
             @Override
-            protected void finalize() throws Throwable {
-                super.finalize();
+            public void onDownloadProgressChange() {
+                Platform.runLater(() -> {
+                    statusbottomlabel.setText("downloading");
+                    progressbar.setProgress(singleDownloadManager.getDownloadProgress());
+                    DecimalFormat format = new DecimalFormat();
+                    format.setMaximumFractionDigits(2);
+
+                    filenamelabel.setText("Filename: "+singleDownloadManager.getFilename()+"\nprogress: "+(int)(singleDownloadManager.getDownloadProgress()*100)+"%\nLoaded: "+format.format((float)singleDownloadManager.getLoadedBytes()/(1024*1024))+"MB/"+format.format((float)singleDownloadManager.getTotalBytes()/(1024*1024))+"MB");
+                });
+            }
+
+            @Override
+            public void onDownloadFinished() {
+                Platform.runLater(() -> statusbottomlabel.setText("finished downloding -- ready to download new"));
+            }
+
+            @Override
+            public void onDownloadStarted() {
+                Platform.runLater(() -> statusbottomlabel.setText("starting the download"));
+            }
+
+            @Override
+            public void onDownloadErrored(String message) {
+                Platform.runLater(() -> {
+                    statusbottomlabel.setText("An Error occured ");
+                    progressbar.setProgress(0.0);
+                });
+            }
+
+            @Override
+            public void onGettingApiDataFinished() {
+
             }
         });
-
-        singleDownloadManager.addEventHandler(new EventHandler() {
-            @Override
-            public void handle(Event event) {
-
-            }
-        });
-
-        singleDownloadManager.onDownloadProgressChangeListener(e -> Platform.runLater(() -> {
-            statusbottomlabel.setText("downloading");
-            progressbar.setProgress(singleDownloadManager.getDownloadProgress());
-            DecimalFormat format = new DecimalFormat();
-            format.setMaximumFractionDigits(2);
-
-            filenamelabel.setText("Filename: "+singleDownloadManager.getFilename()+"\nprogress: "+(int)(singleDownloadManager.getDownloadProgress()*100)+"%\nLoaded: "+format.format((float)singleDownloadManager.getLoadedBytes()/(1024*1024))+"MB/"+format.format((float)singleDownloadManager.getTotalBytes()/(1024*1024))+"MB");
-        }));
-
-        singleDownloadManager.onDownloadStartListener(e -> Platform.runLater(() -> statusbottomlabel.setText("starting the download")));
-
-        singleDownloadManager.onFinishedListener(e -> Platform.runLater(() -> statusbottomlabel.setText("finished downloding -- ready to download new")));
-
-        singleDownloadManager.onGettingAPIDataFinishedListener(e -> {
-
-        });
-
-        singleDownloadManager.onErrorListener(e -> Platform.runLater(() -> {
-            statusbottomlabel.setText("An Error occured: "+e.getActionCommand());
-            progressbar.setProgress(0.0);
-        }));
 
         singleDownloadManager.startDownloadJob(searchfield.getText());
     }
@@ -276,27 +292,45 @@ public class MainWindowController {
                 });
 
                 DownloadManager mydownload = new DownloadManager();
-                mydownload.onDownloadProgressChangeListener(e -> Platform.runLater(() -> {
-                    Spotifystatuslabel.setText("downloading");
-                    SpotifyProgressbar.setProgress(mydownload.getDownloadProgress());
-                    DecimalFormat format = new DecimalFormat();
-                    format.setMaximumFractionDigits(2);
 
-                    spotifyInfoLabel.setText("Filename: " + mydownload.getFilename() + "\nProgress:  " + (int) (mydownload.getDownloadProgress() * 100) + "%\nLoaded: " + format.format((float) mydownload.getLoadedBytes() / (1024 * 1024)) + "MB/" + format.format((float) mydownload.getTotalBytes() / (1024 * 1024)) + "MB");
-                }));
+                mydownload.addEventListener(new DownloadListener() {
+                    @Override
+                    public void onDownloadProgressChange() {
+                        Platform.runLater(() -> {
+                            Spotifystatuslabel.setText("downloading");
+                            SpotifyProgressbar.setProgress(mydownload.getDownloadProgress());
+                            DecimalFormat format = new DecimalFormat();
+                            format.setMaximumFractionDigits(2);
 
-                mydownload.onDownloadStartListener(e -> Platform.runLater(() -> Spotifystatuslabel.setText("starting the download")));
-
-                mydownload.onFinishedListener(e -> Platform.runLater(() -> {
-                    Spotifystatuslabel.setText("finished downloding -- ready to download new");
-                    if (songlist.size() > num+1)
-                    {
-                        downloadSpotifyListRec(num+1,songlist);
+                            spotifyInfoLabel.setText("Filename: " + mydownload.getFilename() + "\nProgress:  " + (int) (mydownload.getDownloadProgress() * 100) + "%\nLoaded: " + format.format((float) mydownload.getLoadedBytes() / (1024 * 1024)) + "MB/" + format.format((float) mydownload.getTotalBytes() / (1024 * 1024)) + "MB");
+                        });
                     }
-                }));
 
-                mydownload.onGettingAPIDataFinishedListener(e -> {
+                    @Override
+                    public void onDownloadFinished() {
+                        Platform.runLater(() -> {
+                            Spotifystatuslabel.setText("finished downloding -- ready to download new");
+                            if (songlist.size() > num+1)
+                            {
+                                downloadSpotifyListRec(num+1,songlist);
+                            }
+                        });
+                    }
 
+                    @Override
+                    public void onDownloadStarted() {
+                        Platform.runLater(() -> Spotifystatuslabel.setText("starting the download"));
+                    }
+
+                    @Override
+                    public void onDownloadErrored(String message) {
+                        //TODO!!!
+                    }
+
+                    @Override
+                    public void onGettingApiDataFinished() {
+                        //TODO!!!
+                    }
                 });
 
                 mydownload.startDownloadJob(songlist.get(num).songname+" "+songlist.get(num).artistname);
