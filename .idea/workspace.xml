@@ -6,24 +6,14 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="added percentage as actionlistener parameter">
-      <change afterPath="$PROJECT_DIR$/src/api/YoutubeToLinkmp3Music.java" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="added new id to downloadlink api (not working now) &#10;version1.3&#10;improved error handling of downloads">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/HowToSteelMusic_jar/HowToSteelMusic.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/HowToSteelMusic_jar/HowToSteelMusic.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/api/API.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/api/API.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/api/YoutubeToLink.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/api/YoutubeToLink.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadManager$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadMusic$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadMusic$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadMusic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadMusic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/API.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/API.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/YoutubeToLink.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/YoutubeToLink.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/download/DownloadManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/download/DownloadManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/download/DownloadMusic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/download/DownloadMusic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/download/MusicDownloadListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/download/MusicDownloadListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/MainWindowController.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -84,19 +74,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/download/DownloadMusic.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="622">
-              <caret line="70" column="43" selection-start-line="70" selection-start-column="43" selection-end-line="70" selection-end-column="43" />
+            <state relative-caret-position="262">
+              <caret line="46" column="46" lean-forward="true" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#606#3054#0" expanded="true" />
-                <element signature="e#3053#3054#0" expanded="true" />
                 <element signature="method#fireRetrievingDataEvent#0;class#DownloadMusic#0" />
                 <element signature="method#fireErroredEvent#0;class#DownloadMusic#0" />
+                <element signature="e#4511#4512#0" expanded="true" />
                 <element signature="e#4545#4546#0" expanded="true" />
+                <element signature="e#4585#4586#0" expanded="true" />
                 <element signature="e#4617#4618#0" expanded="true" />
+                <element signature="e#4649#4650#0" expanded="true" />
                 <element signature="e#4679#4680#0" expanded="true" />
+                <element signature="e#4714#4715#0" expanded="true" />
                 <element signature="e#4748#4749#0" expanded="true" />
+                <element signature="e#4783#4784#0" expanded="true" />
                 <element signature="e#4817#4818#0" expanded="true" />
+                <element signature="e#4852#4853#0" expanded="true" />
                 <element signature="e#4883#4884#0" expanded="true" />
               </folding>
             </state>
@@ -104,10 +98,21 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/download/MusicDownloadListener.java">
+        <entry file="file://$PROJECT_DIR$/src/api/spotify/Spotify.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+            <state relative-caret-position="292">
+              <caret line="44" column="23" selection-start-line="44" selection-start-column="23" selection-end-line="44" selection-end-column="23" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#Spotify#0;class#Spotify#0" />
+                <element signature="method#getSongsList#0;class#Spotify#0" />
+                <element signature="method#getSongNames#0;class#Spotify#0" />
+                <element signature="method#loginNewAccount#0;class#Spotify#0" />
+                <element signature="method#getUserProfile#0;class#Spotify#0" />
+                <element signature="method#refreshToken#0;class#Spotify#0" />
+                <element signature="method#checkKeyValidity#0;class#Spotify#0" />
+                <element signature="method#logout#0;class#Spotify#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -115,8 +120,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/api/YoutubeToLink.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="225">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -127,8 +132,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/api/YoutubeToLinkmp3Music.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+            <state relative-caret-position="255">
+              <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -148,14 +153,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/download/DownloadManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-416">
-              <caret line="39" column="46" lean-forward="true" selection-start-line="39" selection-start-column="46" selection-end-line="39" selection-end-column="46" />
+            <state relative-caret-position="450">
+              <caret line="39" column="46" selection-start-line="39" selection-start-column="46" selection-end-line="39" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2374#2375#0" expanded="true" />
-                <element signature="e#2450#2451#0" expanded="true" />
-                <element signature="e#3089#3090#0" expanded="true" />
-                <element signature="e#3128#3129#0" expanded="true" />
                 <element signature="method#fireStartEvent#0;class#DownloadManager#0" />
                 <element signature="method#fireFinishedEvents#0;class#DownloadManager#0" />
                 <element signature="method#fireErroredEvent#0;class#DownloadManager#0" />
@@ -165,30 +166,27 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="45" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
+            <state relative-caret-position="270">
+              <caret line="23" column="44" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#792#793#0" expanded="true" />
-                <element signature="e#820#821#0" expanded="true" />
+                <element signature="e#711#712#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/MainWindowController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="124" lean-forward="true" selection-start-line="124" selection-end-line="124" />
+            <state relative-caret-position="240">
+              <caret line="100" column="64" selection-start-line="100" selection-start-column="64" selection-end-line="100" selection-end-column="64" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#MainWindowController#0;class#MainWindowController#0" />
-                <element signature="e#4028#4485#0" expanded="true" />
-                <element signature="e#4484#4485#0" expanded="true" />
+                <element signature="method#cancelbutton#0;class#MainWindowController#0" />
                 <element signature="method#clickbtnDownloadList#0;class#MainWindowController#0" />
                 <element signature="method#DownloadMultiple#0;class#MainWindowController#0" />
                 <element signature="method#DownloadMultipleRec#0;class#MainWindowController#0" />
@@ -275,10 +273,10 @@
         <option value="$PROJECT_DIR$/src/download/MusicDownloadListener.java" />
         <option value="$PROJECT_DIR$/src/api/YoutubeToLinkmp3Music.java" />
         <option value="$PROJECT_DIR$/src/download/DownloadMusic.java" />
-        <option value="$PROJECT_DIR$/src/gui/MainWindowController.java" />
         <option value="$PROJECT_DIR$/src/api/YoutubeToLink.java" />
         <option value="$PROJECT_DIR$/src/download/DownloadManager.java" />
         <option value="$PROJECT_DIR$/src/gui/Main.java" />
+        <option value="$PROJECT_DIR$/src/gui/MainWindowController.java" />
       </list>
     </option>
   </component>
@@ -295,6 +293,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -352,8 +352,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -366,11 +364,11 @@
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553195880505" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553196084564" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/json-simple-1.1.1.jar!/" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
@@ -504,7 +502,8 @@
       <workItem from="1552724087196" duration="12649000" />
       <workItem from="1552810437116" duration="648000" />
       <workItem from="1552999068901" duration="4671000" />
-      <workItem from="1553186274240" duration="8561000" />
+      <workItem from="1553186274240" duration="8817000" />
+      <workItem from="1553285786332" duration="815000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1552576280883</created>
@@ -576,17 +575,24 @@
       <option name="project" value="LOCAL" />
       <updated>1553192760823</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="added new id to downloadlink api (not working now) &#10;version1.3&#10;improved error handling of downloads">
+      <created>1553195958188</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1553195958188</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="165628000" />
+    <option name="totallyTimeSpent" value="166699000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="25" width="1922" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.26627535" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.26947704" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -595,7 +601,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32834226" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.25240642" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25240642" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39957264" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -638,7 +644,8 @@
     <MESSAGE value="added own event to DownloadManager" />
     <MESSAGE value="added own event to song download class and cleaned up unneccessary code." />
     <MESSAGE value="added percentage as actionlistener parameter" />
-    <option name="LAST_COMMIT_MESSAGE" value="added percentage as actionlistener parameter" />
+    <MESSAGE value="added new id to downloadlink api (not working now) &#10;version1.3&#10;improved error handling of downloads" />
+    <option name="LAST_COMMIT_MESSAGE" value="added new id to downloadlink api (not working now) &#10;version1.3&#10;improved error handling of downloads" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -721,16 +728,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/spotify/Spotify.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="43" column="32" selection-start-line="43" selection-start-column="14" selection-end-line="43" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/api/Youtube.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -788,13 +785,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/general/GeneralEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="47" selection-start-line="4" selection-start-column="47" selection-end-line="4" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/general/GeneralEvent.java" />
     <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/EventListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -809,13 +800,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/general/GeneralActionEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="38" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/general/GeneralActionEvent.java" />
     <entry file="file://$PROJECT_DIR$/src/safe/SpotifyData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
@@ -833,6 +818,57 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/download/MusicDownloadListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="30" lean-forward="true" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/download/DownloadMusic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="46" column="46" lean-forward="true" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#fireRetrievingDataEvent#0;class#DownloadMusic#0" />
+            <element signature="method#fireErroredEvent#0;class#DownloadMusic#0" />
+            <element signature="e#4511#4512#0" expanded="true" />
+            <element signature="e#4545#4546#0" expanded="true" />
+            <element signature="e#4585#4586#0" expanded="true" />
+            <element signature="e#4617#4618#0" expanded="true" />
+            <element signature="e#4649#4650#0" expanded="true" />
+            <element signature="e#4679#4680#0" expanded="true" />
+            <element signature="e#4714#4715#0" expanded="true" />
+            <element signature="e#4748#4749#0" expanded="true" />
+            <element signature="e#4783#4784#0" expanded="true" />
+            <element signature="e#4817#4818#0" expanded="true" />
+            <element signature="e#4852#4853#0" expanded="true" />
+            <element signature="e#4883#4884#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/YoutubeToLink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/YoutubeToLinkmp3Music.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/api/API.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -840,32 +876,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/download/MusicDownloadListener.java">
+    <entry file="file://$PROJECT_DIR$/src/download/DownloadManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+        <state relative-caret-position="450">
+          <caret line="39" column="46" selection-start-line="39" selection-start-column="46" selection-end-line="39" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#fireStartEvent#0;class#DownloadManager#0" />
+            <element signature="method#fireFinishedEvents#0;class#DownloadManager#0" />
+            <element signature="method#fireErroredEvent#0;class#DownloadManager#0" />
+            <element signature="method#fireApiFinishedEvent#0;class#DownloadManager#0" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/YoutubeToLinkmp3Music.java">
+    <entry file="file://$PROJECT_DIR$/src/gui/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+        <state relative-caret-position="270">
+          <caret line="23" column="44" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#711#712#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/spotify/Spotify.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="44" column="23" selection-start-line="44" selection-start-column="23" selection-end-line="44" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Spotify#0;class#Spotify#0" />
+            <element signature="method#getSongsList#0;class#Spotify#0" />
+            <element signature="method#getSongNames#0;class#Spotify#0" />
+            <element signature="method#loginNewAccount#0;class#Spotify#0" />
+            <element signature="method#getUserProfile#0;class#Spotify#0" />
+            <element signature="method#refreshToken#0;class#Spotify#0" />
+            <element signature="method#checkKeyValidity#0;class#Spotify#0" />
+            <element signature="method#logout#0;class#Spotify#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/MainWindowController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="124" lean-forward="true" selection-start-line="124" selection-end-line="124" />
+        <state relative-caret-position="240">
+          <caret line="100" column="64" selection-start-line="100" selection-start-column="64" selection-end-line="100" selection-end-column="64" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#MainWindowController#0;class#MainWindowController#0" />
-            <element signature="e#4028#4485#0" expanded="true" />
-            <element signature="e#4484#4485#0" expanded="true" />
+            <element signature="method#cancelbutton#0;class#MainWindowController#0" />
             <element signature="method#clickbtnDownloadList#0;class#MainWindowController#0" />
             <element signature="method#DownloadMultiple#0;class#MainWindowController#0" />
             <element signature="method#DownloadMultipleRec#0;class#MainWindowController#0" />
@@ -876,66 +936,6 @@
             <element signature="method#downloadSpotifyListRec#0;class#MainWindowController#0" />
             <element signature="method#newSpotifyBtnListener#0;class#MainWindowController#0" />
             <element signature="method#updatebtnlistener#0;class#MainWindowController#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/YoutubeToLink.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/download/DownloadManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-416">
-          <caret line="39" column="46" lean-forward="true" selection-start-line="39" selection-start-column="46" selection-end-line="39" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2374#2375#0" expanded="true" />
-            <element signature="e#2450#2451#0" expanded="true" />
-            <element signature="e#3089#3090#0" expanded="true" />
-            <element signature="e#3128#3129#0" expanded="true" />
-            <element signature="method#fireStartEvent#0;class#DownloadManager#0" />
-            <element signature="method#fireFinishedEvents#0;class#DownloadManager#0" />
-            <element signature="method#fireErroredEvent#0;class#DownloadManager#0" />
-            <element signature="method#fireApiFinishedEvent#0;class#DownloadManager#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/download/DownloadMusic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="622">
-          <caret line="70" column="43" selection-start-line="70" selection-start-column="43" selection-end-line="70" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#606#3054#0" expanded="true" />
-            <element signature="e#3053#3054#0" expanded="true" />
-            <element signature="method#fireRetrievingDataEvent#0;class#DownloadMusic#0" />
-            <element signature="method#fireErroredEvent#0;class#DownloadMusic#0" />
-            <element signature="e#4545#4546#0" expanded="true" />
-            <element signature="e#4617#4618#0" expanded="true" />
-            <element signature="e#4679#4680#0" expanded="true" />
-            <element signature="e#4748#4749#0" expanded="true" />
-            <element signature="e#4817#4818#0" expanded="true" />
-            <element signature="e#4883#4884#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="45" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#792#793#0" expanded="true" />
-            <element signature="e#820#821#0" expanded="true" />
           </folding>
         </state>
       </provider>

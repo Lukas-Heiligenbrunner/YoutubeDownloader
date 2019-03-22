@@ -1,6 +1,7 @@
 package gui;
 
 import api.YoutubeToLinkmp3Music;
+import api.spotify.Playlist;
 import api.spotify.Song;
 import api.spotify.Spotify;
 import api.spotify.UserProfileData;
@@ -93,6 +94,14 @@ public class MainWindowController {
                                     loginbtn.setText("Logout");
                                     accountInfoLabel.setText("Logged in user: \nE-Mail: "+user.email+"\nName: "+user.name+"\nCountry: "+user.country+"\nAccount Type: "+user.product);
                                 });
+
+                                //TODO load playlists of user
+
+                                ArrayList<Playlist> playlists = myspotify.getPlaylists();
+                                for (Playlist play :playlists) {
+                                    playlistsListView.getItems().add(new Label(play.name));
+                                }
+
                             }else {
                                 Platform.runLater(() -> {
                                     accountInfoLabel.setText("Not logged in yet!!!");
