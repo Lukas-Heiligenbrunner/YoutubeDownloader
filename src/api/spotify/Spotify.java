@@ -124,9 +124,9 @@ public class Spotify extends API{
             }
 
             @Override
-            public void onLoginError() {
+            public void onLoginError(String message) {
                 for (LoginListener a:onLoginSuccessList) {
-                    a.onLoginError();
+                    a.onLoginError(message);
                 }
             }
         });

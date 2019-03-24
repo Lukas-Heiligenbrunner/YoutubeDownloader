@@ -21,6 +21,7 @@ public class SpotifyWindowController {
                 myView.getEngine().load("https://accounts.spotify.com/en/authorize?client_id="+clientID+"&response_type=code&redirect_uri="+ URLEncoder.encode("https://example.com/callback","UTF-8") +"&scope=user-read-private%20user-read-email&state=34fFs29kd09");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
+                fireErrorEvent();
             }
 
             myView.getEngine().getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {

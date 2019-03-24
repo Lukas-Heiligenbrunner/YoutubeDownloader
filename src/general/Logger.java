@@ -16,7 +16,7 @@ public class Logger {
     private static final String CYAN = "\u001B[36m";
     private static final String WHITE = "\u001B[37m";
 
-    private static final int level = 1;
+    private static final int level = 2;
 
 
 

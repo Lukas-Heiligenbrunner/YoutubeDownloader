@@ -408,7 +408,8 @@ public class MainWindowController {
                 }
 
                 @Override
-                public void onLoginError() {
+                public void onLoginError(String message) {
+                    logger.log(message,Logger.ERROR,1);
                     Platform.runLater(() -> {
                         accountInfoLabel.setText("Login Error occured.");
                     });

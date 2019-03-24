@@ -6,21 +6,18 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="added list of user playlists and load playlists in field when user changes tab">
-      <change afterPath="$PROJECT_DIR$/src/api/spotify/login/LoginWindowListener.java" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="improved spotify login process with interfaces and Events">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/HowToSteelMusic_jar/HowToSteelMusic.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/HowToSteelMusic_jar/HowToSteelMusic.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/api/spotify/Spotify.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/api/spotify/Spotify.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/api/spotify/SpotifyLogin$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/api/spotify/SpotifyLogin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/api/spotify/SpotifyLogin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/api/spotify/SpotifyWindowController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/general/Logger.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/general/Logger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/spotify/Spotify.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/spotify/Spotify.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/spotify/login/LoginListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/spotify/login/LoginListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/spotify/login/SpotifyLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/spotify/login/SpotifyLogin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/spotify/login/SpotifyWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/spotify/login/SpotifyWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/general/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/general/Logger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/MainWindowController.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -81,8 +78,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/api/spotify/Spotify.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="128" column="34" selection-start-line="128" selection-start-column="22" selection-end-line="128" selection-end-column="34" />
+            <state relative-caret-position="450">
+              <caret line="132" column="30" lean-forward="true" selection-start-line="132" selection-start-column="30" selection-end-line="132" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Spotify#0;class#Spotify#0" />
@@ -99,30 +96,9 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/api/YoutubeToLinkmp3Music.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/api/API.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/download/DownloadManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
+            <state relative-caret-position="450">
               <caret line="39" column="46" selection-start-line="39" selection-start-column="46" selection-end-line="39" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -149,10 +125,23 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/general/Logger.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="37" lean-forward="true" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+              <folding>
+                <element signature="e#844#845#0" expanded="true" />
+                <element signature="e#879#880#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui/MainWindowController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="395" column="61" lean-forward="true" selection-start-line="395" selection-start-column="61" selection-end-line="395" selection-end-column="61" />
+            <state relative-caret-position="601">
+              <caret line="411" column="53" selection-start-line="411" selection-start-column="53" selection-end-line="411" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#MainWindowController#0;class#MainWindowController#0" />
@@ -180,11 +169,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/api/spotify/login/SpotifyLogin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="59" column="95" selection-start-line="59" selection-start-column="95" selection-end-line="59" selection-end-column="95" />
+            <state relative-caret-position="583">
+              <caret line="84" column="40" lean-forward="true" selection-start-line="84" selection-start-column="40" selection-end-line="84" selection-end-column="40" />
               <folding>
                 <element signature="e#1532#3274#0" expanded="true" />
                 <element signature="e#3273#3274#0" expanded="true" />
@@ -200,8 +189,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/api/spotify/login/LoginListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
+            <state relative-caret-position="60">
+              <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -209,8 +198,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/api/spotify/login/SpotifyWindowController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="18" column="33" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+            <state relative-caret-position="165">
+              <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="6" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -269,14 +267,12 @@
         <option value="$PROJECT_DIR$/src/api/Spotify.java" />
         <option value="$PROJECT_DIR$/src/api/spotify/UserProfileData.java" />
         <option value="$PROJECT_DIR$/src/safe/SpotifyData.java" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/api/spotify/Song.java" />
         <option value="$PROJECT_DIR$/src/api/spotify/Playlist.java" />
         <option value="$PROJECT_DIR$/src/api/spotify/SpotifyLogin.java" />
         <option value="$PROJECT_DIR$/src/api/spotify/SpotifyWindowController.java" />
         <option value="$PROJECT_DIR$/src/gui/mainWindow.fxml" />
         <option value="$PROJECT_DIR$/src/api/YouTubeToMp3.java" />
-        <option value="$PROJECT_DIR$/src/general/Logger.java" />
         <option value="$PROJECT_DIR$/src/general/GeneralEvent.java" />
         <option value="$PROJECT_DIR$/src/general/GeneralActionEvent.java" />
         <option value="$PROJECT_DIR$/src/download/DownloadEvent.java" />
@@ -290,8 +286,11 @@
         <option value="$PROJECT_DIR$/src/gui/Main.java" />
         <option value="$PROJECT_DIR$/src/api/spotify/login/LoginListener.java" />
         <option value="$PROJECT_DIR$/src/api/spotify/Spotify.java" />
+        <option value="$PROJECT_DIR$/src/general/Logger.java" />
         <option value="$PROJECT_DIR$/src/gui/MainWindowController.java" />
         <option value="$PROJECT_DIR$/src/api/spotify/login/SpotifyLogin.java" />
+        <option value="$PROJECT_DIR$/src/api/spotify/login/SpotifyWindowController.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -316,6 +315,11 @@
             <path>
               <item name="HowToSteelMusic" type="b2602c69:ProjectViewProjectNode" />
               <item name="HowToSteelMusic" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HowToSteelMusic" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HowToSteelMusic" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="HowToSteelMusic" type="b2602c69:ProjectViewProjectNode" />
@@ -387,7 +391,7 @@
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553451905349" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553453610010" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/json-simple-1.1.1.jar!/" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -527,7 +531,7 @@
       <workItem from="1552999068901" duration="4671000" />
       <workItem from="1553186274240" duration="8817000" />
       <workItem from="1553285786332" duration="956000" />
-      <workItem from="1553450393241" duration="1488000" />
+      <workItem from="1553450393241" duration="3217000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1552576280883</created>
@@ -613,11 +617,18 @@
       <option name="project" value="LOCAL" />
       <updated>1553286719999</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="improved spotify login process with interfaces and Events">
+      <created>1553451948161</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1553451948161</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="168328000" />
+    <option name="totallyTimeSpent" value="170057000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -630,7 +641,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="25" width="1922" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.27267876" />
       <window_info id="Structure" order="1" weight="0.25" />
@@ -641,13 +651,13 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32834226" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.25240642" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.25240642" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39957264" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32941177" />
       <window_info anchor="bottom" id="Application Servers" order="7" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32941177" />
+      <window_info anchor="bottom" id="Version Control" order="8" visible="true" weight="0.32941177" />
       <window_info anchor="bottom" id="Problems" order="9" />
       <window_info anchor="bottom" id="Changes" order="10" />
       <window_info anchor="bottom" id="Profiler" order="11" />
@@ -686,7 +696,8 @@
     <MESSAGE value="added percentage as actionlistener parameter" />
     <MESSAGE value="added new id to downloadlink api (not working now) &#10;version1.3&#10;improved error handling of downloads" />
     <MESSAGE value="added list of user playlists and load playlists in field when user changes tab" />
-    <option name="LAST_COMMIT_MESSAGE" value="added list of user playlists and load playlists in field when user changes tab" />
+    <MESSAGE value="improved spotify login process with interfaces and Events" />
+    <option name="LAST_COMMIT_MESSAGE" value="improved spotify login process with interfaces and Events" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -731,13 +742,6 @@
     <entry file="file://$PROJECT_DIR$/src/META-INF/MANIFEST.MF">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="5" selection-start-column="5" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/api/spotify/Playlist.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -769,17 +773,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/general/Logger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-          <folding>
-            <element signature="e#844#845#0" expanded="true" />
-            <element signature="e#879#880#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -892,9 +885,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/spotify/login/LoginWindowListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="4" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hs_err_pid3555.log">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/spotify/login/LoginListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/download/DownloadManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
+        <state relative-caret-position="450">
           <caret line="39" column="46" selection-start-line="39" selection-start-column="46" selection-end-line="39" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -917,31 +927,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/spotify/login/LoginWindowListener.java">
+    <entry file="file://$PROJECT_DIR$/src/general/Logger.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="4" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/spotify/login/LoginListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/spotify/login/SpotifyWindowController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="18" column="33" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+        <state relative-caret-position="225">
+          <caret line="15" column="37" lean-forward="true" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+          <folding>
+            <element signature="e#844#845#0" expanded="true" />
+            <element signature="e#879#880#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/MainWindowController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="395" column="61" lean-forward="true" selection-start-line="395" selection-start-column="61" selection-end-line="395" selection-end-column="61" />
+        <state relative-caret-position="601">
+          <caret line="411" column="53" selection-start-line="411" selection-start-column="53" selection-end-line="411" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#MainWindowController#0;class#MainWindowController#0" />
@@ -961,8 +961,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/api/spotify/Spotify.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="128" column="34" selection-start-line="128" selection-start-column="22" selection-end-line="128" selection-end-column="34" />
+        <state relative-caret-position="450">
+          <caret line="132" column="30" lean-forward="true" selection-start-line="132" selection-start-column="30" selection-end-line="132" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#Spotify#0;class#Spotify#0" />
@@ -979,8 +979,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/api/spotify/login/SpotifyLogin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="59" column="95" selection-start-line="59" selection-start-column="95" selection-end-line="59" selection-end-column="95" />
+        <state relative-caret-position="583">
+          <caret line="84" column="40" lean-forward="true" selection-start-line="84" selection-start-column="40" selection-end-line="84" selection-end-column="40" />
           <folding>
             <element signature="e#1532#3274#0" expanded="true" />
             <element signature="e#3273#3274#0" expanded="true" />
@@ -989,6 +989,20 @@
             <element signature="e#3768#3769#0" expanded="true" />
             <element signature="e#3804#3805#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/spotify/login/SpotifyWindowController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="6" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
         </state>
       </provider>
     </entry>

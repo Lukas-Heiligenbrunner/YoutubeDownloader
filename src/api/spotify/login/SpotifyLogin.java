@@ -3,10 +3,12 @@ package api.spotify.login;
 import api.API;
 import general.Logger;
 import javafx.concurrent.Task;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import safe.SpotifyData;
@@ -44,6 +46,10 @@ public class SpotifyLogin extends API {
             stage.setTitle("please login");
             stage.setScene(scene);
 
+            stage.setOnCloseRequest(event -> {
+                fireErrorevent("Login window closed unexpectedly");
+            });
+
             SpotifyWindowController controller = fxmlLoader.getController();
             controller.addOnSuccessListener(new LoginWindowListener() {
                 @Override
@@ -65,6 +71,7 @@ public class SpotifyLogin extends API {
                                 request = (JSONObject) requestData("https://accounts.spotify.com/api/token", mymap, true);
                             } catch (IOException | ParseException e1) {
                                 e1.printStackTrace();
+                                fireErrorevent("IO Error");
                             }
                             SpotifyData myspotifydata = SpotifyData.getData();
                             myspotifydata.setRefreshToken((String) request.get("refresh_token"));
@@ -82,7 +89,7 @@ public class SpotifyLogin extends API {
 
                 @Override
                 public void onLoginError() {
-                    fireErrorevent();
+                    fireErrorevent("an login Error occured");
                 }
             });
 
@@ -98,9 +105,9 @@ public class SpotifyLogin extends API {
         }
     }
 
-    private void fireErrorevent() {
+    private void fireErrorevent(String message) {
         for (LoginListener a : onsuccesslist) {
-            a.onLoginSuccess();
+            a.onLoginError(message);
         }
     }
 
