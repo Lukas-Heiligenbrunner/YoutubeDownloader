@@ -140,24 +140,6 @@ public class MainWindowController {
     }
 
     public void cancelbutton() {
-        //TODO!!!
-        new Thread(new Task<Boolean>() {
-            @Override
-            protected Boolean call() throws Exception {
-
-                try {
-                    new YoutubeToLinkmp3Music().getDirectLink("L4sjxRhAJHA");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-                return null;
-            }
-        }).start();
-
-
         logger.log("stopping download...", Logger.WARNING, 1);
         singleDownloadManager.interruptDownload();
     }
@@ -221,12 +203,12 @@ public class MainWindowController {
 
                     @Override
                     public void onDownloadErrored(String message) {
-                        //TODO!!!
+                        logger.log(message,Logger.ERROR,1);
                     }
 
                     @Override
                     public void onGettingApiDataFinished() {
-                        //TODO!!!
+
                     }
                 });
 
@@ -372,12 +354,16 @@ public class MainWindowController {
 
                     @Override
                     public void onDownloadErrored(String message) {
-                        //TODO!!!
+                        logger.log(message,Logger.ERROR,1);
+                        Platform.runLater(() -> {
+                            Spotifystatuslabel.setText("errored downloading:\n\n Error:"+message);
+                            SpotifyProgressbar.setProgress(0.0);
+                        });
                     }
 
                     @Override
                     public void onGettingApiDataFinished() {
-                        //TODO!!!
+
                     }
                 });
 

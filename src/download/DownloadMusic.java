@@ -59,9 +59,6 @@ public class DownloadMusic {
 
                     InputStream is = conn.getInputStream();
 
-                    //TODO check if output path is writeable
-                    // and user input of path
-                    // check speed
                     OutputStream outstream = new FileOutputStream(new File(filename));
                     byte[] buffer = new byte[4096];
                     int len;

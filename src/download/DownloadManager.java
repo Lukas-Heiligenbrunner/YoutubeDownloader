@@ -70,7 +70,7 @@ public class DownloadManager {
 
                         @Override
                         public void onErrored(String message) {
-                            System.out.println(message);
+                            fireErroredEvent(message);
                         }
                     });
 

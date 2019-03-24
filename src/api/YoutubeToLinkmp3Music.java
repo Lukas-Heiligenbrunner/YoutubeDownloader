@@ -12,6 +12,7 @@ public class YoutubeToLinkmp3Music extends API{
     private String lengthsecs = ";";
 
     //https://youtubemp3music.info/@api/json/mp3/nD75vDVIn-Y
+    //TODO check if it works
 
     public void getDirectLink(String id) throws IOException, ParseException {
         JSONObject request = (JSONObject) this.requestData("https://youtubemp3music.info/@api/json/mp3/"+id);
