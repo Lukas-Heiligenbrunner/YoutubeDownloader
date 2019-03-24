@@ -87,17 +87,14 @@ public class MainWindowController {
                                 accountInfoLabel.setText("Logged in user: \nE-Mail: " + user.email + "\nName: " + user.name + "\nCountry: " + user.country + "\nAccount Type: " + user.product);
                             });
 
-                            //TODO load playlists of user
-
                             ArrayList<Playlist> playlists = myspotify.getPlaylists();
-                            for (Playlist play : playlists) {
-                                Platform.runLater(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        playlistsListView.getItems().add(new Label(play.name));
-                                    }
-                                });
-                            }
+                            Platform.runLater(() -> {
+                                playlistsListView.getItems().clear();
+                                for (Playlist play : playlists) {
+                                    playlistsListView.getItems().add(new Label(play.name));
+                                }
+                            });
+
 
                         } else {
                             Platform.runLater(() -> {
@@ -142,6 +139,7 @@ public class MainWindowController {
     }
 
     public void cancelbutton() {
+        //TODO!!!
         new Thread(new Task<Boolean>() {
             @Override
             protected Boolean call() throws Exception {
@@ -160,7 +158,7 @@ public class MainWindowController {
 
 
         logger.log("stopping download...", Logger.WARNING, 1);
-        //singleDownloadManager.interruptDownload();
+        singleDownloadManager.interruptDownload();
     }
 
     public void clickbtnDownloadList() {

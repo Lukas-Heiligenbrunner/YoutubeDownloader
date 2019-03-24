@@ -1,6 +1,8 @@
 package api.spotify;
 
 import api.API;
+import api.spotify.login.SpotifyLogin;
+import api.spotify.login.SpotifyWindowController;
 import general.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -12,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.*;
 
-public class Spotify extends API {
+public class Spotify extends API{
     private static final String ClientId="5b7f34f605214a52b6ce4d7b5a9e135c";
     private static final String ClientSecret="6d451d7334ea4c60b1329a6396bcc07c";
 
@@ -25,6 +27,7 @@ public class Spotify extends API {
     public Spotify() {
     }
 
+    @Deprecated
     public ArrayList<Song> getSongsList(){
         ArrayList<Song> songs = new ArrayList<>();
 

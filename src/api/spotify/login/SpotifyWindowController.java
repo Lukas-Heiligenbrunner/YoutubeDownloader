@@ -1,11 +1,9 @@
-package api.spotify;
+package api.spotify.login;
 
 import javafx.application.Platform;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -13,7 +11,7 @@ import java.util.ArrayList;
 public class SpotifyWindowController {
     public WebView myView;
 
-    private ArrayList<ActionListener> onsucceedlist = new ArrayList<>();
+    private ArrayList<LoginListener> onsucceedlist = new ArrayList<>();
 
     private static final String clientID = "5b7f34f605214a52b6ce4d7b5a9e135c";
 
@@ -37,12 +35,18 @@ public class SpotifyWindowController {
     }
 
     private void fireOnSuccessEvent(String result){
-        for (ActionListener e:onsucceedlist) {
-            e.actionPerformed(new ActionEvent(this,42,result)); //return request code...
+        for (LoginListener e:onsucceedlist) {
+            e.onLoginSuccess(result);
         }
     }
 
-    public void addOnSuccessListener(ActionListener e){
+    private void fireErrorEvent(){
+        for (LoginListener e:onsucceedlist) {
+            e.onLoginError();
+        }
+    }
+
+    void addOnSuccessListener(LoginListener e){
         onsucceedlist.add(e);
     }
 

@@ -22,7 +22,7 @@
 
 <TabPane fx:id="rootTabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="691.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainWindowController">
     <tabs>
-        <Tab text="basic search">
+        <Tab id="basicsearch" text="basic search">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
@@ -70,7 +70,7 @@
                     </children></AnchorPane>
             </content>
         </Tab>
-        <Tab text="search of list">
+        <Tab id="multiplesearch" text="search of list">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -83,7 +83,7 @@
                </children></AnchorPane>
             </content>
         </Tab>
-        <Tab text="spotify search">
+        <Tab id="spotifysearch" text="spotify search">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -97,7 +97,7 @@
                </children></AnchorPane>
             </content>
         </Tab>
-      <Tab text="Settings">
+      <Tab id="settings" text="Settings">
          <content>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
