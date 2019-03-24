@@ -72,52 +72,66 @@ public class MainWindowController {
     private Settings settings = Settings.getSettings();
 
     public MainWindowController() {
-        Platform.runLater(() -> {
-            proxenabledcheckbox.setSelected(settings.isProxyEnabled());
-            userfield.setText(settings.getProxyUser());
-            passfield.setText(settings.getProxyPass());
-            proxportfield.setText(settings.getProxyPort());
-            proxhostfield.setText(settings.getProxyHost());
-            versioninfolabel.setText("Version: "+Main.version);
+        Platform.runLater(() -> rootTabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.getId().equals("spotifysearch")) {
+                //in spotify tab --> load infos
+                logger.log("tab changed to spotify search", Logger.INFO, 2);
+                new Thread(new Task<Boolean>() {
+                    @Override
+                    protected Boolean call() {
+                        Spotify myspotify = new Spotify();
+                        if (myspotify.isLoggedIn()) {
+                            UserProfileData user = myspotify.getUserProfile();
+                            Platform.runLater(() -> {
+                                loginbtn.setText("Logout");
+                                accountInfoLabel.setText("Logged in user: \nE-Mail: " + user.email + "\nName: " + user.name + "\nCountry: " + user.country + "\nAccount Type: " + user.product);
+                            });
 
-            settingPathLabel.setText(settings.getDownloadPath());
-            rootTabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue.getText().equals("spotify search")){
-                    //in spotify tab --> load infos
-                    new Thread(new Task<Boolean>() {
-                        @Override
-                        protected Boolean call() {
-                            Spotify myspotify = new Spotify();
-                            if (myspotify.isLoggedIn()){
-                                UserProfileData user = myspotify.getUserProfile();
-                                Platform.runLater(() -> {
-                                    loginbtn.setText("Logout");
-                                    accountInfoLabel.setText("Logged in user: \nE-Mail: "+user.email+"\nName: "+user.name+"\nCountry: "+user.country+"\nAccount Type: "+user.product);
-                                });
+                            //TODO load playlists of user
 
-                                //TODO load playlists of user
-
-                                ArrayList<Playlist> playlists = myspotify.getPlaylists();
-                                for (Playlist play :playlists) {
-                                    playlistsListView.getItems().add(new Label(play.name));
-                                }
-
-                            }else {
-                                Platform.runLater(() -> {
-                                    accountInfoLabel.setText("Not logged in yet!!!");
-                                    loginbtn.setText("Login");
+                            ArrayList<Playlist> playlists = myspotify.getPlaylists();
+                            for (Playlist play : playlists) {
+                                Platform.runLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        playlistsListView.getItems().add(new Label(play.name));
+                                    }
                                 });
                             }
 
-                            return null;
+                        } else {
+                            Platform.runLater(() -> {
+                                accountInfoLabel.setText("Not logged in yet!!!");
+                                loginbtn.setText("Login");
+                            });
                         }
-                    }).start();
-                }
-            });
-        });
 
-        if(settings.isProxyEnabled()){ //set proxy if enabled
-            ProxySettings.setProxy(settings.getProxyUser(),settings.getProxyPass(),settings.getProxyHost(),settings.getProxyPort());
+                        return null;
+                    }
+                }).start();
+            } else if (newValue.getId().equals("settings")) {
+                logger.log("tab changed to settings", Logger.INFO, 2);
+                Platform.runLater(() -> {
+                    proxenabledcheckbox.setSelected(settings.isProxyEnabled());
+                    userfield.setText(settings.getProxyUser());
+                    passfield.setText(settings.getProxyPass());
+                    proxportfield.setText(settings.getProxyPort());
+                    proxhostfield.setText(settings.getProxyHost());
+                    versioninfolabel.setText("Version: " + Main.version);
+
+                    settingPathLabel.setText(settings.getDownloadPath());
+                });
+
+            } else if (newValue.getId().equals("multiplesearch")) {
+                logger.log("tab changed to multiple search", Logger.INFO, 2);
+            } else if (newValue.getId().equals("basicsearch")) {
+                logger.log("tab changed to basic search", Logger.INFO, 2);
+            }
+        }));
+
+
+        if (settings.isProxyEnabled()) { //set proxy if enabled
+            ProxySettings.setProxy(settings.getProxyUser(), settings.getProxyPass(), settings.getProxyHost(), settings.getProxyPort());
         }
 
 
@@ -145,7 +159,7 @@ public class MainWindowController {
         }).start();
 
 
-        logger.log("stopping download...", Logger.WARNING,1);
+        logger.log("stopping download...", Logger.WARNING, 1);
         //singleDownloadManager.interruptDownload();
     }
 
@@ -157,15 +171,15 @@ public class MainWindowController {
         DownloadMultiple();
     }
 
-    private void DownloadMultiple(){
+    private void DownloadMultiple() {
         ArrayList<String> downloadlinks = new ArrayList<>();
-        for (int i = 0;i < tableMultipleLinks.getItems().size();i++){
+        for (int i = 0; i < tableMultipleLinks.getItems().size(); i++) {
             downloadlinks.add(((TextField) tableMultipleLinks.getItems().get(i)).getText());
         }
-        DownloadMultipleRec(0,downloadlinks);
+        DownloadMultipleRec(0, downloadlinks);
     }
 
-    private void DownloadMultipleRec(int num,ArrayList<String> downloadlinks){
+    private void DownloadMultipleRec(int num, ArrayList<String> downloadlinks) {
 
         new Thread(new Task<Boolean>() {
             @Override
@@ -182,7 +196,7 @@ public class MainWindowController {
                     public void onDownloadProgressChange(int percent) {
                         Platform.runLater(() -> {
                             liststatuslabel.setText("downloading");
-                            listProgressbar.setProgress(percent/100.0);
+                            listProgressbar.setProgress(percent / 100.0);
                             DecimalFormat format = new DecimalFormat();
                             format.setMaximumFractionDigits(2);
 
@@ -195,9 +209,8 @@ public class MainWindowController {
                         Platform.runLater(() -> {
                             liststatuslabel.setText("finished downloding -- ready to download new");
                             listProgressbar.setProgress(0.0);
-                            if (downloadlinks.size() > num+1)
-                            {
-                                DownloadMultipleRec(num+1,downloadlinks);
+                            if (downloadlinks.size() > num + 1) {
+                                DownloadMultipleRec(num + 1, downloadlinks);
                             }
                         });
                     }
@@ -226,7 +239,7 @@ public class MainWindowController {
 
     }
 
-    private void DownloadSingle(){
+    private void DownloadSingle() {
         singleDownloadManager = new DownloadManager();
         Platform.runLater(() -> {
             progressbar.setProgress(-1.0);
@@ -238,11 +251,11 @@ public class MainWindowController {
             public void onDownloadProgressChange(int percent) {
                 Platform.runLater(() -> {
                     statusbottomlabel.setText("downloading");
-                    progressbar.setProgress(percent/100.0);
+                    progressbar.setProgress(percent / 100.0);
                     DecimalFormat format = new DecimalFormat();
                     format.setMaximumFractionDigits(2);
 
-                    filenamelabel.setText("Filename: "+singleDownloadManager.getFilename()+"\nprogress: "+percent+"%\nLoaded: "+format.format((float)singleDownloadManager.getLoadedBytes()/(1024*1024))+"MB/"+format.format((float)singleDownloadManager.getTotalBytes()/(1024*1024))+"MB");
+                    filenamelabel.setText("Filename: " + singleDownloadManager.getFilename() + "\nprogress: " + percent + "%\nLoaded: " + format.format((float) singleDownloadManager.getLoadedBytes() / (1024 * 1024)) + "MB/" + format.format((float) singleDownloadManager.getTotalBytes() / (1024 * 1024)) + "MB");
                 });
             }
 
@@ -293,12 +306,12 @@ public class MainWindowController {
         mychooser.setTitle("select downloadpath");
         mychooser.setInitialDirectory(new File(settings.getDownloadPath())); //setting default windows to Download path
         File mydir = mychooser.showDialog(rootTabPane.getScene().getWindow()); //show dialog
-        if (mydir != null){
-            logger.log("setting Download path to: "+mydir.getPath(),Logger.INFO,2);
+        if (mydir != null) {
+            logger.log("setting Download path to: " + mydir.getPath(), Logger.INFO, 2);
             Platform.runLater(() -> settingPathLabel.setText(mydir.getPath()));
             settings.setDownloadPath(mydir.getPath());
-        }else{
-            logger.log("nothing selected",Logger.WARNING,2);
+        } else {
+            logger.log("nothing selected", Logger.WARNING, 2);
         }
     }
 
@@ -310,15 +323,15 @@ public class MainWindowController {
             SpotifyProgressbar.setProgress(-1.0);
         });
 
-        if (myspotify.isLoggedIn()){
+        if (myspotify.isLoggedIn()) {
             ArrayList<Song> songs = myspotify.getSongsList();
-            downloadSpotifyListRec(0,songs);
-        }else {
-            logger.log("Not logged in",Logger.ERROR,1);
+            downloadSpotifyListRec(0, songs);
+        } else {
+            logger.log("Not logged in", Logger.ERROR, 1);
         }
     }
 
-    private void downloadSpotifyListRec(int num,ArrayList<Song> songlist){
+    private void downloadSpotifyListRec(int num, ArrayList<Song> songlist) {
         new Thread(new Task<Boolean>() {
             @Override
             protected Boolean call() {
@@ -334,7 +347,7 @@ public class MainWindowController {
                     public void onDownloadProgressChange(int percent) {
                         Platform.runLater(() -> {
                             Spotifystatuslabel.setText("downloading");
-                            SpotifyProgressbar.setProgress(percent/100.0);
+                            SpotifyProgressbar.setProgress(percent / 100.0);
                             DecimalFormat format = new DecimalFormat();
                             format.setMaximumFractionDigits(2);
 
@@ -347,9 +360,8 @@ public class MainWindowController {
                         Platform.runLater(() -> {
                             Spotifystatuslabel.setText("finished downloding -- ready to download new");
                             SpotifyProgressbar.setProgress(0.0);
-                            if (songlist.size() > num+1)
-                            {
-                                downloadSpotifyListRec(num+1,songlist);
+                            if (songlist.size() > num + 1) {
+                                downloadSpotifyListRec(num + 1, songlist);
                             }
                         });
                     }
@@ -370,7 +382,7 @@ public class MainWindowController {
                     }
                 });
 
-                mydownload.startDownloadJob(songlist.get(num).songname+" "+songlist.get(num).artistname);
+                mydownload.startDownloadJob(songlist.get(num).songname + " " + songlist.get(num).artistname);
                 return null;
             }
         }).start();
@@ -378,19 +390,19 @@ public class MainWindowController {
 
     public void newSpotifyBtnListener() {
         Spotify myspotify = new Spotify();
-        if (myspotify.isLoggedIn()){
+        if (myspotify.isLoggedIn()) {
             //logout
             myspotify.logout();
             Platform.runLater(() -> {
                 accountInfoLabel.setText("Not logged in yet!!!");
                 loginbtn.setText("Login");
             });
-        }else {
+        } else {
             myspotify.addLoginSuccessListener(e -> {
                 UserProfileData user = myspotify.getUserProfile();
                 Platform.runLater(() -> {
                     loginbtn.setText("Logout");
-                    accountInfoLabel.setText("Logged in user: \nE-Mail: "+user.email+"\nName: "+user.name+"\nCountry: "+user.country+"\nAccount Type: "+user.product);
+                    accountInfoLabel.setText("Logged in user: \nE-Mail: " + user.email + "\nName: " + user.name + "\nCountry: " + user.country + "\nAccount Type: " + user.product);
                 });
             });
             myspotify.loginNewAccount();
@@ -412,17 +424,16 @@ public class MainWindowController {
             e.printStackTrace();
         }
 
-        System.out.println("current version: "+Main.version+" -- version on server: "+version);
+        System.out.println("current version: " + Main.version + " -- version on server: " + version);
 
-        if (!Main.version.equals(version)){
+        if (!Main.version.equals(version)) {
             //update
             try {
                 final File currentJar = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI());
                 final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
 
 
-                if(currentJar.delete())
-                {
+                if (currentJar.delete()) {
                     System.out.println("File deleted successfully");
                     URL url = new URL("http://lukisvpnserver.ddns.net/HowToSteelMusic/HowToSteelMusic.jar");
                     URLConnection conn = url.openConnection();
@@ -438,10 +449,9 @@ public class MainWindowController {
 
                     while ((len = is.read(buffer)) > 0) {
                         outstream.write(buffer, 0, len);
-                        loadedbytes+=len;
-                        percent = (loadedbytes*100)/totallength;
-                        if (percent != percentold)
-                        {
+                        loadedbytes += len;
+                        percent = (loadedbytes * 100) / totallength;
+                        if (percent != percentold) {
                             System.out.println(percent);
                             percentold = percent;
                         }
@@ -459,9 +469,7 @@ public class MainWindowController {
                     System.exit(0);
 
 
-                }
-                else
-                {
+                } else {
                     System.out.println("Failed to delete the file");
                 }
                 System.out.println(currentJar.getPath());
