@@ -24,7 +24,7 @@ public class SpotifyLogin extends API {
     private String ClientId;
     private String ClientSecret;
 
-    private ArrayList<ActionListener> onsuccesslist = new ArrayList<>();
+    private ArrayList<LoginListener> onsuccesslist = new ArrayList<>();
 
     public SpotifyLogin(String ClientId, String ClientSecret) {
         this.ClientId = ClientId;
@@ -45,7 +45,7 @@ public class SpotifyLogin extends API {
             stage.setScene(scene);
 
             SpotifyWindowController controller = fxmlLoader.getController();
-            controller.addOnSuccessListener(new LoginListener() {
+            controller.addOnSuccessListener(new LoginWindowListener() {
                 @Override
                 public void onLoginSuccess(String key) {
                     new Thread(new Task<Boolean>() {
@@ -73,7 +73,7 @@ public class SpotifyLogin extends API {
                             myspotifydata.safeData();
 
                             new Logger().log("successfully logged in!", Logger.INFO);
-                            fireOnloggedinevent();
+                            fireSuccessevent();
 
                             return null;
                         }
@@ -82,7 +82,7 @@ public class SpotifyLogin extends API {
 
                 @Override
                 public void onLoginError() {
-
+                    fireErrorevent();
                 }
             });
 
@@ -92,13 +92,19 @@ public class SpotifyLogin extends API {
         }
     }
 
-    private void fireOnloggedinevent() {
-        for (ActionListener a : onsuccesslist) {
-            a.actionPerformed(new ActionEvent(this, 42, "successfully logged in"));
+    private void fireSuccessevent() {
+        for (LoginListener a : onsuccesslist) {
+            a.onLoginSuccess();
         }
     }
 
-    public void addOnLoggedInListener(ActionListener a) {
+    private void fireErrorevent() {
+        for (LoginListener a : onsuccesslist) {
+            a.onLoginSuccess();
+        }
+    }
+
+    public void addLoginListener(LoginListener a) {
         onsuccesslist.add(a);
     }
 }

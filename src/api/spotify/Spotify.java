@@ -1,6 +1,7 @@
 package api.spotify;
 
 import api.API;
+import api.spotify.login.LoginListener;
 import api.spotify.login.SpotifyLogin;
 import api.spotify.login.SpotifyWindowController;
 import general.Logger;
@@ -18,7 +19,7 @@ public class Spotify extends API{
     private static final String ClientId="5b7f34f605214a52b6ce4d7b5a9e135c";
     private static final String ClientSecret="6d451d7334ea4c60b1329a6396bcc07c";
 
-    private ArrayList<ActionListener> onLoginSuccessList = new ArrayList<>();
+    private ArrayList<LoginListener> onLoginSuccessList = new ArrayList<>();
 
     private SpotifyData data = SpotifyData.getData();
 
@@ -114,15 +115,25 @@ public class Spotify extends API{
 
     public void loginNewAccount(){
         SpotifyLogin login = new SpotifyLogin(ClientId,ClientSecret);
-        login.addOnLoggedInListener(e -> {
-            for (ActionListener a:onLoginSuccessList) {
-                a.actionPerformed(new ActionEvent(this,e.getID(),e.getActionCommand()));
+        login.addLoginListener(new LoginListener() {
+            @Override
+            public void onLoginSuccess() {
+                for (LoginListener a:onLoginSuccessList) {
+                    a.onLoginSuccess();
+                }
+            }
+
+            @Override
+            public void onLoginError() {
+                for (LoginListener a:onLoginSuccessList) {
+                    a.onLoginError();
+                }
             }
         });
         login.loginNewAccount();
     }
 
-    public void addLoginSuccessListener(ActionListener a){
+    public void addLoginListener(LoginListener a){
         onLoginSuccessList.add(a);
     }
 

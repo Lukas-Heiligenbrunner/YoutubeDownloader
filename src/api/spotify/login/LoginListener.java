@@ -1,6 +1,6 @@
 package api.spotify.login;
 
-interface LoginListener {
-    void onLoginSuccess(String key);
+public interface LoginListener {
+    void onLoginSuccess();
     void onLoginError();
 }

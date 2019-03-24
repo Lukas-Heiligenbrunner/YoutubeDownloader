@@ -6,6 +6,7 @@ import api.spotify.Song;
 import api.spotify.Spotify;
 import api.spotify.UserProfileData;
 
+import api.spotify.login.LoginListener;
 import download.DownloadListener;
 import download.DownloadManager;
 
@@ -396,12 +397,22 @@ public class MainWindowController {
                 loginbtn.setText("Login");
             });
         } else {
-            myspotify.addLoginSuccessListener(e -> {
-                UserProfileData user = myspotify.getUserProfile();
-                Platform.runLater(() -> {
-                    loginbtn.setText("Logout");
-                    accountInfoLabel.setText("Logged in user: \nE-Mail: " + user.email + "\nName: " + user.name + "\nCountry: " + user.country + "\nAccount Type: " + user.product);
-                });
+            myspotify.addLoginListener(new LoginListener() {
+                @Override
+                public void onLoginSuccess() {
+                    UserProfileData user = myspotify.getUserProfile();
+                    Platform.runLater(() -> {
+                        loginbtn.setText("Logout");
+                        accountInfoLabel.setText("Logged in user: \nE-Mail: " + user.email + "\nName: " + user.name + "\nCountry: " + user.country + "\nAccount Type: " + user.product);
+                    });
+                }
+
+                @Override
+                public void onLoginError() {
+                    Platform.runLater(() -> {
+                        accountInfoLabel.setText("Login Error occured.");
+                    });
+                }
             });
             myspotify.loginNewAccount();
         }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class SpotifyWindowController {
     public WebView myView;
 
-    private ArrayList<LoginListener> onsucceedlist = new ArrayList<>();
+    private ArrayList<LoginWindowListener> onsucceedlist = new ArrayList<>();
 
     private static final String clientID = "5b7f34f605214a52b6ce4d7b5a9e135c";
 
@@ -35,18 +35,18 @@ public class SpotifyWindowController {
     }
 
     private void fireOnSuccessEvent(String result){
-        for (LoginListener e:onsucceedlist) {
+        for (LoginWindowListener e:onsucceedlist) {
             e.onLoginSuccess(result);
         }
     }
 
     private void fireErrorEvent(){
-        for (LoginListener e:onsucceedlist) {
+        for (LoginWindowListener e:onsucceedlist) {
             e.onLoginError();
         }
     }
 
-    void addOnSuccessListener(LoginListener e){
+    void addOnSuccessListener(LoginWindowListener e){
         onsucceedlist.add(e);
     }
 
