@@ -13,6 +13,7 @@ import download.DownloadManager;
 import general.Logger;
 import general.ProxySettings;
 
+import javafx.event.ActionEvent;
 import org.json.simple.parser.ParseException;
 import safe.Settings;
 
@@ -69,8 +70,9 @@ public class MainWindowController {
 
     private Logger logger = new Logger();
     private DownloadManager singleDownloadManager;
-
     private Settings settings = Settings.getSettings();
+
+    private Boolean interruptspotifyDownload = false;
 
     public MainWindowController() {
         Platform.runLater(() -> rootTabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -297,6 +299,7 @@ public class MainWindowController {
     }
 
     public void startSpotifyDownloadBtn() {
+        interruptspotifyDownload=false;
         Spotify myspotify = new Spotify();
 
         Platform.runLater(() -> {
@@ -342,7 +345,9 @@ public class MainWindowController {
                             Spotifystatuslabel.setText("finished downloding -- ready to download new");
                             SpotifyProgressbar.setProgress(0.0);
                             if (songlist.size() > num + 1) {
-                                downloadSpotifyListRec(num + 1, songlist);
+                                if (!interruptspotifyDownload){
+                                    downloadSpotifyListRec(num + 1, songlist);
+                                }
                             }
                         });
                     }
@@ -477,5 +482,9 @@ public class MainWindowController {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void spotifybtnStop(ActionEvent actionEvent) {
+        interruptspotifyDownload = true;
     }
 }

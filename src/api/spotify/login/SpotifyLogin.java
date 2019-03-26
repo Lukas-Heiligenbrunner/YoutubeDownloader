@@ -3,18 +3,14 @@ package api.spotify.login;
 import api.API;
 import general.Logger;
 import javafx.concurrent.Task;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import safe.SpotifyData;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
