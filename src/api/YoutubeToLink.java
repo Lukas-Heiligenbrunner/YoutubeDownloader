@@ -18,7 +18,6 @@ public class YoutubeToLink extends API{
 
     public YoutubeToLink() {
 
-
     }
 
     public void getDirectLink(String id) throws IOException, ParseException {

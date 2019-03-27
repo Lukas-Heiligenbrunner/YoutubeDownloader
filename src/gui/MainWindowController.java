@@ -308,7 +308,7 @@ public class MainWindowController {
         });
 
         if (myspotify.isLoggedIn()) {
-            ArrayList<Song> songs = myspotify.getSongsList();
+            ArrayList<Song> songs = myspotify.getSongsList(); //TODO gettext of selected item
             downloadSpotifyListRec(0, songs);
         } else {
             logger.log("Not logged in", Logger.ERROR, 1);

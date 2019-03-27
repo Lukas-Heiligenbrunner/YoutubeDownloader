@@ -3,21 +3,18 @@ package api.spotify;
 import api.API;
 import api.spotify.login.LoginListener;
 import api.spotify.login.SpotifyLogin;
-import api.spotify.login.SpotifyWindowController;
 import general.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import safe.SpotifyData;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.*;
 
-public class Spotify extends API{
-    private static final String ClientId="5b7f34f605214a52b6ce4d7b5a9e135c";
-    private static final String ClientSecret="6d451d7334ea4c60b1329a6396bcc07c";
+public class Spotify extends API {
+    private static final String ClientId = "5b7f34f605214a52b6ce4d7b5a9e135c";
+    private static final String ClientSecret = "6d451d7334ea4c60b1329a6396bcc07c";
 
     private ArrayList<LoginListener> onLoginSuccessList = new ArrayList<>();
 
@@ -29,12 +26,12 @@ public class Spotify extends API{
     }
 
     @Deprecated
-    public ArrayList<Song> getSongsList(){
+    public ArrayList<Song> getSongsList() { //get fix playlist
         ArrayList<Song> songs = new ArrayList<>();
 
         ArrayList<Playlist> playlists = getPlaylists();
-        for (Playlist play:playlists) {
-            if (play.name.equals("meineliada")){
+        for (Playlist play : playlists) {
+            if (play.name.equals("meineliada")) {
                 try {
                     songs = getSongNames(play);
                 } catch (IOException | ParseException e) {
@@ -46,30 +43,42 @@ public class Spotify extends API{
         return songs;
     }
 
-    public ArrayList<Playlist> getPlaylists(){
-        checkKeyValidity();
+    public ArrayList<Song> getSongList(Playlist list){
+        ArrayList<Song> songs = new ArrayList<>();
 
-        ArrayList<Playlist> playlists = new ArrayList<>();
-
-        JSONObject result=null;
         try {
-            Map<String,String> head = new HashMap<>();
-            head.put("Authorization","Bearer "+data.getKey());
-
-            result = (JSONObject) requestData("https://api.spotify.com/v1/me/playlists",head);
+            songs = getSongNames(list);
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
 
-        JSONArray playlistarr = (JSONArray)result.get("items");
+        return songs;
+    }
 
-        for (Object obj:playlistarr) {
-            JSONObject myobj = (JSONObject)obj;
+    public ArrayList<Playlist> getPlaylists() {
+        checkKeyValidity();
+
+        ArrayList<Playlist> playlists = new ArrayList<>();
+
+        JSONObject result = null;
+        try {
+            Map<String, String> head = new HashMap<>();
+            head.put("Authorization", "Bearer " + data.getKey());
+
+            result = (JSONObject) requestData("https://api.spotify.com/v1/me/playlists", head);
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+
+        JSONArray playlistarr = (JSONArray) result.get("items");
+
+        for (Object obj : playlistarr) {
+            JSONObject myobj = (JSONObject) obj;
 
             Playlist myplaylist = new Playlist();
-            myplaylist.name = (String)myobj.get("name");
+            myplaylist.name = (String) myobj.get("name");
             myplaylist.id = (String) myobj.get("id");
-            myplaylist.tracknumber = Math.toIntExact((long)((JSONObject)myobj.get("tracks")).get("total"));
+            myplaylist.tracknumber = Math.toIntExact((long) ((JSONObject) myobj.get("tracks")).get("total"));
 
             playlists.add(myplaylist);
         }
@@ -78,54 +87,54 @@ public class Spotify extends API{
         return playlists;
     }
 
-    public ArrayList<Song> getSongNames(Playlist list) throws IOException, ParseException {
+    private ArrayList<Song> getSongNames(Playlist list) throws IOException, ParseException {
         checkKeyValidity();
 
         ArrayList<Song> songs = new ArrayList<>();
         int songnumber = list.tracknumber;
         int offset = 0;
 
-        for (int i = songnumber;i>0;i=i-100){
+        for (int i = songnumber; i > 0; i = i - 100) {
 
-            Map<String,String> get = new HashMap<>();
-            Map<String,String> head = new HashMap<>();
-            head.put("Authorization","Bearer "+SpotifyData.getData().getKey());
+            Map<String, String> get = new HashMap<>();
+            Map<String, String> head = new HashMap<>();
+            head.put("Authorization", "Bearer " + SpotifyData.getData().getKey());
 
 
-            get.put("offset",String.valueOf(offset));
+            get.put("offset", String.valueOf(offset));
 
-            JSONObject result = (JSONObject) requestData("https://api.spotify.com/v1/playlists/"+list.id+"/tracks",get,head,false);
+            JSONObject result = (JSONObject) requestData("https://api.spotify.com/v1/playlists/" + list.id + "/tracks", get, head, false);
             JSONArray songarr = (JSONArray) result.get("items");
 
-            for (Object obj:songarr) {
-                JSONObject songobj = (JSONObject)obj;
+            for (Object obj : songarr) {
+                JSONObject songobj = (JSONObject) obj;
 
                 Song mysong = new Song();
-                mysong.songname = (String)((JSONObject)songobj.get("track")).get("name");
-                JSONArray artists = (JSONArray)((JSONObject)songobj.get("track")).get("artists");
-                for (Object o:artists) {
-                    mysong.artistname+=((JSONObject)o).get("name")+" ";
+                mysong.songname = (String) ((JSONObject) songobj.get("track")).get("name");
+                JSONArray artists = (JSONArray) ((JSONObject) songobj.get("track")).get("artists");
+                for (Object o : artists) {
+                    mysong.artistname += ((JSONObject) o).get("name") + " ";
                 }
                 songs.add(mysong);
             }
-            offset+=100;
+            offset += 100;
         }
         return songs;
     }
 
-    public void loginNewAccount(){
-        SpotifyLogin login = new SpotifyLogin(ClientId,ClientSecret);
+    public void loginNewAccount() {
+        SpotifyLogin login = new SpotifyLogin(ClientId, ClientSecret);
         login.addLoginListener(new LoginListener() {
             @Override
             public void onLoginSuccess() {
-                for (LoginListener a:onLoginSuccessList) {
+                for (LoginListener a : onLoginSuccessList) {
                     a.onLoginSuccess();
                 }
             }
 
             @Override
             public void onLoginError(String message) {
-                for (LoginListener a:onLoginSuccessList) {
+                for (LoginListener a : onLoginSuccessList) {
                     a.onLoginError(message);
                 }
             }
@@ -133,19 +142,19 @@ public class Spotify extends API{
         login.loginNewAccount();
     }
 
-    public void addLoginListener(LoginListener a){
+    public void addLoginListener(LoginListener a) {
         onLoginSuccessList.add(a);
     }
 
-    public UserProfileData getUserProfile(){
+    public UserProfileData getUserProfile() {
         checkKeyValidity();
 
         UserProfileData user = null;
 
-        Map<String,String> header = new HashMap<>();
-        header.put("Authorization","Bearer "+SpotifyData.getData().getKey());
+        Map<String, String> header = new HashMap<>();
+        header.put("Authorization", "Bearer " + SpotifyData.getData().getKey());
         try {
-            JSONObject userdata = (JSONObject) requestData("https://api.spotify.com/v1/me",header);
+            JSONObject userdata = (JSONObject) requestData("https://api.spotify.com/v1/me", header);
             user = new UserProfileData();
             user.country = (String) userdata.get("country");
             user.email = (String) userdata.get("email");
@@ -158,43 +167,43 @@ public class Spotify extends API{
         return user;
     }
 
-    private void refreshToken(){
-        Map<String,String> mymap = new HashMap<>();
-        mymap.put("grant_type","refresh_token");
-        mymap.put("refresh_token",data.getRefreshToken());
+    private void refreshToken() {
+        Map<String, String> mymap = new HashMap<>();
+        mymap.put("grant_type", "refresh_token");
+        mymap.put("refresh_token", data.getRefreshToken());
 
         Map<String, String> head = new HashMap<>();
-        head.put("Authorization","Basic "+ Base64.getEncoder().encodeToString((ClientId+":"+ClientSecret).getBytes()));
+        head.put("Authorization", "Basic " + Base64.getEncoder().encodeToString((ClientId + ":" + ClientSecret).getBytes()));
 
         try {
-            JSONObject refreshed = (JSONObject)requestData("https://accounts.spotify.com/api/token",mymap,head,true);
-            data.setKey((String)refreshed.get("access_token"));
-            data.setExpireSeconds(Calendar.getInstance().getTimeInMillis()+(long)refreshed.get("expires_in")*1000);
+            JSONObject refreshed = (JSONObject) requestData("https://accounts.spotify.com/api/token", mymap, head, true);
+            data.setKey((String) refreshed.get("access_token"));
+            data.setExpireSeconds(Calendar.getInstance().getTimeInMillis() + (long) refreshed.get("expires_in") * 1000);
             data.safeData();
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
     }
 
-    private void checkKeyValidity(){
-        if(data.getExpireSeconds() > Calendar.getInstance().getTimeInMillis()){
+    private void checkKeyValidity() {
+        if (data.getExpireSeconds() > Calendar.getInstance().getTimeInMillis()) {
             //valid
-            logger.log("key is valid until: "+(data.getExpireSeconds()-Calendar.getInstance().getTimeInMillis()),Logger.INFO,3);
-        }else {
+            logger.log("key is valid until: " + (data.getExpireSeconds() - Calendar.getInstance().getTimeInMillis()), Logger.INFO, 3);
+        } else {
             //invalid
-            logger.log("key is invalid, refreshing",Logger.INFO,2);
-            if (!data.getRefreshToken().equals("")){
+            logger.log("key is invalid, refreshing", Logger.INFO, 2);
+            if (!data.getRefreshToken().equals("")) {
                 refreshToken();
             }
 
         }
     }
 
-    public boolean isLoggedIn(){
+    public boolean isLoggedIn() {
         return !data.getRefreshToken().equals(""); //return false if reqfresh token is ""
     }
 
-    public void logout(){
+    public void logout() {
         data.setKey("");
         data.setExpireSeconds(0);
         data.setRefreshToken("");
