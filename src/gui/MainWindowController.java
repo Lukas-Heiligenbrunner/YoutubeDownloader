@@ -71,6 +71,8 @@ public class MainWindowController {
     private Logger logger = new Logger();
     private DownloadManager singleDownloadManager;
     private Settings settings = Settings.getSettings();
+    private Spotify myspotify = new Spotify();
+    private ArrayList<Playlist> playlists = new ArrayList<>();
 
     private Boolean interruptspotifyDownload = false;
 
@@ -82,7 +84,6 @@ public class MainWindowController {
                 new Thread(new Task<Boolean>() {
                     @Override
                     protected Boolean call() {
-                        Spotify myspotify = new Spotify();
                         if (myspotify.isLoggedIn()) {
                             UserProfileData user = myspotify.getUserProfile();
                             Platform.runLater(() -> {
@@ -90,12 +91,13 @@ public class MainWindowController {
                                 accountInfoLabel.setText("Logged in user: \nE-Mail: " + user.email + "\nName: " + user.name + "\nCountry: " + user.country + "\nAccount Type: " + user.product);
                             });
 
-                            ArrayList<Playlist> playlists = myspotify.getPlaylists();
+                            playlists = myspotify.getPlaylists();
                             Platform.runLater(() -> {
                                 playlistsListView.getItems().clear();
                                 for (Playlist play : playlists) {
                                     playlistsListView.getItems().add(new Label(play.name));
                                 }
+                                playlistsListView.getSelectionModel().selectFirst(); //select first as default
                             });
 
 
@@ -300,15 +302,13 @@ public class MainWindowController {
 
     public void startSpotifyDownloadBtn() {
         interruptspotifyDownload=false;
-        Spotify myspotify = new Spotify();
-
         Platform.runLater(() -> {
             spotifyInfoLabel.setText("retrieving necessary data!");
             SpotifyProgressbar.setProgress(-1.0);
         });
 
         if (myspotify.isLoggedIn()) {
-            ArrayList<Song> songs = myspotify.getSongsList(); //TODO gettext of selected item
+            ArrayList<Song> songs = myspotify.getSongList(playlists.get(playlistsListView.getSelectionModel().getSelectedIndex()));
             downloadSpotifyListRec(0, songs);
         } else {
             logger.log("Not logged in", Logger.ERROR, 1);
@@ -379,7 +379,6 @@ public class MainWindowController {
     }
 
     public void newSpotifyBtnListener() {
-        Spotify myspotify = new Spotify();
         if (myspotify.isLoggedIn()) {
             //logout
             myspotify.logout();
