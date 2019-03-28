@@ -16,8 +16,6 @@ import java.util.ArrayList;
 
 public class DownloadManager {
 
-    private Logger logger = new Logger();
-
     private ArrayList<DownloadListener> listeners = new ArrayList<>();
 
     private Youtube myyoutube = new Youtube();
@@ -33,12 +31,12 @@ public class DownloadManager {
         new Thread(new Task<Boolean>() {
             @Override
             protected Boolean call() {
-                logger.log("searching for "+songname, Logger.INFO,1);
+                Logger.log("searching for "+songname, Logger.INFO,1);
 
                 try{
                     String id = myyoutube.firstResultID(songname);
 
-                    logger.log("getting direct link",Logger.INFO,2);
+                    Logger.log("getting direct link",Logger.INFO,2);
 
                     yttl.getDirectLink(id);
                     String directlink = yttl.getLink();
@@ -52,19 +50,19 @@ public class DownloadManager {
 
                         @Override
                         public void onFinishedListener() {
-                            logger.log("finished downloading",Logger.INFO,2);
+                            Logger.log("finished downloading",Logger.INFO,2);
                             fireFinishedEvents();
                         }
 
                         @Override
                         public void onDownloadStartListener() {
-                            logger.log("starting downloading",Logger.INFO,2);
+                            Logger.log("starting downloading",Logger.INFO,2);
                             fireStartEvent();
                         }
 
                         @Override
                         public void onRetrievingDataListener() {
-                            logger.log("starting retrieving data (Downloader)",Logger.INFO,2);
+                            Logger.log("starting retrieving data (Downloader)",Logger.INFO,2);
                         }
 
                         @Override
@@ -75,12 +73,12 @@ public class DownloadManager {
 
                     dld.Download(directlink, Settings.getSettings().getDownloadPath()+"/"+yttl.getName()+".mp3"); //starting the donwload
                 }catch (IOException e){
-                    logger.log("cant download --> no internet connection",Logger.ERROR,1);
+                    Logger.log("cant download --> no internet connection",Logger.ERROR,1);
                     fireErroredEvent("No Internet Connection");
                     e.printStackTrace();
                 } catch (ParseException e) {
                     //download isnt available
-                    logger.log("requested video isnt available for download",Logger.ERROR,1);
+                    Logger.log("requested video isnt available for download",Logger.ERROR,1);
                     fireErroredEvent("Video Not supported");
                 }
 

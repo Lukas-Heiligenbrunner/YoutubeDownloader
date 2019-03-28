@@ -49,7 +49,7 @@ public class SpotifyData implements Serializable{
     }
 
     private static SpotifyData loadData(){
-        SpotifyData myspotify = null;
+        SpotifyData myspotify;
         new Logger().log("loaded spotify file from Disk",Logger.INFO,2);
         try {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("spotify.txt"));
@@ -59,9 +59,8 @@ public class SpotifyData implements Serializable{
             myspotify = new SpotifyData();
             myspotify.safeData();
             new Logger().log("created new spotify file",Logger.INFO,2);
-        } finally {
-            return myspotify;
         }
+        return myspotify;
     }
 
     public static SpotifyData getData(){

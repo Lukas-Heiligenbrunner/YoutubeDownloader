@@ -1,20 +1,15 @@
 package gui;
 
-import api.YoutubeToLinkmp3Music;
 import api.spotify.Playlist;
 import api.spotify.Song;
 import api.spotify.Spotify;
 import api.spotify.UserProfileData;
-
 import api.spotify.login.LoginListener;
+
 import download.DownloadListener;
 import download.DownloadManager;
-
 import general.Logger;
 import general.ProxySettings;
-
-import javafx.event.ActionEvent;
-import org.json.simple.parser.ParseException;
 import safe.Settings;
 
 import javafx.application.Platform;
@@ -25,7 +20,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -78,56 +72,61 @@ public class MainWindowController {
 
     public MainWindowController() {
         Platform.runLater(() -> rootTabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.getId().equals("spotifysearch")) {
-                //in spotify tab --> load infos
-                logger.log("tab changed to spotify search", Logger.INFO, 2);
-                new Thread(new Task<Boolean>() {
-                    @Override
-                    protected Boolean call() {
-                        if (myspotify.isLoggedIn()) {
-                            UserProfileData user = myspotify.getUserProfile();
-                            Platform.runLater(() -> {
-                                loginbtn.setText("Logout");
-                                accountInfoLabel.setText("Logged in user: \nE-Mail: " + user.email + "\nName: " + user.name + "\nCountry: " + user.country + "\nAccount Type: " + user.product);
-                            });
+            switch (newValue.getId()) {
+                case "spotifysearch":
+                    //in spotify tab --> load infos
+                    logger.log("tab changed to spotify search", Logger.INFO, 2);
+                    new Thread(new Task<Boolean>() {
+                        @Override
+                        protected Boolean call() {
+                            if (myspotify.isLoggedIn()) {
+                                UserProfileData user = myspotify.getUserProfile();
+                                Platform.runLater(() -> {
+                                    loginbtn.setText("Logout");
+                                    accountInfoLabel.setText("Logged in user: \nE-Mail: " + user.email + "\nName: " + user.name + "\nCountry: " + user.country + "\nAccount Type: " + user.product);
+                                });
 
-                            playlists = myspotify.getPlaylists();
-                            Platform.runLater(() -> {
-                                playlistsListView.getItems().clear();
-                                for (Playlist play : playlists) {
-                                    playlistsListView.getItems().add(new Label(play.name));
-                                }
-                                playlistsListView.getSelectionModel().selectFirst(); //select first as default
-                            });
+                                playlists = myspotify.getPlaylists();
+                                Platform.runLater(() -> {
+                                    playlistsListView.getItems().clear();
+                                    for (Playlist play : playlists) {
+                                        playlistsListView.getItems().add(new Label(play.name));
+                                    }
+                                    playlistsListView.getSelectionModel().selectFirst(); //select first as default
+                                });
 
 
-                        } else {
-                            Platform.runLater(() -> {
-                                accountInfoLabel.setText("Not logged in yet!!!");
-                                loginbtn.setText("Login");
-                            });
+                            } else {
+                                Platform.runLater(() -> {
+                                    accountInfoLabel.setText("Not logged in yet!!!");
+                                    loginbtn.setText("Login");
+                                });
+                            }
+
+                            return null;
                         }
+                    }).start();
+                    break;
+                case "settings":
+                    logger.log("tab changed to settings", Logger.INFO, 2);
+                    Platform.runLater(() -> {
+                        proxenabledcheckbox.setSelected(settings.isProxyEnabled());
+                        userfield.setText(settings.getProxyUser());
+                        passfield.setText(settings.getProxyPass());
+                        proxportfield.setText(settings.getProxyPort());
+                        proxhostfield.setText(settings.getProxyHost());
+                        versioninfolabel.setText("Version: " + Main.version);
 
-                        return null;
-                    }
-                }).start();
-            } else if (newValue.getId().equals("settings")) {
-                logger.log("tab changed to settings", Logger.INFO, 2);
-                Platform.runLater(() -> {
-                    proxenabledcheckbox.setSelected(settings.isProxyEnabled());
-                    userfield.setText(settings.getProxyUser());
-                    passfield.setText(settings.getProxyPass());
-                    proxportfield.setText(settings.getProxyPort());
-                    proxhostfield.setText(settings.getProxyHost());
-                    versioninfolabel.setText("Version: " + Main.version);
+                        settingPathLabel.setText(settings.getDownloadPath());
+                    });
 
-                    settingPathLabel.setText(settings.getDownloadPath());
-                });
-
-            } else if (newValue.getId().equals("multiplesearch")) {
-                logger.log("tab changed to multiple search", Logger.INFO, 2);
-            } else if (newValue.getId().equals("basicsearch")) {
-                logger.log("tab changed to basic search", Logger.INFO, 2);
+                    break;
+                case "multiplesearch":
+                    logger.log("tab changed to multiple search", Logger.INFO, 2);
+                    break;
+                case "basicsearch":
+                    logger.log("tab changed to basic search", Logger.INFO, 2);
+                    break;
             }
         }));
 
@@ -400,9 +399,7 @@ public class MainWindowController {
                 @Override
                 public void onLoginError(String message) {
                     logger.log(message,Logger.ERROR,1);
-                    Platform.runLater(() -> {
-                        accountInfoLabel.setText("Login Error occured.");
-                    });
+                    Platform.runLater(() -> accountInfoLabel.setText("Login Error occured."));
                 }
             });
             myspotify.loginNewAccount();
@@ -418,8 +415,6 @@ public class MainWindowController {
             BufferedReader myreader = new BufferedReader(new InputStreamReader(versionurl.openStream()));
             version = myreader.readLine();
             myreader.close();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -444,7 +439,7 @@ public class MainWindowController {
                     byte[] buffer = new byte[4096];
                     int len;
                     int percentold = 42;
-                    int percent = 0;
+                    int percent;
                     int loadedbytes = 0;
 
                     while ((len = is.read(buffer)) > 0) {
@@ -458,8 +453,7 @@ public class MainWindowController {
                     }
                     outstream.close();
 
-                    /* Build command: java -jar application.jar */
-                    final ArrayList<String> command = new ArrayList<String>();
+                    final ArrayList<String> command = new ArrayList<>();
                     command.add(javaBin);
                     command.add("-jar");
                     command.add(currentJar.getPath());
@@ -473,17 +467,13 @@ public class MainWindowController {
                     System.out.println("Failed to delete the file");
                 }
                 System.out.println(currentJar.getPath());
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (URISyntaxException | IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void spotifybtnStop(ActionEvent actionEvent) {
+    public void spotifybtnStop() {
         interruptspotifyDownload = true;
     }
 }

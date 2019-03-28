@@ -5,11 +5,6 @@ import java.net.PasswordAuthentication;
 
 public class ProxySettings {
 
-
-    public static void setProxy(String authUser, String authPassword) { //default for HTL Steyr
-        setProxy(authUser,authPassword,"proxy.htl-steyr.ac.at","8082");
-    }
-
     public static void setProxy(String authUser, String authPassword, String host, String port) {
         Authenticator.setDefault(
                 new Authenticator() {

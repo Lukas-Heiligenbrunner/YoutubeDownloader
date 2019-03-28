@@ -18,20 +18,11 @@ public class Settings implements  Serializable{
     private String proxyHost="proxy.htl-steyr.ac.at";
     private String proxyPort="8082";
 
-
-    //language settings
-    private String language = "de"; //set default langaugae
-
-
     //Download Settings
     private String downloadPath = System.getProperty("user.home");
 
 
     //getters
-
-    public String getLanguage() {
-        return language;
-    }
 
     public boolean isProxyEnabled() {
         return proxyEnabled;
@@ -68,10 +59,6 @@ public class Settings implements  Serializable{
         this.proxyPass = proxyPass;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
     public void setProxyEnabled(boolean proxyEnabled) {
         this.proxyEnabled = proxyEnabled;
     }
@@ -102,7 +89,7 @@ public class Settings implements  Serializable{
     }
 
     private static Settings loadSettings(){
-        Settings mysettings = null;
+        Settings mysettings;
         new Logger().log("loaded file from Disk",Logger.INFO);
         try {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("settings.txt"));
@@ -112,9 +99,8 @@ public class Settings implements  Serializable{
             mysettings = new Settings();
             mysettings.safeSettings();
             new Logger().log("created new settings file",Logger.INFO);
-        } finally {
-            return mysettings;
         }
+            return mysettings;
     }
 
     public static Settings getSettings(){

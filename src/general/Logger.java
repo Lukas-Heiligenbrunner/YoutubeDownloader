@@ -16,24 +16,18 @@ public class Logger {
     private static final String CYAN = "\u001B[36m";
     private static final String WHITE = "\u001B[37m";
 
-    private static final int level = 2;
+    private static final int loglevellevel = 2;
 
-
-
-    public Logger() {
-
-    }
-
-    public void log(String message){
+    public static void log(String message){
         System.out.println(message);
     }
 
-    public void log(String message, int type){
+    public static void log(String message, int type){
         log(message,type,1);
     }
 
-    public void log(String message, int type,int level){
-        if(level <= this.level){
+    public static void log(String message, int type,int level){
+        if(level <= loglevellevel){
             if(System.getProperty("os.name").contains("Windows")) //colored terminal in Windows not supported...
             {
                 switch (type){

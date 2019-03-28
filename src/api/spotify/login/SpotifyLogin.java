@@ -42,9 +42,7 @@ public class SpotifyLogin extends API {
             stage.setTitle("please login");
             stage.setScene(scene);
 
-            stage.setOnCloseRequest(event -> {
-                fireErrorevent("Login window closed unexpectedly");
-            });
+            stage.setOnCloseRequest(event -> fireErrorevent("Login window closed unexpectedly"));
 
             SpotifyWindowController controller = fxmlLoader.getController();
             controller.addOnSuccessListener(new LoginWindowListener() {
@@ -75,7 +73,7 @@ public class SpotifyLogin extends API {
                             myspotifydata.setExpireSeconds(Calendar.getInstance().getTimeInMillis() + (Long) request.get("expires_in") * 1000);
                             myspotifydata.safeData();
 
-                            new Logger().log("successfully logged in!", Logger.INFO);
+                            Logger.log("successfully logged in!", Logger.INFO);
                             fireSuccessevent();
 
                             return null;

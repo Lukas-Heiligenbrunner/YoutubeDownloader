@@ -20,8 +20,6 @@ public class Spotify extends API {
 
     private SpotifyData data = SpotifyData.getData();
 
-    private Logger logger = new Logger();
-
     public Spotify() {
     }
 
@@ -188,10 +186,10 @@ public class Spotify extends API {
     private void checkKeyValidity() {
         if (data.getExpireSeconds() > Calendar.getInstance().getTimeInMillis()) {
             //valid
-            logger.log("key is valid until: " + (data.getExpireSeconds() - Calendar.getInstance().getTimeInMillis()), Logger.INFO, 3);
+            Logger.log("key is valid until: " + (data.getExpireSeconds() - Calendar.getInstance().getTimeInMillis()), Logger.INFO, 3);
         } else {
             //invalid
-            logger.log("key is invalid, refreshing", Logger.INFO, 2);
+            Logger.log("key is invalid, refreshing", Logger.INFO, 2);
             if (!data.getRefreshToken().equals("")) {
                 refreshToken();
             }
