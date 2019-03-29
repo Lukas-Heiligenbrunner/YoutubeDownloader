@@ -6,10 +6,26 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="added working code for selecting and downloading a specific playlist">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="removed language selection and added some TODO signs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/MainWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/HowToSteelMusic_jar/HowToSteelMusic.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/HowToSteelMusic_jar/HowToSteelMusic.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/api/spotify/Spotify.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/api/spotify/Spotify.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadMusic$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadMusic$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadMusic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadMusic.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/general/Logger.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/general/Logger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/general/ProxySettings$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/general/ProxySettings$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/general/ProxySettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/general/ProxySettings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/MainWindowController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/mainWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/gui/mainWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/safe/Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/safe/Settings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/safe/SpotifyData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/safe/SpotifyData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Main.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -67,15 +83,6 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/api/Youtube.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/api/spotify/Spotify.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1496">
@@ -93,15 +100,25 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/gui/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/api/spotify/login/SpotifyLogin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="44" column="97" lean-forward="true" selection-start-line="44" selection-start-column="97" selection-end-line="44" selection-end-column="97" />
+            <state relative-caret-position="493">
+              <caret line="44" column="97" selection-start-line="44" selection-start-column="97" selection-end-line="44" selection-end-column="97" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1563#3356#0" expanded="true" />
-                <element signature="e#3355#3356#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -119,8 +136,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/safe/Settings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-253">
-              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+            <state relative-caret-position="425">
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -128,13 +145,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui/MainWindowController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="577">
-              <caret line="479" column="51" selection-start-line="479" selection-start-column="51" selection-end-line="479" selection-end-column="51" />
+            <state relative-caret-position="323">
+              <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="method#MainWindowController#0;class#MainWindowController#0" />
                 <element signature="method#cancelbutton#0;class#MainWindowController#0" />
                 <element signature="method#clickbtnDownloadList#0;class#MainWindowController#0" />
                 <element signature="method#DownloadMultiple#0;class#MainWindowController#0" />
@@ -146,22 +163,20 @@
                 <element signature="method#downloadSpotifyListRec#0;class#MainWindowController#0" />
                 <element signature="method#newSpotifyBtnListener#0;class#MainWindowController#0" />
                 <element signature="method#updatebtnlistener#0;class#MainWindowController#0" />
+                <element signature="method#spotifybtnStop#0;class#MainWindowController#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/download/DownloadMusic.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-              <folding>
-                <element signature="method#fireRetrievingDataEvent#0;class#DownloadMusic#0" />
-                <element signature="method#fireErroredEvent#0;class#DownloadMusic#0" />
-              </folding>
+        <entry file="file://$PROJECT_DIR$/src/gui/mainWindow.fxml">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
             </state>
           </provider>
+          <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -270,10 +285,8 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/api/YoutubeToLinkmp3Music.java" />
         <option value="$PROJECT_DIR$/src/api/YoutubeToLink.java" />
-        <option value="$PROJECT_DIR$/src/gui/mainWindow.fxml" />
         <option value="$PROJECT_DIR$/src/safe/SpotifyData.java" />
         <option value="$PROJECT_DIR$/src/safe/Settings.java" />
-        <option value="$PROJECT_DIR$/src/gui/Main.java" />
         <option value="$PROJECT_DIR$/src/general/ProxySettings.java" />
         <option value="$PROJECT_DIR$/src/general/Logger.java" />
         <option value="$PROJECT_DIR$/src/download/DownloadMusic.java" />
@@ -281,6 +294,8 @@
         <option value="$PROJECT_DIR$/src/api/spotify/Spotify.java" />
         <option value="$PROJECT_DIR$/src/api/spotify/login/SpotifyLogin.java" />
         <option value="$PROJECT_DIR$/src/gui/MainWindowController.java" />
+        <option value="$PROJECT_DIR$/src/gui/mainWindow.fxml" />
+        <option value="$PROJECT_DIR$/src/gui/Main.java" />
       </list>
     </option>
   </component>
@@ -297,8 +312,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -360,6 +373,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -456,7 +471,6 @@
       </method>
     </configuration>
     <configuration default="true" type="TestNG">
-      <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="moduleWithDependencies" />
@@ -523,7 +537,8 @@
       <workItem from="1553692069756" duration="290000" />
       <workItem from="1553692415479" duration="780000" />
       <workItem from="1553770076293" duration="1950000" />
-      <workItem from="1553846567725" duration="1004000" />
+      <workItem from="1553846567725" duration="2144000" />
+      <workItem from="1553850217387" duration="114000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1552576280883</created>
@@ -644,11 +659,18 @@
       <option name="project" value="LOCAL" />
       <updated>1553691980689</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="removed language selection and added some TODO signs">
+      <created>1553847675760</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1553847675760</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="185398000" />
+    <option name="totallyTimeSpent" value="186652000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -660,10 +682,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.30810234" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.3131068" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -672,7 +694,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32834226" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.1971831" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.1971831" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39957264" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -722,7 +744,8 @@
     <MESSAGE value="added stop button for spotify download" />
     <MESSAGE value="added method to select a specific spotify playlist" />
     <MESSAGE value="added working code for selecting and downloading a specific playlist" />
-    <option name="LAST_COMMIT_MESSAGE" value="added working code for selecting and downloading a specific playlist" />
+    <MESSAGE value="removed language selection and added some TODO signs" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed language selection and added some TODO signs" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -788,14 +811,6 @@
     </entry>
     <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/io/Serializable.java" />
     <entry file="file://$PROJECT_DIR$/src/gui/testcontroller.java" />
-    <entry file="file://$PROJECT_DIR$/src/gui/mainWindow.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/download/DownloadListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -820,18 +835,6 @@
           <folding>
             <element signature="e#1756#1757#0" expanded="true" />
             <element signature="e#1788#1789#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#683#684#0" expanded="true" />
-            <element signature="e#711#712#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -883,6 +886,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/download/DownloadMusic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+          <folding>
+            <element signature="method#fireRetrievingDataEvent#0;class#DownloadMusic#0" />
+            <element signature="method#fireErroredEvent#0;class#DownloadMusic#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/api/spotify/Spotify.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1496">
@@ -899,16 +913,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/download/DownloadMusic.java">
+    <entry file="file://$PROJECT_DIR$/src/api/spotify/login/SpotifyLogin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        <state relative-caret-position="493">
+          <caret line="44" column="97" selection-start-line="44" selection-start-column="97" selection-end-line="44" selection-end-column="97" />
           <folding>
-            <element signature="method#fireRetrievingDataEvent#0;class#DownloadMusic#0" />
-            <element signature="method#fireErroredEvent#0;class#DownloadMusic#0" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/general/ProxySettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/safe/Settings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/MainWindowController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+          <folding>
+            <element signature="method#MainWindowController#0;class#MainWindowController#0" />
+            <element signature="method#cancelbutton#0;class#MainWindowController#0" />
+            <element signature="method#clickbtnDownloadList#0;class#MainWindowController#0" />
+            <element signature="method#DownloadMultiple#0;class#MainWindowController#0" />
+            <element signature="method#DownloadMultipleRec#0;class#MainWindowController#0" />
+            <element signature="method#DownloadSingle#0;class#MainWindowController#0" />
+            <element signature="method#SettingSafeBtnClick#0;class#MainWindowController#0" />
+            <element signature="method#selectDownloadPathBtn#0;class#MainWindowController#0" />
+            <element signature="method#startSpotifyDownloadBtn#0;class#MainWindowController#0" />
+            <element signature="method#downloadSpotifyListRec#0;class#MainWindowController#0" />
+            <element signature="method#newSpotifyBtnListener#0;class#MainWindowController#0" />
+            <element signature="method#updatebtnlistener#0;class#MainWindowController#0" />
+            <element signature="method#spotifybtnStop#0;class#MainWindowController#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/mainWindow.fxml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/download/DownloadManager.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -937,52 +997,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/spotify/login/SpotifyLogin.java">
+    <entry file="file://$PROJECT_DIR$/src/gui/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="44" column="97" lean-forward="true" selection-start-line="44" selection-start-column="97" selection-end-line="44" selection-end-column="97" />
+        <state relative-caret-position="323">
+          <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1563#3356#0" expanded="true" />
-            <element signature="e#3355#3356#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/safe/Settings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-253">
-          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/general/ProxySettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/MainWindowController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="577">
-          <caret line="479" column="51" selection-start-line="479" selection-start-column="51" selection-end-line="479" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#cancelbutton#0;class#MainWindowController#0" />
-            <element signature="method#clickbtnDownloadList#0;class#MainWindowController#0" />
-            <element signature="method#DownloadMultiple#0;class#MainWindowController#0" />
-            <element signature="method#DownloadMultipleRec#0;class#MainWindowController#0" />
-            <element signature="method#DownloadSingle#0;class#MainWindowController#0" />
-            <element signature="method#SettingSafeBtnClick#0;class#MainWindowController#0" />
-            <element signature="method#selectDownloadPathBtn#0;class#MainWindowController#0" />
-            <element signature="method#startSpotifyDownloadBtn#0;class#MainWindowController#0" />
-            <element signature="method#downloadSpotifyListRec#0;class#MainWindowController#0" />
-            <element signature="method#newSpotifyBtnListener#0;class#MainWindowController#0" />
-            <element signature="method#updatebtnlistener#0;class#MainWindowController#0" />
           </folding>
         </state>
       </provider>
