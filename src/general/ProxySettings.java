@@ -4,7 +4,13 @@ import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 
 public class ProxySettings {
-
+    /**
+     * set proxy settings for system
+     * @param authUser username
+     * @param authPassword password
+     * @param host hostname
+     * @param port port of proxy
+     */
     public static void setProxy(String authUser, String authPassword, String host, String port) {
         Authenticator.setDefault(
                 new Authenticator() {

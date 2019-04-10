@@ -20,52 +20,55 @@ public class Logger {
 
     /**
      * log default message // same as sout
+     *
      * @param message message to print
      */
-    public static void log(String message){
+    public static void log(String message) {
         System.out.println(message);
     }
 
     /**
      * log a message with  a specific type
+     *
      * @param message the message to print
-     * @param type the type of message (ERROR,WARNING;INFO)
+     * @param type    the type of message (ERROR,WARNING;INFO)
      */
-    public static void log(String message, int type){
-        log(message,type,1);
+    public static void log(String message, int type) {
+        log(message, type, 1);
     }
 
     /**
      * log a message with  a specific type and log level
+     *
      * @param message message to print
-     * @param type the type of message (ERROR,WARNING;INFO)
-     * @param level log level 0 - 10
+     * @param type    the type of message (ERROR,WARNING;INFO)
+     * @param level   log level 0 - 10
      */
-    public static void log(String message, int type,int level){
-        if(level <= loglevellevel){
-            if(System.getProperty("os.name").contains("Windows")) //colored terminal in Windows not supported...
+    public static void log(String message, int type, int level) {
+        if (level <= loglevellevel) {
+            if (System.getProperty("os.name").contains("Windows")) //colored terminal in Windows not supported...
             {
-                switch (type){
+                switch (type) {
                     case 1:
-                        System.out.println("[INFO] "+message);
+                        System.out.println("[INFO] " + message);
                         break;
                     case 0:
-                        System.out.println("[WARNING] "+message);
+                        System.out.println("[WARNING] " + message);
                         break;
                     case -1:
-                        System.out.println("[ERROR] "+message);
+                        System.out.println("[ERROR] " + message);
                         break;
                 }
-            }else {
-                switch (type){
+            } else {
+                switch (type) {
                     case 1:
-                        System.out.println(CYAN+"[INFO] "+message+RESET);
+                        System.out.println(CYAN + "[INFO] " + message + RESET);
                         break;
                     case 0:
-                        System.out.println(YELLOW+"[WARNING] "+message+RESET);
+                        System.out.println(YELLOW + "[WARNING] " + message + RESET);
                         break;
                     case -1:
-                        System.out.println(RED+"[ERROR] "+message+RESET);
+                        System.out.println(RED + "[ERROR] " + message + RESET);
                         break;
                 }
             }
