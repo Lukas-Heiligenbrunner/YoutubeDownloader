@@ -62,7 +62,6 @@ public class MainWindowController {
     public ListView playlistsListView;
 
 
-    private Logger logger = new Logger();
     private DownloadManager singleDownloadManager;
     private Settings settings = Settings.getSettings();
     private Spotify myspotify = new Spotify();
@@ -75,7 +74,7 @@ public class MainWindowController {
             switch (newValue.getId()) {
                 case "spotifysearch":
                     //in spotify tab --> load infos
-                    logger.log("tab changed to spotify search", Logger.INFO, 2);
+                    Logger.log("tab changed to spotify search", Logger.INFO, 2);
                     new Thread(new Task<Boolean>() {
                         @Override
                         protected Boolean call() {
@@ -108,7 +107,7 @@ public class MainWindowController {
                     }).start();
                     break;
                 case "settings":
-                    logger.log("tab changed to settings", Logger.INFO, 2);
+                    Logger.log("tab changed to settings", Logger.INFO, 2);
                     Platform.runLater(() -> {
                         proxenabledcheckbox.setSelected(settings.isProxyEnabled());
                         userfield.setText(settings.getProxyUser());
@@ -122,10 +121,10 @@ public class MainWindowController {
 
                     break;
                 case "multiplesearch":
-                    logger.log("tab changed to multiple search", Logger.INFO, 2);
+                    Logger.log("tab changed to multiple search", Logger.INFO, 2);
                     break;
                 case "basicsearch":
-                    logger.log("tab changed to basic search", Logger.INFO, 2);
+                    Logger.log("tab changed to basic search", Logger.INFO, 2);
                     break;
             }
         }));
@@ -143,7 +142,7 @@ public class MainWindowController {
     }
 
     public void cancelbutton() {
-        logger.log("stopping download...", Logger.WARNING, 1);
+        Logger.log("stopping download...", Logger.WARNING, 1);
         singleDownloadManager.interruptDownload();
     }
 
@@ -206,7 +205,7 @@ public class MainWindowController {
 
                     @Override
                     public void onDownloadErrored(String message) {
-                        logger.log(message,Logger.ERROR,1);
+                        Logger.log(message,Logger.ERROR,1);
                     }
 
                     @Override
@@ -292,11 +291,11 @@ public class MainWindowController {
         mychooser.setInitialDirectory(new File(settings.getDownloadPath())); //setting default windows to Download path
         File mydir = mychooser.showDialog(rootTabPane.getScene().getWindow()); //show dialog
         if (mydir != null) {
-            logger.log("setting Download path to: " + mydir.getPath(), Logger.INFO, 2);
+            Logger.log("setting Download path to: " + mydir.getPath(), Logger.INFO, 2);
             Platform.runLater(() -> settingPathLabel.setText(mydir.getPath()));
             settings.setDownloadPath(mydir.getPath());
         } else {
-            logger.log("nothing selected", Logger.WARNING, 2);
+            Logger.log("nothing selected", Logger.WARNING, 2);
         }
     }
 
@@ -311,7 +310,7 @@ public class MainWindowController {
             ArrayList<Song> songs = myspotify.getSongList(playlists.get(playlistsListView.getSelectionModel().getSelectedIndex()));
             downloadSpotifyListRec(0, songs);
         } else {
-            logger.log("Not logged in", Logger.ERROR, 1);
+            Logger.log("Not logged in", Logger.ERROR, 1);
         }
     }
 
@@ -359,7 +358,7 @@ public class MainWindowController {
 
                     @Override
                     public void onDownloadErrored(String message) {
-                        logger.log(message,Logger.ERROR,1);
+                        Logger.log(message,Logger.ERROR,1);
                         Platform.runLater(() -> {
                             Spotifystatuslabel.setText("errored downloading:\n\n Error:"+message);
                             SpotifyProgressbar.setProgress(0.0);
@@ -400,7 +399,7 @@ public class MainWindowController {
 
                 @Override
                 public void onLoginError(String message) {
-                    logger.log(message,Logger.ERROR,1);
+                    Logger.log(message,Logger.ERROR,1);
                     Platform.runLater(() -> accountInfoLabel.setText("Login Error occured."));
                 }
             });
