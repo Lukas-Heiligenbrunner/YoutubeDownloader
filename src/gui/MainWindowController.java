@@ -282,7 +282,8 @@ public class MainWindowController {
 
         settings.safeSettings();
 
-
+        //TODO reload new proxy settings after settings change
+        ProxySettings.setProxy(settings.getProxyUser(), settings.getProxyPass(), settings.getProxyHost(), settings.getProxyPort()); //set new proxy settings after safing
     }
 
     public void selectDownloadPathBtn() {
@@ -394,6 +395,7 @@ public class MainWindowController {
                         loginbtn.setText("Logout");
                         accountInfoLabel.setText("Logged in user: \nE-Mail: " + user.email + "\nName: " + user.name + "\nCountry: " + user.country + "\nAccount Type: " + user.product);
                     });
+                    //TODO load playlists to GUI arraylist
                 }
 
                 @Override
@@ -475,5 +477,6 @@ public class MainWindowController {
 
     public void spotifybtnStop() {
         interruptspotifyDownload = true;
+        //TODO full interrupt also current download
     }
 }
