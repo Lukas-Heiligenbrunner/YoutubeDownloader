@@ -23,64 +23,61 @@ public class DownloadMusic {
 
     private boolean interrupt = false;
 
-
+    /**
+     * Download new File from the internet
+     * @param link url to file
+     * @param filename filename where to download to
+     */
     public void Download(String link, String filename) {
+        new Thread(() -> {
+            try {
+                fireRetrievingDataEvent();
+                URLConnection conn = new URL(link).openConnection();
+                conn.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0"); // setting user agent --> needed on oracle java 8
 
-        new Thread(new Task<Boolean>() {
-            @Override
-            protected Boolean call() {
-                try {
-                    fireRetrievingDataEvent();
-                    URLConnection conn = new URL(link).openConnection();
-                    conn.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0"); // setting user agent --> needed on oracle java 8
+                totallength = conn.getContentLength();
+                conttype = conn.getContentType();
 
-                    totallength = conn.getContentLength();
-                    conttype = conn.getContentType();
+                if (!conttype.equals("audio/mpeg")) {
 
-                    if (!conttype.equals("audio/mpeg")) {
-
-                        int i;
-                        for (i = 1; i <= 10 && !conttype.equals("audio/mpeg"); i++) { //needed because download link sometimes invalid
-                            Logger.log("invalid Downloadlink --> " + i + "st retry", Logger.WARNING, 2);
-                            conn = new URL(link).openConnection();
-                            conn.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0"); // setting user agent --> needed on oracle java 8
-                            totallength = conn.getContentLength();
-                            conttype = conn.getContentType();
-                        }
-                        if (i == 10) {
-                            // download completelly errored
-                            Logger.log("Download Error: Downloadlink is invalid", Logger.ERROR, 1);
-                        }
-
+                    int i;
+                    for (i = 1; i <= 10 && !conttype.equals("audio/mpeg"); i++) { //needed because download link sometimes invalid
+                        Logger.log("invalid Downloadlink --> " + i + "st retry", Logger.WARNING, 2);
+                        conn = new URL(link).openConnection();
+                        conn.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0"); // setting user agent --> needed on oracle java 8
+                        totallength = conn.getContentLength();
+                        conttype = conn.getContentType();
+                    }
+                    if (i == 10) {
+                        // download completelly errored
+                        Logger.log("Download Error: Downloadlink is invalid", Logger.ERROR, 1);
                     }
 
-                    InputStream is = conn.getInputStream();
-
-                    OutputStream outstream = new FileOutputStream(new File(filename));
-                    byte[] buffer = new byte[4096];
-                    int len;
-                    int percentold = 42;
-                    fireStartDownloadEvent();
-                    while ((len = is.read(buffer)) > 0 && !interrupt) {
-                        outstream.write(buffer, 0, len);
-                        loadedbytes += len;
-                        percent = (loadedbytes * 100) / totallength;
-                        if (percent != percentold) {
-                            firePercentchangeListener(percent);
-                            percentold = percent;
-                        }
-                    }
-                    outstream.close();
-                    fireFinishedEvent();
-
-                    System.out.println("finished successful");
-                } catch (IOException e) {
-                    fireErroredEvent(e.getMessage());
                 }
 
-                return null;
-            }
+                InputStream is = conn.getInputStream();
 
+                OutputStream outstream = new FileOutputStream(new File(filename));
+                byte[] buffer = new byte[4096];
+                int len;
+                int percentold = 42;
+                fireStartDownloadEvent();
+                while ((len = is.read(buffer)) > 0 && !interrupt) {
+                    outstream.write(buffer, 0, len);
+                    loadedbytes += len;
+                    percent = (loadedbytes * 100) / totallength;
+                    if (percent != percentold) {
+                        firePercentchangeListener(percent);
+                        percentold = percent;
+                    }
+                }
+                outstream.close();
+                fireFinishedEvent();
+
+                System.out.println("finished successful");
+            } catch (IOException e) {
+                fireErroredEvent(e.getMessage());
+            }
         }).start();
     }
 
@@ -114,6 +111,10 @@ public class DownloadMusic {
         }
     }
 
+    /**
+     * add new Downloadlistener
+     * @param lis the MusicDownloadListener
+     */
     public void addActionListener(MusicDownloadListener lis) {
         listeners.add(lis);
     }

@@ -7,9 +7,8 @@ package download;
 import api.Youtube;
 import api.YoutubeToLink;
 import general.Logger;
-import safe.Settings;
-import javafx.concurrent.Task;
 import org.json.simple.parser.ParseException;
+import safe.Settings;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,62 +31,56 @@ public class DownloadManager {
      * @param songname name of song to download
      */
     public void startDownloadJob(String songname) {
+        new Thread(() -> {
+            Logger.log("searching for " + songname, Logger.INFO, 1);
 
-        new Thread(new Task<Boolean>() {
-            @Override
-            protected Boolean call() {
-                Logger.log("searching for " + songname, Logger.INFO, 1);
+            try {
+                String id = myyoutube.firstResultID(songname);
 
-                try {
-                    String id = myyoutube.firstResultID(songname);
+                Logger.log("getting direct link", Logger.INFO, 2);
 
-                    Logger.log("getting direct link", Logger.INFO, 2);
+                yttl.getDirectLink(id);
+                String directlink = yttl.getLink();
+                fireApiFinishedEvent();
 
-                    yttl.getDirectLink(id);
-                    String directlink = yttl.getLink();
-                    fireApiFinishedEvent();
+                dld.addActionListener(new MusicDownloadListener() {
+                    @Override
+                    public void onPercentChangeListener(int percent) {
+                        fireProgresschangeEvent(percent);
+                    }
 
-                    dld.addActionListener(new MusicDownloadListener() {
-                        @Override
-                        public void onPercentChangeListener(int percent) {
-                            fireProgresschangeEvent(percent);
-                        }
+                    @Override
+                    public void onFinishedListener() {
+                        Logger.log("finished downloading", Logger.INFO, 2);
+                        fireFinishedEvents();
+                    }
 
-                        @Override
-                        public void onFinishedListener() {
-                            Logger.log("finished downloading", Logger.INFO, 2);
-                            fireFinishedEvents();
-                        }
+                    @Override
+                    public void onDownloadStartListener() {
+                        Logger.log("starting downloading", Logger.INFO, 2);
+                        fireStartEvent();
+                    }
 
-                        @Override
-                        public void onDownloadStartListener() {
-                            Logger.log("starting downloading", Logger.INFO, 2);
-                            fireStartEvent();
-                        }
+                    @Override
+                    public void onRetrievingDataListener() {
+                        Logger.log("starting retrieving data (Downloader)", Logger.INFO, 2);
+                    }
 
-                        @Override
-                        public void onRetrievingDataListener() {
-                            Logger.log("starting retrieving data (Downloader)", Logger.INFO, 2);
-                        }
+                    @Override
+                    public void onErrored(String message) {
+                        fireErroredEvent(message);
+                    }
+                });
 
-                        @Override
-                        public void onErrored(String message) {
-                            fireErroredEvent(message);
-                        }
-                    });
-
-                    dld.Download(directlink, Settings.getSettings().getDownloadPath() + "/" + yttl.getName() + ".mp3"); //starting the donwload
-                } catch (IOException e) {
-                    Logger.log("cant download --> no internet connection", Logger.ERROR, 1);
-                    fireErroredEvent("No Internet Connection");
-                    e.printStackTrace();
-                } catch (ParseException e) {
-                    //download isnt available
-                    Logger.log("requested video isnt available for download", Logger.ERROR, 1);
-                    fireErroredEvent("Video Not supported");
-                }
-
-                return null;
+                dld.Download(directlink, Settings.getSettings().getDownloadPath() + "/" + yttl.getName() + ".mp3"); //starting the donwload
+            } catch (IOException e) {
+                Logger.log("cant download --> no internet connection", Logger.ERROR, 1);
+                fireErroredEvent("No Internet Connection");
+                e.printStackTrace();
+            } catch (ParseException e) {
+                //download isnt available
+                Logger.log("requested video isnt available for download", Logger.ERROR, 1);
+                fireErroredEvent("Video Not supported");
             }
         }).start();
     }
@@ -110,6 +103,7 @@ public class DownloadManager {
 
     /**
      * get filename of current download
+     *
      * @return string with filename
      */
     public String getFilename() {
@@ -118,6 +112,7 @@ public class DownloadManager {
 
     /**
      * get already downloaded bytes
+     *
      * @return downloaded bytes
      */
     public int getLoadedBytes() {
@@ -126,6 +121,7 @@ public class DownloadManager {
 
     /**
      * get whole size of file
+     *
      * @return total size of file in bytes
      */
     public int getTotalBytes() {
@@ -134,6 +130,7 @@ public class DownloadManager {
 
     /**
      * add new DownloadManager Event Listneer
+     *
      * @param listener a new instance of the DownloadListener
      */
     public void addEventListener(DownloadListener listener) {
