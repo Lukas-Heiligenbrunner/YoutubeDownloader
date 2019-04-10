@@ -24,11 +24,20 @@ public class SpotifyLogin extends API {
 
     private ArrayList<LoginListener> onsuccesslist = new ArrayList<>();
 
+    /**
+     * create new SpotifyLogin object
+     * @param ClientId Spotify Client id
+     * @param ClientSecret Spotify secret id
+     */
     public SpotifyLogin(String ClientId, String ClientSecret) {
         this.ClientId = ClientId;
         this.ClientSecret = ClientSecret;
     }
 
+
+    /**
+     *  creates login window and gives the user the opportunity to login on spotify
+     */
     public void loginNewAccount() {
 
         try {
@@ -93,18 +102,28 @@ public class SpotifyLogin extends API {
         }
     }
 
+    /**
+     * fires the Event for successful login
+     */
     private void fireSuccessevent() {
         for (LoginListener a : onsuccesslist) {
             a.onLoginSuccess();
         }
     }
 
+    /**
+     * fires error event for spotify login
+     * @param message error message
+     */
     private void fireErrorevent(String message) {
         for (LoginListener a : onsuccesslist) {
             a.onLoginError(message);
         }
     }
 
+    /**
+     * adds LoginListener to class for fired events.
+     */
     public void addLoginListener(LoginListener a) {
         onsuccesslist.add(a);
     }

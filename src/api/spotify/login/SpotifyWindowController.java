@@ -15,6 +15,9 @@ public class SpotifyWindowController {
 
     private static final String clientID = "5b7f34f605214a52b6ce4d7b5a9e135c";
 
+    /**
+     * FXML Controller for Spotify login window
+     */
     public SpotifyWindowController() {
         Platform.runLater(() -> {
             try {
@@ -35,18 +38,29 @@ public class SpotifyWindowController {
         });
     }
 
-    private void fireOnSuccessEvent(String result){
+    /**
+     * fires successful event
+     * @param key gotten key from spotify api
+     */
+    private void fireOnSuccessEvent(String key){
         for (LoginWindowListener e:onsucceedlist) {
-            e.onLoginSuccess(result);
+            e.onLoginSuccess(key);
         }
     }
 
+    /**
+     * fires error event
+     */
     private void fireErrorEvent(){
         for (LoginWindowListener e:onsucceedlist) {
             e.onLoginError();
         }
     }
 
+    /**
+     * adds new Listner to SpotifyWindowController
+     * @param e a new LoginWindowListner
+     */
     void addOnSuccessListener(LoginWindowListener e){
         onsucceedlist.add(e);
     }

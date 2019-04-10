@@ -9,27 +9,61 @@ import java.util.*;
 
 public class API {
 
+    /**
+     * reqests api data
+     * @param url basic url
+     * @return returns json object
+     * @throws IOException is thrown on no internet connection
+     * @throws ParseException is thrown on wrong json data
+     */
     protected Object requestData(String url) throws IOException, ParseException {
         return requestData(url,new HashMap<>(),new HashMap<>(),false);
     }
 
+    /**
+     * reqests api data
+     * @param url basic url
+     * @param arguments get/post parameters
+     * @param POST false if get and true if post request method
+     * @return returns json object
+     * @throws IOException is thrown on no internet connection
+     * @throws ParseException is thrown on wrong json data
+     */
     protected Object requestData(String url, Map<String,String> arguments ,Boolean POST) throws IOException, ParseException {
         return requestData(url,arguments,new HashMap<>(),POST);
     }
 
+    /**
+     * reqests api data
+     * @param url basic url
+     * @param headParameters sets head parameters
+     * @return returns json object
+     * @throws IOException is thrown on no internet connection
+     * @throws ParseException is thrown on wrong json data
+     */
     protected Object requestData(String url, Map<String,String> headParameters) throws IOException, ParseException {
         return requestData(url,new HashMap<>(),headParameters,false);
     }
 
-    protected Object requestData(String myurlurl, Map<String,String> arguments,Map<String,String> headParameters,Boolean POST) throws IOException, ParseException {
+    /**
+     * reqests api data
+     * @param myurl basic url
+     * @param arguments get/post arguments
+     * @param headParameters
+     * @param POST false if get and true if post request method
+     * @return returns json object
+     * @throws IOException is thrown on no internet connection
+     * @throws ParseException is thrown on wrong json data
+     */
+    protected Object requestData(String myurl, Map<String,String> arguments,Map<String,String> headParameters,Boolean POST) throws IOException, ParseException {
 
         if(!POST){ //get request
             StringJoiner sj = new StringJoiner("&");
             for(Map.Entry<String,String> entry : arguments.entrySet()) sj.add(entry.getKey()+ "=" + URLEncoder.encode(entry.getValue(), "UTF-8"));
-            myurlurl+="?"+sj;
+            myurl+="?"+sj;
         }
 
-        URL url = new URL(myurlurl);
+        URL url = new URL(myurl);
         URLConnection con = url.openConnection();
         HttpURLConnection http = (HttpURLConnection) con;
         http.setDoOutput(true);
