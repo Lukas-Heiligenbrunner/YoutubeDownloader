@@ -1,8 +1,5 @@
 package api.spotify;
 
-/**
- *
- */
 public class UserProfileData {
     public String name;
     public String email;

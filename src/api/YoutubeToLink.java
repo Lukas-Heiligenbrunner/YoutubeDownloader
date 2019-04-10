@@ -20,6 +20,12 @@ public class YoutubeToLink extends API{
 
     }
 
+    /**
+     * exchanges youtube video id to direct download link
+     * @param id youtube video id of video
+     * @throws IOException thrown if there is no internet connection
+     * @throws ParseException thrown if received data is not in json format
+     */
     public void getDirectLink(String id) throws IOException, ParseException {
 
         Map<String,String> mymap = new HashMap<>();

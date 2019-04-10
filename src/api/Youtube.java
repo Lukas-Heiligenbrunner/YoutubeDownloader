@@ -16,10 +16,22 @@ public class Youtube extends API{
 
     }
 
+    /**
+     * get id of first result of youtube search
+     * @param keyword songname to search on youtube
+     * @return string with id of video
+     * @throws IOException thrown if there is no internet connection
+     */
     public String firstResultID(String keyword) throws IOException{
         return (String)((JSONObject)((JSONObject)((JSONArray) searchYoutube(keyword).get("items")).get(0)).get("id")).get("videoId");
     }
 
+    /**
+     * search on youtube for specific keyword
+     * @param keyword search query
+     * @return object with all serach results
+     * @throws IOException thrown if there is no internet connection
+     */
     public JSONObject searchYoutube(String keyword) throws IOException{
         JSONObject data = null;
         try {

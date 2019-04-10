@@ -23,20 +23,25 @@ public class DownloadManager {
     private YoutubeToLink yttl = new YoutubeToLink();
     private DownloadMusic dld = new DownloadMusic();
 
-    public DownloadManager()  {
+    public DownloadManager() {
     }
 
-    public void startDownloadJob(String songname){
+    /**
+     * start a new download job
+     *
+     * @param songname name of song to download
+     */
+    public void startDownloadJob(String songname) {
 
         new Thread(new Task<Boolean>() {
             @Override
             protected Boolean call() {
-                Logger.log("searching for "+songname, Logger.INFO,1);
+                Logger.log("searching for " + songname, Logger.INFO, 1);
 
-                try{
+                try {
                     String id = myyoutube.firstResultID(songname);
 
-                    Logger.log("getting direct link",Logger.INFO,2);
+                    Logger.log("getting direct link", Logger.INFO, 2);
 
                     yttl.getDirectLink(id);
                     String directlink = yttl.getLink();
@@ -50,19 +55,19 @@ public class DownloadManager {
 
                         @Override
                         public void onFinishedListener() {
-                            Logger.log("finished downloading",Logger.INFO,2);
+                            Logger.log("finished downloading", Logger.INFO, 2);
                             fireFinishedEvents();
                         }
 
                         @Override
                         public void onDownloadStartListener() {
-                            Logger.log("starting downloading",Logger.INFO,2);
+                            Logger.log("starting downloading", Logger.INFO, 2);
                             fireStartEvent();
                         }
 
                         @Override
                         public void onRetrievingDataListener() {
-                            Logger.log("starting retrieving data (Downloader)",Logger.INFO,2);
+                            Logger.log("starting retrieving data (Downloader)", Logger.INFO, 2);
                         }
 
                         @Override
@@ -71,14 +76,14 @@ public class DownloadManager {
                         }
                     });
 
-                    dld.Download(directlink, Settings.getSettings().getDownloadPath()+"/"+yttl.getName()+".mp3"); //starting the donwload
-                }catch (IOException e){
-                    Logger.log("cant download --> no internet connection",Logger.ERROR,1);
+                    dld.Download(directlink, Settings.getSettings().getDownloadPath() + "/" + yttl.getName() + ".mp3"); //starting the donwload
+                } catch (IOException e) {
+                    Logger.log("cant download --> no internet connection", Logger.ERROR, 1);
                     fireErroredEvent("No Internet Connection");
                     e.printStackTrace();
                 } catch (ParseException e) {
                     //download isnt available
-                    Logger.log("requested video isnt available for download",Logger.ERROR,1);
+                    Logger.log("requested video isnt available for download", Logger.ERROR, 1);
                     fireErroredEvent("Video Not supported");
                 }
 
@@ -87,61 +92,80 @@ public class DownloadManager {
         }).start();
     }
 
-    public double getDownloadProgress(){
-        return dld.getPercent()/100.0;
+    /**
+     * get download progress
+     *
+     * @return download progress
+     */
+    public double getDownloadProgress() {
+        return dld.getPercent() / 100.0;
     }
 
-
-    public void interruptDownload()
-    {
+    /**
+     * interrupt current download job
+     */
+    public void interruptDownload() {
         dld.interruptdownload();
     }
 
-    public String getFilename(){
+    /**
+     * get filename of current download
+     * @return string with filename
+     */
+    public String getFilename() {
         return yttl.getName();
     }
 
-    public int getLoadedBytes(){
+    /**
+     * get already downloaded bytes
+     * @return downloaded bytes
+     */
+    public int getLoadedBytes() {
         return dld.getLoadedbytes();
     }
 
-    public int getTotalBytes(){
+    /**
+     * get whole size of file
+     * @return total size of file in bytes
+     */
+    public int getTotalBytes() {
         return dld.getTotallength();
     }
 
-
-
-
-    public void addEventListener(DownloadListener e){
-        listeners.add(e);
+    /**
+     * add new DownloadManager Event Listneer
+     * @param listener a new instance of the DownloadListener
+     */
+    public void addEventListener(DownloadListener listener) {
+        listeners.add(listener);
     }
 
-    private void fireProgresschangeEvent(int percent){
-        for (DownloadListener listener:listeners) {
+    private void fireProgresschangeEvent(int percent) {
+        for (DownloadListener listener : listeners) {
             listener.onDownloadProgressChange(percent);
         }
     }
 
-    private void fireStartEvent(){
-        for (DownloadListener listener:listeners) {
+    private void fireStartEvent() {
+        for (DownloadListener listener : listeners) {
             listener.onDownloadStarted();
         }
     }
 
-    private void fireFinishedEvents(){
-        for (DownloadListener listener:listeners) {
+    private void fireFinishedEvents() {
+        for (DownloadListener listener : listeners) {
             listener.onDownloadFinished();
         }
     }
 
-    private void fireErroredEvent(String message){
-        for (DownloadListener listener:listeners) {
+    private void fireErroredEvent(String message) {
+        for (DownloadListener listener : listeners) {
             listener.onDownloadErrored(message);
         }
     }
 
-    private void fireApiFinishedEvent(){
-        for (DownloadListener listener:listeners) {
+    private void fireApiFinishedEvent() {
+        for (DownloadListener listener : listeners) {
             listener.onGettingApiDataFinished();
         }
     }
