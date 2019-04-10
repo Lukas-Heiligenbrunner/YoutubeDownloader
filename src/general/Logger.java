@@ -18,14 +18,29 @@ public class Logger {
 
     private static final int loglevellevel = 2;
 
+    /**
+     * log default message // same as sout
+     * @param message message to print
+     */
     public static void log(String message){
         System.out.println(message);
     }
 
+    /**
+     * log a message with  a specific type
+     * @param message the message to print
+     * @param type the type of message (ERROR,WARNING;INFO)
+     */
     public static void log(String message, int type){
         log(message,type,1);
     }
 
+    /**
+     * log a message with  a specific type and log level
+     * @param message message to print
+     * @param type the type of message (ERROR,WARNING;INFO)
+     * @param level log level 0 - 10
+     */
     public static void log(String message, int type,int level){
         if(level <= loglevellevel){
             if(System.getProperty("os.name").contains("Windows")) //colored terminal in Windows not supported...

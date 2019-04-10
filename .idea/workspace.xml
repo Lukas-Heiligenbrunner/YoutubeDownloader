@@ -6,10 +6,17 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="added lots of method comments and some code reformat">
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="removed dependency to fx tasks and replaced with runnables and addes some comments and reformats of code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/download/DownloadManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/download/DownloadManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/download/DownloadMusic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/download/DownloadMusic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/HowToSteelMusic_jar/HowToSteelMusic.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/HowToSteelMusic_jar/HowToSteelMusic.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/api/Youtube.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/api/Youtube.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/api/YoutubeToLink.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/api/YoutubeToLink.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/api/spotify/UserProfileData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/api/spotify/UserProfileData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadMusic$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadMusic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HowToSteelMusic/download/DownloadMusic.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/general/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/general/Logger.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -162,7 +169,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/download/DownloadMusic.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
@@ -188,6 +195,21 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/general/Logger.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="34" column="28" lean-forward="true" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
+              <folding>
+                <element signature="e#782#783#0" expanded="true" />
+                <element signature="e#825#826#0" expanded="true" />
+                <element signature="e#997#998#0" expanded="true" />
+                <element signature="e#1032#1033#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/api/API.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -195,22 +217,6 @@
               <caret line="52" column="63" selection-start-line="52" selection-start-column="63" selection-end-line="52" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/api/spotify/Spotify.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
-              <folding>
-                <element signature="method#getSongsList#0;class#Spotify#0" />
-                <element signature="method#getSongList#0;class#Spotify#0" />
-                <element signature="method#getUserProfile#0;class#Spotify#0" />
-                <element signature="method#refreshToken#0;class#Spotify#0" />
-                <element signature="method#logout#0;class#Spotify#0" />
               </folding>
             </state>
           </provider>
@@ -288,7 +294,6 @@
         <option value="$PROJECT_DIR$/src/safe/SpotifyData.java" />
         <option value="$PROJECT_DIR$/src/safe/Settings.java" />
         <option value="$PROJECT_DIR$/src/general/ProxySettings.java" />
-        <option value="$PROJECT_DIR$/src/general/Logger.java" />
         <option value="$PROJECT_DIR$/src/gui/MainWindowController.java" />
         <option value="$PROJECT_DIR$/src/gui/mainWindow.fxml" />
         <option value="$PROJECT_DIR$/src/gui/Main.java" />
@@ -302,6 +307,7 @@
         <option value="$PROJECT_DIR$/src/api/YoutubeToLinkmp3Music.java" />
         <option value="$PROJECT_DIR$/src/download/DownloadManager.java" />
         <option value="$PROJECT_DIR$/src/download/DownloadMusic.java" />
+        <option value="$PROJECT_DIR$/src/general/Logger.java" />
       </list>
     </option>
   </component>
@@ -393,7 +399,7 @@
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554887277166" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554888095749" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -546,7 +552,7 @@
       <workItem from="1553770076293" duration="1950000" />
       <workItem from="1553846567725" duration="2144000" />
       <workItem from="1553850217387" duration="114000" />
-      <workItem from="1554885638664" duration="1618000" />
+      <workItem from="1554885638664" duration="2435000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1552576280883</created>
@@ -681,11 +687,18 @@
       <option name="project" value="LOCAL" />
       <updated>1554886484390</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="removed dependency to fx tasks and replaced with runnables and addes some comments and reformats of code">
+      <created>1554887332862</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1554887332862</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="192741000" />
+    <option name="totallyTimeSpent" value="193558000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -777,7 +790,8 @@
     <MESSAGE value="added working code for selecting and downloading a specific playlist" />
     <MESSAGE value="removed language selection and added some TODO signs" />
     <MESSAGE value="added lots of method comments and some code reformat" />
-    <option name="LAST_COMMIT_MESSAGE" value="added lots of method comments and some code reformat" />
+    <MESSAGE value="removed dependency to fx tasks and replaced with runnables and addes some comments and reformats of code" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed dependency to fx tasks and replaced with runnables and addes some comments and reformats of code" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -1010,13 +1024,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/general/Logger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/download/DownloadManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-272">
@@ -1062,6 +1069,19 @@
             <element signature="e#4257#4258#0" expanded="true" />
             <element signature="e#4292#4293#0" expanded="true" />
             <element signature="e#4323#4324#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/general/Logger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="34" column="28" lean-forward="true" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
+          <folding>
+            <element signature="e#782#783#0" expanded="true" />
+            <element signature="e#825#826#0" expanded="true" />
+            <element signature="e#997#998#0" expanded="true" />
+            <element signature="e#1032#1033#0" expanded="true" />
           </folding>
         </state>
       </provider>
