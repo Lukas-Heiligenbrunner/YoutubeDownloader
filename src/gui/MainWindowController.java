@@ -75,34 +75,29 @@ public class MainWindowController {
                 case "spotifysearch":
                     //in spotify tab --> load infos
                     Logger.log("tab changed to spotify search", Logger.INFO, 2);
-                    new Thread(new Task<Boolean>() {
-                        @Override
-                        protected Boolean call() {
-                            if (myspotify.isLoggedIn()) {
-                                UserProfileData user = myspotify.getUserProfile();
-                                Platform.runLater(() -> {
-                                    loginbtn.setText("Logout");
-                                    accountInfoLabel.setText("Logged in user: \nE-Mail: " + user.email + "\nName: " + user.name + "\nCountry: " + user.country + "\nAccount Type: " + user.product);
-                                });
+                    new Thread(() -> {
+                        if (myspotify.isLoggedIn()) {
+                            UserProfileData user = myspotify.getUserProfile();
+                            Platform.runLater(() -> {
+                                loginbtn.setText("Logout");
+                                accountInfoLabel.setText("Logged in user: \nE-Mail: " + user.email + "\nName: " + user.name + "\nCountry: " + user.country + "\nAccount Type: " + user.product);
+                            });
 
-                                playlists = myspotify.getPlaylists();
-                                Platform.runLater(() -> {
-                                    playlistsListView.getItems().clear();
-                                    for (Playlist play : playlists) {
-                                        playlistsListView.getItems().add(new Label(play.name));
-                                    }
-                                    playlistsListView.getSelectionModel().selectFirst(); //select first as default
-                                });
+                            playlists = myspotify.getPlaylists();
+                            Platform.runLater(() -> {
+                                playlistsListView.getItems().clear();
+                                for (Playlist play : playlists) {
+                                    playlistsListView.getItems().add(new Label(play.name));
+                                }
+                                playlistsListView.getSelectionModel().selectFirst(); //select first as default
+                            });
 
 
-                            } else {
-                                Platform.runLater(() -> {
-                                    accountInfoLabel.setText("Not logged in yet!!!");
-                                    loginbtn.setText("Login");
-                                });
-                            }
-
-                            return null;
+                        } else {
+                            Platform.runLater(() -> {
+                                accountInfoLabel.setText("Not logged in yet!!!");
+                                loginbtn.setText("Login");
+                            });
                         }
                     }).start();
                     break;
@@ -205,7 +200,7 @@ public class MainWindowController {
 
                     @Override
                     public void onDownloadErrored(String message) {
-                        Logger.log(message,Logger.ERROR,1);
+                        Logger.log(message, Logger.ERROR, 1);
                     }
 
                     @Override
@@ -300,7 +295,7 @@ public class MainWindowController {
     }
 
     public void startSpotifyDownloadBtn() {
-        interruptspotifyDownload=false;
+        interruptspotifyDownload = false;
         Platform.runLater(() -> {
             spotifyInfoLabel.setText("retrieving necessary data!");
             SpotifyProgressbar.setProgress(-1.0);
@@ -344,7 +339,7 @@ public class MainWindowController {
                             Spotifystatuslabel.setText("finished downloding -- ready to download new");
                             SpotifyProgressbar.setProgress(0.0);
                             if (songlist.size() > num + 1) {
-                                if (!interruptspotifyDownload){
+                                if (!interruptspotifyDownload) {
                                     downloadSpotifyListRec(num + 1, songlist);
                                 }
                             }
@@ -358,9 +353,9 @@ public class MainWindowController {
 
                     @Override
                     public void onDownloadErrored(String message) {
-                        Logger.log(message,Logger.ERROR,1);
+                        Logger.log(message, Logger.ERROR, 1);
                         Platform.runLater(() -> {
-                            Spotifystatuslabel.setText("errored downloading:\n\n Error:"+message);
+                            Spotifystatuslabel.setText("errored downloading:\n\n Error:" + message);
                             SpotifyProgressbar.setProgress(0.0);
                         });
                     }
@@ -384,6 +379,7 @@ public class MainWindowController {
             Platform.runLater(() -> {
                 accountInfoLabel.setText("Not logged in yet!!!");
                 loginbtn.setText("Login");
+                playlistsListView.getItems().clear();
             });
         } else {
             myspotify.addLoginListener(new LoginListener() {
@@ -394,12 +390,20 @@ public class MainWindowController {
                         loginbtn.setText("Logout");
                         accountInfoLabel.setText("Logged in user: \nE-Mail: " + user.email + "\nName: " + user.name + "\nCountry: " + user.country + "\nAccount Type: " + user.product);
                     });
-                    //TODO load playlists to GUI arraylist
+
+                    //get playlists of logged in user
+                    playlists = myspotify.getPlaylists();
+                    Platform.runLater(() -> {
+                        for (Playlist play : playlists) {
+                            playlistsListView.getItems().add(new Label(play.name));
+                        }
+                        playlistsListView.getSelectionModel().selectFirst(); //select first as default
+                    });
                 }
 
                 @Override
                 public void onLoginError(String message) {
-                    Logger.log(message,Logger.ERROR,1);
+                    Logger.log(message, Logger.ERROR, 1);
                     Platform.runLater(() -> accountInfoLabel.setText("Login Error occured."));
                 }
             });
