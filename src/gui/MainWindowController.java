@@ -69,6 +69,9 @@ public class MainWindowController {
 
     private Boolean interruptspotifyDownload = false;
 
+    /**
+     * Controller constructor loaded on GUI start
+     */
     public MainWindowController() {
         Platform.runLater(() -> rootTabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             switch (newValue.getId()) {
@@ -91,8 +94,6 @@ public class MainWindowController {
                                 }
                                 playlistsListView.getSelectionModel().selectFirst(); //select first as default
                             });
-
-
                         } else {
                             Platform.runLater(() -> {
                                 accountInfoLabel.setText("Not logged in yet!!!");
@@ -132,6 +133,8 @@ public class MainWindowController {
 
     }
 
+    //------------------[ Button Action Listener ]--------------------//
+    //TODO sort methods and add comments
     public void searchbtn() {
         DownloadSingle();
     }
