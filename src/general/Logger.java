@@ -23,7 +23,8 @@ public class Logger {
      *
      * @param message message to print
      */
-    public static void log(String message) {
+    public void log(String message) {
+
         System.out.println(message);
     }
 
