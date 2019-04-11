@@ -1,7 +1,6 @@
 package download;
 
 import general.Logger;
-import javafx.concurrent.Task;
 
 import java.io.*;
 import java.net.URL;

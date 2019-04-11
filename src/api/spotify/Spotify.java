@@ -25,24 +25,6 @@ public class Spotify extends API {
 
     //--------------------------------------[ Public Methods ] ----------------------------------------//
 
-//    @Deprecated
-//    public ArrayList<Song> getSongsList() { //get fix playlist
-//        ArrayList<Song> songs = new ArrayList<>();
-//
-//        ArrayList<Playlist> playlists = getPlaylists();
-//        for (Playlist play : playlists) {
-//            if (play.name.equals("meineliada")) {
-//                try {
-//                    songs = getSongNames(play);
-//                } catch (IOException | ParseException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//
-//        return songs;
-//    }
-
     /**
      * get a list of all songs of a specific playlist
      * @param list the Playlist object
@@ -208,7 +190,7 @@ public class Spotify extends API {
     //--------------------------------------[ Private Methods ] ----------------------------------------//
 
     /**
-     *
+     * refresh the old access token
      */
     private void refreshToken() {
         Map<String, String> mymap = new HashMap<>();
@@ -229,7 +211,7 @@ public class Spotify extends API {
     }
 
     /**
-     *
+     * check if current token is active
      */
     private void checkKeyValidity() {
         if (data.getExpireSeconds() > Calendar.getInstance().getTimeInMillis()) {

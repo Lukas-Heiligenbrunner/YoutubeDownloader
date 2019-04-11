@@ -1,6 +1,5 @@
 package gui;
 
-import api.Youtube;
 import api.spotify.Playlist;
 import api.spotify.Song;
 import api.spotify.Spotify;
@@ -14,7 +13,6 @@ import general.ProxySettings;
 import safe.Settings;
 
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -163,60 +161,55 @@ public class MainWindowController {
 
     private void DownloadMultipleRec(int num, ArrayList<String> downloadlinks) {
 
-        new Thread(new Task<Boolean>() {
-            @Override
-            protected Boolean call() {
-                Platform.runLater(() -> {
-                    listProgressbar.setProgress(-1.0);
-                    liststatuslabel.setText("retrieving necessary  data!");
-                });
+        new Thread(() -> {
+            Platform.runLater(() -> {
+                listProgressbar.setProgress(-1.0);
+                liststatuslabel.setText("retrieving necessary  data!");
+            });
 
-                DownloadManager mydownload = new DownloadManager();
+            DownloadManager mydownload = new DownloadManager();
 
-                mydownload.addEventListener(new DownloadListener() {
-                    @Override
-                    public void onDownloadProgressChange(int percent) {
-                        Platform.runLater(() -> {
-                            liststatuslabel.setText("downloading");
-                            listProgressbar.setProgress(percent / 100.0);
-                            DecimalFormat format = new DecimalFormat();
-                            format.setMaximumFractionDigits(2);
+            mydownload.addEventListener(new DownloadListener() {
+                @Override
+                public void onDownloadProgressChange(int percent) {
+                    Platform.runLater(() -> {
+                        liststatuslabel.setText("downloading");
+                        listProgressbar.setProgress(percent / 100.0);
+                        DecimalFormat format = new DecimalFormat();
+                        format.setMaximumFractionDigits(2);
 
-                            listsearchInfoLabel.setText("Filename: " + mydownload.getFilename() + "\nprogress:  " + percent + "%\nLoaded: " + format.format((float) mydownload.getLoadedBytes() / (1024 * 1024)) + "MB/" + format.format((float) mydownload.getTotalBytes() / (1024 * 1024)) + "MB");
-                        });
-                    }
+                        listsearchInfoLabel.setText("Filename: " + mydownload.getFilename() + "\nprogress:  " + percent + "%\nLoaded: " + format.format((float) mydownload.getLoadedBytes() / (1024 * 1024)) + "MB/" + format.format((float) mydownload.getTotalBytes() / (1024 * 1024)) + "MB");
+                    });
+                }
 
-                    @Override
-                    public void onDownloadFinished() {
-                        Platform.runLater(() -> {
-                            liststatuslabel.setText("finished downloding -- ready to download new");
-                            listProgressbar.setProgress(0.0);
-                            if (downloadlinks.size() > num + 1) {
-                                DownloadMultipleRec(num + 1, downloadlinks);
-                            }
-                        });
-                    }
+                @Override
+                public void onDownloadFinished() {
+                    Platform.runLater(() -> {
+                        liststatuslabel.setText("finished downloding -- ready to download new");
+                        listProgressbar.setProgress(0.0);
+                        if (downloadlinks.size() > num + 1) {
+                            DownloadMultipleRec(num + 1, downloadlinks);
+                        }
+                    });
+                }
 
-                    @Override
-                    public void onDownloadStarted() {
-                        Platform.runLater(() -> liststatuslabel.setText("starting the download"));
-                    }
+                @Override
+                public void onDownloadStarted() {
+                    Platform.runLater(() -> liststatuslabel.setText("starting the download"));
+                }
 
-                    @Override
-                    public void onDownloadErrored(String message) {
-                        Logger.log(message, Logger.ERROR, 1);
-                    }
+                @Override
+                public void onDownloadErrored(String message) {
+                    Logger.log(message, Logger.ERROR, 1);
+                }
 
-                    @Override
-                    public void onGettingApiDataFinished() {
+                @Override
+                public void onGettingApiDataFinished() {
 
-                    }
-                });
+                }
+            });
 
-                mydownload.startDownloadJob(downloadlinks.get(num));
-
-                return null;
-            }
+            mydownload.startDownloadJob(downloadlinks.get(num));
         }).start();
 
     }
@@ -314,65 +307,61 @@ public class MainWindowController {
     }
 
     private void downloadSpotifyListRec(int num, ArrayList<Song> songlist) {
-        new Thread(new Task<Boolean>() {
-            @Override
-            protected Boolean call() {
-                Platform.runLater(() -> {
-                    SpotifyProgressbar.setProgress(-1.0);
-                    Spotifystatuslabel.setText("retrieving necessary  data!");
-                });
+        new Thread(() -> {
+            Platform.runLater(() -> {
+                SpotifyProgressbar.setProgress(-1.0);
+                Spotifystatuslabel.setText("retrieving necessary  data!");
+            });
 
-                DownloadManager mydownload = new DownloadManager();
+            DownloadManager mydownload = new DownloadManager();
 
-                mydownload.addEventListener(new DownloadListener() {
-                    @Override
-                    public void onDownloadProgressChange(int percent) {
-                        Platform.runLater(() -> {
-                            Spotifystatuslabel.setText("downloading");
-                            SpotifyProgressbar.setProgress(percent / 100.0);
-                            DecimalFormat format = new DecimalFormat();
-                            format.setMaximumFractionDigits(2);
+            mydownload.addEventListener(new DownloadListener() {
+                @Override
+                public void onDownloadProgressChange(int percent) {
+                    Platform.runLater(() -> {
+                        Spotifystatuslabel.setText("downloading");
+                        SpotifyProgressbar.setProgress(percent / 100.0);
+                        DecimalFormat format = new DecimalFormat();
+                        format.setMaximumFractionDigits(2);
 
-                            spotifyInfoLabel.setText("Filename: " + mydownload.getFilename() + "\nProgress:  " + percent + "%\nLoaded: " + format.format((float) mydownload.getLoadedBytes() / (1024 * 1024)) + "MB/" + format.format((float) mydownload.getTotalBytes() / (1024 * 1024)) + "MB");
-                        });
-                    }
+                        spotifyInfoLabel.setText("Filename: " + mydownload.getFilename() + "\nProgress:  " + percent + "%\nLoaded: " + format.format((float) mydownload.getLoadedBytes() / (1024 * 1024)) + "MB/" + format.format((float) mydownload.getTotalBytes() / (1024 * 1024)) + "MB");
+                    });
+                }
 
-                    @Override
-                    public void onDownloadFinished() {
-                        Platform.runLater(() -> {
-                            Spotifystatuslabel.setText("finished downloding -- ready to download new");
-                            SpotifyProgressbar.setProgress(0.0);
-                            if (songlist.size() > num + 1) {
-                                if (!interruptspotifyDownload) {
-                                    downloadSpotifyListRec(num + 1, songlist);
-                                }
+                @Override
+                public void onDownloadFinished() {
+                    Platform.runLater(() -> {
+                        Spotifystatuslabel.setText("finished downloding -- ready to download new");
+                        SpotifyProgressbar.setProgress(0.0);
+                        if (songlist.size() > num + 1) {
+                            if (!interruptspotifyDownload) {
+                                downloadSpotifyListRec(num + 1, songlist);
                             }
-                        });
-                    }
+                        }
+                    });
+                }
 
-                    @Override
-                    public void onDownloadStarted() {
-                        Platform.runLater(() -> Spotifystatuslabel.setText("starting the download"));
-                    }
+                @Override
+                public void onDownloadStarted() {
+                    Platform.runLater(() -> Spotifystatuslabel.setText("starting the download"));
+                }
 
-                    @Override
-                    public void onDownloadErrored(String message) {
-                        Logger.log(message, Logger.ERROR, 1);
-                        Platform.runLater(() -> {
-                            Spotifystatuslabel.setText("errored downloading:\n\n Error:" + message);
-                            SpotifyProgressbar.setProgress(0.0);
-                        });
-                    }
+                @Override
+                public void onDownloadErrored(String message) {
+                    Logger.log(message, Logger.ERROR, 1);
+                    Platform.runLater(() -> {
+                        Spotifystatuslabel.setText("errored downloading:\n\n Error:" + message);
+                        SpotifyProgressbar.setProgress(0.0);
+                    });
+                }
 
-                    @Override
-                    public void onGettingApiDataFinished() {
+                @Override
+                public void onGettingApiDataFinished() {
 
-                    }
-                });
+                }
+            });
 
-                mydownload.startDownloadJob(songlist.get(num).songname + " " + songlist.get(num).artistname);
-                return null;
-            }
+            mydownload.startDownloadJob(songlist.get(num).songname + " " + songlist.get(num).artistname);
         }).start();
     }
 
