@@ -52,6 +52,7 @@ public class MainWindowController {
     public Label settingPathLabel;
 
 
+    //Spotify Elements
     public Label spotifyInfoLabel;
     public ProgressBar SpotifyProgressbar;
     public Label Spotifystatuslabel;
@@ -61,6 +62,7 @@ public class MainWindowController {
     public ListView playlistsListView;
 
 
+    //class member definitions
     private DownloadManager singleDownloadManager;
     private Settings settings = Settings.getSettings();
     private Spotify myspotify = new Spotify();
@@ -133,24 +135,33 @@ public class MainWindowController {
     }
 
     //------------------[ Button Action Listener ]--------------------//
+
+    /**
+     * click event of normal search button
+     */
     public void searchbtn() {
         DownloadSingle();
     }
 
+    /**
+     * click event of cancel button
+     */
     public void cancelbutton() {
         Logger.log("stopping download...", Logger.WARNING, 1);
         singleDownloadManager.interruptDownload();
     }
 
+    /**
+     * click event to add new song name in list
+     */
     public void clickbtnDownloadList() {
         Platform.runLater(() -> tableMultipleLinks.getItems().add(new TextField("Songname")));
     }
 
+    /**
+     * click event of Download button of a list
+     */
     public void startDldBtnList() {
-        DownloadMultiple();
-    }
-
-    private void DownloadMultiple() {
         ArrayList<String> downloadlinks = new ArrayList<>();
         for (int i = 0; i < tableMultipleLinks.getItems().size(); i++) {
             downloadlinks.add(((TextField) tableMultipleLinks.getItems().get(i)).getText());
@@ -158,8 +169,12 @@ public class MainWindowController {
         DownloadMultipleRec(0, downloadlinks);
     }
 
+    /**
+     * recursive method to download one song after the other
+     * @param num current number in arraylist to download
+     * @param downloadlinks arraylist of songnames to download
+     */
     private void DownloadMultipleRec(int num, ArrayList<String> downloadlinks) {
-
         new Thread(() -> {
             Platform.runLater(() -> {
                 listProgressbar.setProgress(-1.0);
@@ -210,9 +225,11 @@ public class MainWindowController {
 
             mydownload.startDownloadJob(downloadlinks.get(num));
         }).start();
-
     }
 
+    /**
+     * download a single song
+     */
     private void DownloadSingle() {
         singleDownloadManager = new DownloadManager();
         Platform.runLater(() -> {
@@ -263,6 +280,9 @@ public class MainWindowController {
         singleDownloadManager.startDownloadJob(searchfield.getText());
     }
 
+    /**
+     * click event of save button on the settings page
+     */
     public void SettingSafeBtnClick() {
         settings.setProxyEnabled(proxenabledcheckbox.isSelected());
         settings.setProxyUser(userfield.getText());
@@ -280,6 +300,9 @@ public class MainWindowController {
 
     }
 
+    /**
+     * click event of the button on the settings page to set the download path
+     */
     public void selectDownloadPathBtn() {
         DirectoryChooser mychooser = new DirectoryChooser();
         mychooser.setTitle("select downloadpath");
@@ -294,6 +317,9 @@ public class MainWindowController {
         }
     }
 
+    /**
+     * click event of the button on the spotify page to start the download of the spotify playlist
+     */
     public void startSpotifyDownloadBtn() {
         interruptspotifyDownload = false;
         Platform.runLater(() -> {
@@ -309,6 +335,11 @@ public class MainWindowController {
         }
     }
 
+    /**
+     * recursive method to download one song after the other from spotify playlist
+     * @param num current number in arraylist to download
+     * @param songlist arraylist of Song objects to download
+     */
     private void downloadSpotifyListRec(int num, ArrayList<Song> songlist) {
         new Thread(() -> {
             Platform.runLater(() -> {
@@ -368,6 +399,9 @@ public class MainWindowController {
         }).start();
     }
 
+    /**
+     * click event of button to select a new spotify user
+     */
     public void newSpotifyBtnListener() {
         if (myspotify.isLoggedIn()) {
             //logout
@@ -407,8 +441,10 @@ public class MainWindowController {
         }
     }
 
+    /**
+     * click event of button to update the software
+     */
     public void updatebtnlistener() {
-
         //checking version
         String version = "";
         try {
@@ -474,6 +510,9 @@ public class MainWindowController {
         }
     }
 
+    /**
+     * click event to stop the current  (spotify) download
+     */
     public void spotifybtnStop() {
         interruptspotifyDownload = true;
         //TODO full interrupt also current download
