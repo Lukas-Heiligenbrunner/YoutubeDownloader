@@ -20,7 +20,6 @@ public class Logger {
 
     /**
      * log default message // same as sout
-     *
      * @param message message to print
      */
     public void log(String message) {
@@ -30,7 +29,6 @@ public class Logger {
 
     /**
      * log a message with  a specific type
-     *
      * @param message the message to print
      * @param type    the type of message (ERROR,WARNING;INFO)
      */
@@ -40,7 +38,6 @@ public class Logger {
 
     /**
      * log a message with  a specific type and log level
-     *
      * @param message message to print
      * @param type    the type of message (ERROR,WARNING;INFO)
      * @param level   log level 0 - 10

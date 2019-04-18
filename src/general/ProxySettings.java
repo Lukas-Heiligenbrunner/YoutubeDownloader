@@ -37,6 +37,9 @@ public class ProxySettings {
         System.setProperty("jdk.http.auth.tunneling.disabledSchemes", "");
     }
 
+    /**
+     * disable proxy for the whole application
+     */
     public static void disbleProxy(){
 
         //clear https proxy

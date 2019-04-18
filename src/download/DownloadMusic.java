@@ -23,7 +23,7 @@ public class DownloadMusic {
     private boolean interrupt = false;
 
     /**
-     * Download new File from the internet
+     * Download new song from the internet
      * @param link url to file
      * @param filename filename where to download to
      */
@@ -80,30 +80,47 @@ public class DownloadMusic {
         }).start();
     }
 
+    /**
+     * fire percent change event
+     * @param percent amount of loaded percent
+     */
     private void firePercentchangeListener(int percent) {
         for (MusicDownloadListener lis : listeners) {
             lis.onPercentChangeListener(percent);
         }
     }
 
+    /**
+     *  fire finished downloading event
+     */
     private void fireFinishedEvent() {
         for (MusicDownloadListener lis : listeners) {
             lis.onFinishedListener();
         }
     }
 
+    /**
+     * fires start event
+     */
     private void fireStartDownloadEvent() {
         for (MusicDownloadListener lis : listeners) {
             lis.onDownloadStartListener();
         }
     }
 
+    /**
+     * fire start to retrieve data event
+     */
     private void fireRetrievingDataEvent() {
         for (MusicDownloadListener lis : listeners) {
             lis.onRetrievingDataListener();
         }
     }
 
+    /**
+     * fire error event
+     * @param message
+     */
     private void fireErroredEvent(String message) {
         for (MusicDownloadListener lis : listeners) {
             lis.onErrored(message);
@@ -118,24 +135,41 @@ public class DownloadMusic {
         listeners.add(lis);
     }
 
-
+    /**
+     * interrupt the current processing download
+     */
     public void interruptdownload() {
         interrupt = true;
     }
 
-
+    /**
+     * get the percentage of the downloaded song
+     * @return percentage
+     */
     public int getPercent() {
         return percent;
     }
 
+    /**
+     * get the amount of loaded byets
+     * @return loaded bytes
+     */
     public int getLoadedbytes() {
         return loadedbytes;
     }
 
+    /**
+     * get the total size of the song
+     * @return total size in bytes
+     */
     public int getTotallength() {
         return totallength;
     }
 
+    /**
+     * get the contentype of the file
+     * @return content type as string
+     */
     public String getConttype() {
         return conttype;
     }
