@@ -18,7 +18,6 @@ public class DownloadManager {
     private ArrayList<DownloadListener> listeners = new ArrayList<>();
 
     private Youtube myyoutube = new Youtube();
-    //private YoutubeToLinkmp3Music yttl = new YoutubeToLinkmp3Music();
     private YoutubeToLink yttl = new YoutubeToLink();
     private DownloadMusic dld = new DownloadMusic();
 

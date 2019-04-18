@@ -36,4 +36,21 @@ public class ProxySettings {
 
         System.setProperty("jdk.http.auth.tunneling.disabledSchemes", "");
     }
+
+    public static void disbleProxy(){
+
+        //clear https proxy
+        System.clearProperty("https.proxyUser");
+        System.clearProperty("https.proxyPassword");
+        System.clearProperty("https.proxyHost");
+        System.clearProperty("https.proxyPort");
+
+        //clear http proxy
+        System.clearProperty("http.proxyUser");
+        System.clearProperty("http.proxyPassword");
+        System.clearProperty("http.proxyHost");
+        System.clearProperty("http.proxyPort");
+
+        System.clearProperty("jdk.http.auth.tunneling.disabledSchemes");
+    }
 }

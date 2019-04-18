@@ -133,7 +133,6 @@ public class MainWindowController {
     }
 
     //------------------[ Button Action Listener ]--------------------//
-    //TODO sort methods and add comments
     public void searchbtn() {
         DownloadSingle();
     }
@@ -273,8 +272,12 @@ public class MainWindowController {
 
         settings.safeSettings();
 
-        //TODO reload new proxy settings after settings change
-        ProxySettings.setProxy(settings.getProxyUser(), settings.getProxyPass(), settings.getProxyHost(), settings.getProxyPort()); //set new proxy settings after safing
+        if (settings.isProxyEnabled()){
+            ProxySettings.setProxy(settings.getProxyUser(), settings.getProxyPass(), settings.getProxyHost(), settings.getProxyPort()); //set new proxy settings after safing
+        }else {
+            ProxySettings.disbleProxy();
+        }
+
     }
 
     public void selectDownloadPathBtn() {
