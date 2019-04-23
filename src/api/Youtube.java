@@ -12,10 +12,6 @@ public class Youtube extends API{
     private static final String key="AIzaSyAYIXX7lgATXN2xPSCIK71wNQjgUzmYL0s";
     // https://www.googleapis.com/youtube/v3/search?type=video&q=surfing&maxResults=25&part=snippet&key=AIzaSyDFOuo3jbhaYqgzfOWDQxSMnTP0SuJLZjM
 
-    public Youtube() {
-
-    }
-
     /**
      * get id of first result of youtube search
      * @param keyword songname to search on youtube

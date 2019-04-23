@@ -20,9 +20,6 @@ public class Spotify extends API {
 
     private SpotifyData data = SpotifyData.getData();
 
-    public Spotify() {}
-
-
     //--------------------------------------[ Public Methods ] ----------------------------------------//
 
     /**

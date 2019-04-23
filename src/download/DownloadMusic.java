@@ -9,10 +9,6 @@ import java.util.ArrayList;
 
 public class DownloadMusic {
 
-    public DownloadMusic() {
-
-    }
-
     private ArrayList<MusicDownloadListener> listeners = new ArrayList<>();
 
     private int percent = 0;
@@ -71,6 +67,8 @@ public class DownloadMusic {
                     }
                 }
                 outstream.close();
+                is.close();
+
                 fireFinishedEvent();
 
                 System.out.println("finished successful");

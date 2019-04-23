@@ -21,9 +21,6 @@ public class DownloadManager {
     private YoutubeToLink yttl = new YoutubeToLink();
     private DownloadMusic dld = new DownloadMusic();
 
-    public DownloadManager() {
-    }
-
     /**
      * start a new download job
      *

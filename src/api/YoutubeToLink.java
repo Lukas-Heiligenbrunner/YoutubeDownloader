@@ -13,12 +13,7 @@ public class YoutubeToLink extends API{
     private String name = "";
     private String lengthsecs = ";";
 
-    // https://you-link.herokuapp.com/?url=https://www.youtube.com/watch?v=Ns6mceo9DZs //--> didnt work ...
     // http://www.convertmp3.io/fetch/?format=JSON&video=https://www.youtube.com/watch?v=i62Zjga8JOM
-
-    public YoutubeToLink() {
-
-    }
 
     /**
      * exchanges youtube video id to direct download link
@@ -40,14 +35,26 @@ public class YoutubeToLink extends API{
         lengthsecs = ((String)request.get("length"));
     }
 
+    /**
+     * get the downloadLink
+     * @return the download link
+     */
     public String getLink() {
         return link;
     }
 
+    /**
+     * get the file name
+     * @return the name of the music file
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * get the length of the video
+     * @return length in seconds
+     */
     public String getLengthsecs() {
         return lengthsecs;
     }
