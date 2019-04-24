@@ -76,7 +76,7 @@ public class API {
         }
 
         if (POST){
-            http.setRequestMethod("POST"); // PUT is another valid option
+            http.setRequestMethod("POST");
 
             StringJoiner sj = new StringJoiner("&");
             for(Map.Entry<String,String> entry : arguments.entrySet()) sj.add(entry.getKey()+ "=" + URLEncoder.encode(entry.getValue(), "UTF-8"));
