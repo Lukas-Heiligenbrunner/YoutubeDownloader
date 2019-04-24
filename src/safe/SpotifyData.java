@@ -13,30 +13,57 @@ public class SpotifyData implements Serializable{
     private String key="";
     private long expireSeconds=0;
 
+    /**
+     * get Refresh Token
+     * @return refresh token
+     */
     public String getRefreshToken() {
         return refreshToken;
     }
 
+    /**
+     * set Refresh Token
+     * @param refreshToken returns refresh token
+     */
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
     }
 
+    /**
+     * get the current key
+     * @return key
+     */
     public String getKey() {
         return key;
     }
 
+    /**
+     * set the key
+     * @param key set key
+     */
     public void setKey(String key) {
         this.key = key;
     }
 
+    /**
+     * get expireation time
+     * @return time in seconds
+     */
     public long getExpireSeconds() {
         return expireSeconds;
     }
 
+    /**
+     * set key expire time
+     * @param expireSeconds time in seconds
+     */
     public void setExpireSeconds(long expireSeconds) {
         this.expireSeconds = expireSeconds;
     }
 
+    /**
+     * safe object to disk
+     */
     public void safeData(){
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("spotify.txt"));
@@ -48,6 +75,10 @@ public class SpotifyData implements Serializable{
         }
     }
 
+    /**
+     * load data from disk
+     * @return SpotifyData Objects
+     */
     private static SpotifyData loadData(){
         SpotifyData myspotify;
         new Logger().log("loaded spotify file from Disk",Logger.INFO,2);
@@ -63,6 +94,10 @@ public class SpotifyData implements Serializable{
         return myspotify;
     }
 
+    /**
+     * get always the sames SpotifyData object
+     * @return Spotifydata object
+     */
     public static SpotifyData getData(){
         return myspotify;
     }

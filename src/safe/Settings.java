@@ -76,6 +76,9 @@ public class Settings implements  Serializable{
     }
 
 
+    /**
+     * safe the settings object to disk
+     */
     public void safeSettings(){
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("settings.txt"));
@@ -88,6 +91,10 @@ public class Settings implements  Serializable{
         }
     }
 
+    /**
+     * load the settings object from disk
+     * @return Settings object
+     */
     private static Settings loadSettings(){
         Settings mysettings;
         new Logger().log("loaded file from Disk",Logger.INFO);
@@ -103,6 +110,10 @@ public class Settings implements  Serializable{
             return mysettings;
     }
 
+    /**
+     * get always the same Settings object
+     * @return Settings object
+     */
     public static Settings getSettings(){
         return mysettings;
     }
